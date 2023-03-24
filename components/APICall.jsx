@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ScrollView, Text } from "react-native";
+import { View, Text } from "react-native";
 import getSomething from "../utils/api";
 import React from "react";
 
@@ -13,11 +13,11 @@ const APICall = ({ styleSheet }) => {
   }, []);
 
   return (
-    <ScrollView>
+    <View>
       {reviews.map((review) => {
         return <Text style={styleSheet}>{review.title}</Text>;
       })}
-    </ScrollView>
+    </View>
   );
 };
 
