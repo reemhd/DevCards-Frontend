@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
   reviews: {
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
     justifyContent: "center",
     backgroundColor: "black",
     color: "white",
@@ -34,6 +33,7 @@ const styles = StyleSheet.create({
     border: "1px solid black",
     margin: "0.2rem",
     borderRadius: "20px",
-    flex: 1,
+    width: "20rem",
+    alignItems: "center",
   },
 });
