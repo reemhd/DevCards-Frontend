@@ -15,7 +15,11 @@ const APICall = ({ styleSheet }) => {
   return (
     <View>
       {reviews.map((review) => {
-        return <Text style={styleSheet}>{review.title}</Text>;
+        return (
+          <Text style={styleSheet}>
+            {review.title} key={review.review_id}
+          </Text>
+        );
       })}
     </View>
   );
