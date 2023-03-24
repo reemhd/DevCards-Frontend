@@ -1,9 +1,8 @@
+import React from "react";
+import { Text } from "react-native";
+
 const Header = () => {
-  return (
-    <View>
-      <Text>DevCards Spike!</Text>
-    </View>
-  );
+  return <Text>DevCards Spike!</Text>;
 };
 
 export default Header;
