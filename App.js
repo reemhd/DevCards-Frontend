@@ -23,17 +23,4 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  reviews: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    backgroundColor: "black",
-    color: "white",
-    padding: "0.5rem",
-    border: "1px solid black",
-    margin: "0.2rem",
-    borderRadius: "20px",
-    width: "20rem",
-    alignItems: "center",
-  },
 });
