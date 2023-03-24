@@ -3,7 +3,7 @@ import { ScrollView, Text } from "react-native";
 import getSomething from "../utils/api";
 import React from "react";
 
-const APICall = () => {
+const APICall = ({ styleSheet }) => {
   const [reviews, setReviews] = useState([]);
 
   useEffect(() => {
@@ -15,7 +15,7 @@ const APICall = () => {
   return (
     <ScrollView>
       {reviews.map((review) => {
-        return <Text>{review.title}</Text>;
+        return <Text style={styleSheet}>{review.title}</Text>;
       })}
     </ScrollView>
   );

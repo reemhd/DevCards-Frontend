@@ -7,7 +7,7 @@ export default function App() {
   return (
     <ScrollView>
       <Header />
-      <APICall />
+      <APICall styleSheet={styles.reviews} />
       <View style={styles.container}>
         <Text>Hello World</Text>
         <StatusBar style="auto" />
@@ -22,5 +22,13 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+  },
+  reviews: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "black",
+    color: "white",
   },
 });
