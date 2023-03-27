@@ -12,3 +12,14 @@ export const postDeck = (name, description) => {
       console.log(err);
     });
 };
+
+export const postCard = (front, back) => {
+  return api
+    .post("/decks/cards", { front, back })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
