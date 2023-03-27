@@ -58,15 +58,17 @@ const createDeckStyles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "white",
+    backgroundColor: "#4682B4",
     marginTop: 250,
   },
   label: {
     fontWeight: "bold",
     padding: 10,
     borderWidth: 2,
-    borderColor: "black",
+    borderColor: "#77486E",
     borderStyle: "solid",
+    backgroundColor: "#F5F3E5",
+    color: "#4682B4",
   },
 });
 

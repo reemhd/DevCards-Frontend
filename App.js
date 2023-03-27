@@ -11,3 +11,5 @@ export default function App() {
     </ScrollView>
   );
 }
+
+//createDeck will go inside NavBar and as an alternate render in Decks if no decks exist

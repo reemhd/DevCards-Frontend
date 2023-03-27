@@ -57,8 +57,8 @@ const deckStyles = StyleSheet.create({
   deckList: {
     borderStyle: "solid",
     borderWidth: 5,
-    borderTopColor: "#F5F3E5",
-    borderLeftColor: "#F5F3E5",
+    borderTopColor: "#4682B4",
+    borderLeftColor: "#4682B4",
     borderRightColor: "#77486E",
     borderBottomColor: "#77486E",
     backgroundColor: "#F5F3E5",
