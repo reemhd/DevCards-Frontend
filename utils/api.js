@@ -1,12 +1,14 @@
 import axios from "axios";
 
-const getSomething = () => {
-  const myAPI = axios.create({
-    baseURL: "https://backend-project-nc-games.onrender.com/api",
-  });
-  return myAPI.get("/reviews").then((data) => {
-    return data.data.reviews;
-  });
-};
+const api = axios.create({ baseURL: "" });
 
-export default getSomething;
+export const postDeck = (name, description) => {
+  return api
+    .post("/decks", { name, description })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
