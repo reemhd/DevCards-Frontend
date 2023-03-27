@@ -23,3 +23,9 @@ export const postCard = (front, back) => {
       console.log(err);
     });
 };
+
+export const getDecks = () => {
+  return api.get("/decks").then((data) => {
+    return data.decks; //change this
+  });
+};
