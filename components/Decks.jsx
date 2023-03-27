@@ -39,17 +39,18 @@ const deckStyles = StyleSheet.create({
     display: "flex",
     flexDirection: "column",
     backgroundColor: "#4682B4",
+    justifyContent: "center",
   },
   name: {
     fontWeight: "bold",
     fontSize: 32,
-    padding: 10,
+    padding: 5,
     margin: 10,
     color: "#9381FF",
   },
   description: {
     fontSize: 24,
-    padding: 10,
+    padding: 5,
     margin: 10,
     color: "#9381FF",
   },
@@ -63,6 +64,7 @@ const deckStyles = StyleSheet.create({
     backgroundColor: "#F5F3E5",
     padding: 10,
     margin: 20,
+    height: 170,
   },
 });
 
