@@ -17,12 +17,12 @@ const styles = StyleSheet.create({
 export default function App() {
   return (
     <NavigationContainer>
-      <View style={styles.container}>
-        <ScrollView style={styles.Scrollcontainer}>
+      {/* <View style={styles.container}> */}
+      {/* <ScrollView style={styles.Scrollcontainer}>
           <Decks />
-        </ScrollView>
-        <NavBar />
-      </View>
+        </ScrollView> */}
+      <NavBar />
+      {/* </View> */}
     </NavigationContainer>
   );
 }

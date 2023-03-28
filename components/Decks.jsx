@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { View, Text, FlatList, StyleSheet } from "react-native";
+import { View, Text, ScrollView, StyleSheet } from "react-native";
 
 const Decks = () => {
   const testDecks = [
@@ -22,14 +22,18 @@ const Decks = () => {
   // };
 
   return (
-    <View style={deckStyles.container}>
-      {testDecks.map((testDeck) => (
-        <View style={deckStyles.deckList} key={testDeck.id}>
-          <Text style={deckStyles.name}>{testDeck.name}</Text>
-          <Text style={deckStyles.description}>{testDeck.description}</Text>
-        </View>
-      ))}
-    </View>
+    <ScrollView>
+      <View style={deckStyles.container}>
+        {testDecks.map((testDeck) => (
+          <View style={deckStyles.deckList} key={testDeck.id}>
+            <View style={deckStyles.innerBorder}>
+              <Text style={deckStyles.name}>{testDeck.name}</Text>
+              <Text style={deckStyles.description}>{testDeck.description}</Text>
+            </View>
+          </View>
+        ))}
+      </View>
+    </ScrollView>
   );
 };
 
@@ -58,16 +62,24 @@ const deckStyles = StyleSheet.create({
     color: "#9381FF",
   },
   deckList: {
-    borderStyle: "solid",
-    borderWidth: 5,
-    borderTopColor: "#4682B4",
-    borderLeftColor: "#4682B4",
-    borderRightColor: "#77486E",
-    borderBottomColor: "#77486E",
+    // borderStyle: "solid",
+    // borderWidth: 5,
+    // borderTopColor: "#4682B4",
+    // borderLeftColor: "#4682B4",
+    // borderRightColor: "#77486E",
+    // borderBottomColor: "#77486E",
     backgroundColor: "#F5F3E5",
+    elevation: 10,
     padding: 10,
     margin: 20,
     height: 170,
+    borderRadius: 10,
+  },
+  innerBorder: {
+    borderColor: "#9381FF",
+    borderWidth: 5,
+    borderRadius: 10,
+    padding: 0,
   },
 });
 
