@@ -12,34 +12,42 @@ const Decks = () => {
 
   useEffect(() => {}, []);
 
-  const renderItem = ({ item }) => {
-    return (
-      <View style={deckStyles.deckList}>
-        <Text style={deckStyles.name}>{item.name}</Text>
-        <Text style={deckStyles.description}>{item.description}</Text>
-      </View>
-    );
-  };
+  // const renderItem = ({ item }) => {
+  //   return (
+  //     <View style={deckStyles.deckList}>
+  //       <Text style={deckStyles.name}>{item.name}</Text>
+  //       <Text style={deckStyles.description}>{item.description}</Text>
+  //     </View>
+  //   );
+  // };
 
   return (
     <View style={deckStyles.container}>
-      <FlatList
+      {/* <FlatList
         data={testDecks}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
-      />
+      /> */}
+      {testDecks.map((testDeck) => (
+        <View style={deckStyles.deckList} key={testDeck.id}>
+          <Text style={deckStyles.name}>{testDeck.name}</Text>
+          <Text style={deckStyles.description}>{testDeck.description}</Text>
+        </View>
+      ))}
     </View>
   );
 };
 
 const deckStyles = StyleSheet.create({
   container: {
-    height: "100%",
-    width: "100%",
-    display: "flex",
+    // height: "100%",
+    // width: "100%",
+    flex: 1,
     flexDirection: "column",
     backgroundColor: "#4682B4",
     justifyContent: "center",
+    alignItems: 'stretch',
+    alignContent: 'stretch'
   },
   name: {
     fontWeight: "bold",
