@@ -23,11 +23,6 @@ const Decks = () => {
 
   return (
     <View style={deckStyles.container}>
-      {/* <FlatList
-        data={testDecks}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id}
-      /> */}
       {testDecks.map((testDeck) => (
         <View style={deckStyles.deckList} key={testDeck.id}>
           <Text style={deckStyles.name}>{testDeck.name}</Text>
@@ -46,8 +41,8 @@ const deckStyles = StyleSheet.create({
     flexDirection: "column",
     backgroundColor: "#4682B4",
     justifyContent: "center",
-    alignItems: 'stretch',
-    alignContent: 'stretch'
+    alignItems: "stretch",
+    alignContent: "stretch",
   },
   name: {
     fontWeight: "bold",
