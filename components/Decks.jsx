@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { View, Text, ScrollView, StyleSheet, Pressable } from "react-native";
+import { View, Text, StyleSheet, Pressable, FlatList } from "react-native";
 
 const Decks = ({ navigation }) => {
   const testDecks = [
@@ -12,38 +12,37 @@ const Decks = ({ navigation }) => {
 
   useEffect(() => {}, []);
 
-  // const renderItem = ({ item }) => {
-  //   return (
-  //     <View style={deckStyles.deckList}>
-  //       <Text style={deckStyles.name}>{item.name}</Text>
-  //       <Text style={deckStyles.description}>{item.description}</Text>
-  //     </View>
-  //   );
-  // };
+  const Deck = ({ name, description }) => {
+    return (
+      <View style={deckStyles.deckList}>
+        <View style={deckStyles.innerBorder}>
+          <Text style={deckStyles.name}>{name}</Text>
+          <Text style={deckStyles.description}>{description}</Text>
+        </View>
+      </View>
+    );
+  };
 
   return (
-    <ScrollView>
-      <View style={deckStyles.container}>
-        <View style={deckStyles.buttonBox}>
-          <Pressable
-            style={deckStyles.button}
-            title="Create a New Deck"
-            onPress={() => navigation.navigate("CreateDeck")}
-          >
-            <Text style={deckStyles.buttonText}>Create Deck</Text>
-            <Text style={deckStyles.buttonPlus}>+</Text>
-          </Pressable>
-        </View>
-        {testDecks.map((testDeck) => (
-          <View style={deckStyles.deckList} key={testDeck.id}>
-            <View style={deckStyles.innerBorder}>
-              <Text style={deckStyles.name}>{testDeck.name}</Text>
-              <Text style={deckStyles.description}>{testDeck.description}</Text>
-            </View>
-          </View>
-        ))}
+    <View style={deckStyles.container}>
+      <View style={deckStyles.buttonBox}>
+        <Pressable
+          style={deckStyles.button}
+          title="Create a New Deck"
+          onPress={() => navigation.navigate("CreateDeck")}
+        >
+          <Text style={deckStyles.buttonText}>Create Deck</Text>
+          <Text style={deckStyles.buttonPlus}>+</Text>
+        </Pressable>
       </View>
-    </ScrollView>
+      <FlatList
+        data={testDecks}
+        renderItem={({ item }) => (
+          <Deck name={item.name} description={item.description} />
+        )}
+        keyExtractor={(item) => item.id}
+      />
+    </View>
   );
 };
 

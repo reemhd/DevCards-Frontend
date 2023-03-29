@@ -53,6 +53,10 @@ function NavBar() {
 
             return <Ionicons name={analyticsIcon} size={size} color={color} />;
           },
+          tabBarActiveTintColor: "#9381FF",
+          tabBarStyle: {
+            backgroundColor: "#F5F3E5",
+          },
         })}
       />
       <Tab.Screen
@@ -70,6 +74,10 @@ function NavBar() {
             return (
               <Ionicons name={competitionIcon} size={size} color={color} />
             );
+          },
+          tabBarActiveTintColor: "#9381FF",
+          tabBarStyle: {
+            backgroundColor: "#F5F3E5",
           },
         })}
       />
