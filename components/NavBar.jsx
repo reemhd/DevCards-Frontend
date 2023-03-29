@@ -1,11 +1,7 @@
 import React from "react";
-import { View, StyleSheet, Pressable, Text } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
-import { FontAwesome5 } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Decks from "./Decks";
-import CreateDeck from "./CreateDeck";
 import Analytics from "./Analytics";
 import Competition from "./Competition";
 import StackNavigation from "./StackNavigation";
@@ -14,34 +10,68 @@ const Tab = createBottomTabNavigator();
 
 function NavBar() {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: "#F5F3E5",
+        },
+        headerTitleAlign: "center",
+        headerTintColor: "#4682B4",
+      }}
+    >
       <Tab.Screen
         name="Home"
         component={StackNavigation}
-        options={{
-          headerTitle: () => <Text>DevCards</Text>,
-          tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="home" size={size} color={color} />
-          ),
-        }}
+        options={({ route }) => ({
+          title: "My Decks",
+          tabBarIcon: ({ color, size, focused }) => {
+            let homeIcon;
+
+            if (route.name === "Home") {
+              homeIcon = focused ? "home" : "home-outline";
+            }
+            return <Ionicons name={homeIcon} size={size} color={color} />;
+          },
+          tabBarActiveTintColor: "#9381FF",
+          tabBarStyle: {
+            backgroundColor: "#F5F3E5",
+          },
+        })}
       />
       <Tab.Screen
         name="Analytics"
         component={Analytics}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="analytics" size={size} color={color} />
-          ),
-        }}
+        options={({ route }) => ({
+          title: "Analytics",
+
+          tabBarIcon: ({ color, size, focused }) => {
+            let analyticsIcon;
+
+            if (route.name === "Analytics") {
+              analyticsIcon = focused ? "analytics" : "analytics-outline";
+            }
+
+            return <Ionicons name={analyticsIcon} size={size} color={color} />;
+          },
+        })}
       />
       <Tab.Screen
         name="Competition"
         component={Competition}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <Ionicons name="trophy-sharp" size={size} color={color} />
-          ),
-        }}
+        options={({ route }) => ({
+          title: "Competition",
+
+          tabBarIcon: ({ color, size, focused }) => {
+            let competitionIcon;
+
+            if (route.name === "Competition") {
+              competitionIcon = focused ? "trophy-sharp" : "trophy-outline";
+            }
+            return (
+              <Ionicons name={competitionIcon} size={size} color={color} />
+            );
+          },
+        })}
       />
     </Tab.Navigator>
   );

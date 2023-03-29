@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { View, Text, ScrollView, StyleSheet, Button } from "react-native";
+import { View, Text, ScrollView, StyleSheet, Pressable } from "react-native";
 
 const Decks = ({ navigation }) => {
   const testDecks = [
@@ -24,10 +24,16 @@ const Decks = ({ navigation }) => {
   return (
     <ScrollView>
       <View style={deckStyles.container}>
-        <Button
-          title="Create a New Deck"
-          onPress={() => navigation.navigate("CreateDeck")}
-        />
+        <View style={deckStyles.buttonBox}>
+          <Pressable
+            style={deckStyles.button}
+            title="Create a New Deck"
+            onPress={() => navigation.navigate("CreateDeck")}
+          >
+            <Text style={deckStyles.buttonText}>Create Deck</Text>
+            <Text style={deckStyles.buttonPlus}>+</Text>
+          </Pressable>
+        </View>
         {testDecks.map((testDeck) => (
           <View style={deckStyles.deckList} key={testDeck.id}>
             <View style={deckStyles.innerBorder}>
@@ -76,6 +82,32 @@ const deckStyles = StyleSheet.create({
     borderWidth: 5,
     borderRadius: 10,
     padding: 0,
+  },
+  buttonBox: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  button: {
+    borderWidth: 5,
+    borderColor: "#F5F3E5",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 10,
+    marginTop: 15,
+    borderRadius: 15,
+    elevation: 1,
+  },
+  buttonText: {
+    color: "#F5F3E5",
+    fontSize: 22,
+    padding: 5,
+    paddingBottom: 0,
+  },
+  buttonPlus: {
+    color: "#F5F3E5",
+    fontWeight: "bold",
+    fontSize: 40,
+    paddingTop: 0,
   },
 });
 

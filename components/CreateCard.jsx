@@ -6,10 +6,6 @@ const CreateCard = ({ label }) => {
   const [cardFront, setCardFront] = useState("");
   const [cardBack, setCardBack] = useState("");
 
-  console.log(cardFront, "<< cardFront");
-  console.log(cardBack, "<< cardBack");
-  //we need to reset the card input boxes to blank
-
   return (
     <View style={cardStyles.container}>
       <Text style={label}>Front: </Text>
