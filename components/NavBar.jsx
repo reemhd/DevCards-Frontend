@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet, Pressable } from "react-native";
+import { View, StyleSheet, Pressable, Text } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -19,26 +19,16 @@ function NavBar() {
         name="Home"
         component={StackNavigation}
         options={{
-          headerShown: false,
+          headerTitle: () => <Text>DevCards</Text>,
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="home" size={size} color={color} />
           ),
         }}
       />
-      {/* <Tab.Screen
-        name="CreateDeck"
-        component={CreateDeck}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="add-box" size={size} color={color} />
-          ),
-        }}
-      /> */}
       <Tab.Screen
         name="Analytics"
         component={Analytics}
         options={{
-          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="analytics" size={size} color={color} />
           ),
@@ -48,7 +38,6 @@ function NavBar() {
         name="Competition"
         component={Competition}
         options={{
-          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="trophy-sharp" size={size} color={color} />
           ),

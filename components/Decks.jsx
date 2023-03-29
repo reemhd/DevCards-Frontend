@@ -25,7 +25,7 @@ const Decks = ({ navigation }) => {
     <ScrollView>
       <View style={deckStyles.container}>
         <Button
-          title="Create A Deck"
+          title="Create a New Deck"
           onPress={() => navigation.navigate("CreateDeck")}
         />
         {testDecks.map((testDeck) => (
