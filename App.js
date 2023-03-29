@@ -1,38 +1,27 @@
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, ScrollView } from "react-native";
-import APICall from "./components/APICall";
-import Header from "./components/Header";
-
-export default function App() {
-  return (
-    <ScrollView>
-      <Header />
-      <APICall styleSheet={styles.reviews} />
-      <View style={styles.container}>
-        <Text>Hello World</Text>
-        <StatusBar style="auto" />
-      </View>
-    </ScrollView>
-  );
-}
+import { StyleSheet } from "react-native";
+import { ScrollView, View } from "react-native";
+// import CreateDeck from "./components/CreateDeck";
+import Decks from "./components/Decks";
+import NavBar from "./components/NavBar";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
   },
-  reviews: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    backgroundColor: "black",
-    color: "white",
-    padding: 1,
-    margin: 1,
-    borderRadius: 20,
-    width: 350,
-    alignItems: "center",
+  Scrollcontainer: {
+    flex: 1,
   },
 });
+
+export default function App() {
+  return (
+    <View style={styles.container}>
+      <ScrollView style={styles.Scrollcontainer}>
+        <Decks />
+      </ScrollView>
+      <NavBar />
+    </View>
+  );
+}
+
+//createDeck will go inside NavBar and as an alternate render in Decks if no decks exist
