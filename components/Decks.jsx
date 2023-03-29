@@ -1,8 +1,12 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { View, Text, ScrollView, StyleSheet } from "react-native";
+import { View, Text, ScrollView, StyleSheet, Button } from "react-native";
+import { createStackNavigator } from "@react-navigation/stack";
+import CreateDeck from "./CreateDeck";
 
-const Decks = () => {
+
+
+const Decks = ({navigation}) => {
   const testDecks = [
     { name: "JS", description: "Testtesttest", id: 1 },
     { name: "Python", description: "Testtesttest", id: 2 },
@@ -20,20 +24,26 @@ const Decks = () => {
   //     </View>
   //   );
   // };
-
+  const Stack = createStackNavigator();
   return (
-    <ScrollView>
-      <View style={deckStyles.container}>
-        {testDecks.map((testDeck) => (
-          <View style={deckStyles.deckList} key={testDeck.id}>
-            <View style={deckStyles.innerBorder}>
-              <Text style={deckStyles.name}>{testDeck.name}</Text>
-              <Text style={deckStyles.description}>{testDeck.description}</Text>
+    <Stack.Navigator>
+      <ScrollView>
+        <Stack.Screen name="CreateDeck" component={CreateDeck} />
+        <View style={deckStyles.container}>
+          <Button title="Create A Deck" onPress={()=>navigation.navigate("CreateDeck")}/>
+          {testDecks.map((testDeck) => (
+            <View style={deckStyles.deckList} key={testDeck.id}>
+              <View style={deckStyles.innerBorder}>
+                <Text style={deckStyles.name}>{testDeck.name}</Text>
+                <Text style={deckStyles.description}>
+                  {testDeck.description}
+                </Text>
+              </View>
             </View>
-          </View>
-        ))}
-      </View>
-    </ScrollView>
+          ))}
+        </View>
+      </ScrollView>
+    </Stack.Navigator>
   );
 };
 
