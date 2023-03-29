@@ -19,6 +19,7 @@ function NavBar() {
         name="Home"
         component={StackNavigation}
         options={{
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="home" size={size} color={color} />
           ),
@@ -37,6 +38,7 @@ function NavBar() {
         name="Analytics"
         component={Analytics}
         options={{
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="analytics" size={size} color={color} />
           ),
@@ -46,6 +48,7 @@ function NavBar() {
         name="Competition"
         component={Competition}
         options={{
+          headerShown: false,
           tabBarIcon: ({ color, size }) => (
             <Ionicons name="trophy-sharp" size={size} color={color} />
           ),
