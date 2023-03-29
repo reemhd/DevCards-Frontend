@@ -26,9 +26,9 @@ const Decks = ({navigation}) => {
   // };
   const Stack = createStackNavigator();
   return (
-    <Stack.Navigator>
+    // <Stack.Navigator>
       <ScrollView>
-        <Stack.Screen name="CreateDeck" component={CreateDeck} />
+        {/* <Stack.Screen name="CreateDeck" component={CreateDeck} /> */}
         <View style={deckStyles.container}>
           <Button title="Create A Deck" onPress={()=>navigation.navigate("CreateDeck")}/>
           {testDecks.map((testDeck) => (
@@ -43,7 +43,7 @@ const Decks = ({navigation}) => {
           ))}
         </View>
       </ScrollView>
-    </Stack.Navigator>
+    // </Stack.Navigator>
   );
 };
 
