@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { View, Text, StyleSheet, Pressable, FlatList } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Decks = ({ navigation }) => {
   const testDecks = [
@@ -32,7 +33,11 @@ const Decks = ({ navigation }) => {
           onPress={() => navigation.navigate("CreateDeck")}
         >
           <Text style={deckStyles.buttonText}>Create Deck</Text>
-          <Text style={deckStyles.buttonPlus}>+</Text>
+          <MaterialCommunityIcons
+            name="cards-outline"
+            size={24}
+            color="#F5F3E5"
+          />
         </Pressable>
       </View>
       <FlatList
@@ -87,26 +92,17 @@ const deckStyles = StyleSheet.create({
     justifyContent: "center",
   },
   button: {
-    borderWidth: 5,
+    borderWidth: 3,
     borderColor: "#F5F3E5",
     alignItems: "center",
     justifyContent: "center",
     padding: 10,
     marginTop: 15,
-    borderRadius: 15,
-    elevation: 1,
+    elevation: 7,
   },
   buttonText: {
     color: "#F5F3E5",
     fontSize: 22,
-    padding: 5,
-    paddingBottom: 0,
-  },
-  buttonPlus: {
-    color: "#F5F3E5",
-    fontWeight: "bold",
-    fontSize: 40,
-    paddingTop: 0,
   },
 });
 
