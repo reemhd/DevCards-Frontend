@@ -34,3 +34,9 @@ export const getDecks = () => {
       console.log(err);
     });
 };
+
+export const getDeckByID = (id) => {
+  return api.get(`/decks/${id}`).then(({ data }) => {
+    console.log(data);
+  });
+};
