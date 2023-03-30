@@ -13,14 +13,18 @@ const Decks = ({ navigation }) => {
     });
   }, []);
 
-  const Deck = ({ title, description }) => {
+  const Deck = ({ title, description, _id }) => {
     return (
-      <View style={deckStyles.deckList}>
-        <View style={deckStyles.innerBorder}>
-          <Text style={deckStyles.name}>{title}</Text>
-          <Text style={deckStyles.description}>{description}</Text>
+      <Pressable
+        onPress={() => navigation.navigate("SingleDeck", { deck_id: _id })}
+      >
+        <View style={deckStyles.deckList}>
+          <View style={deckStyles.innerBorder}>
+            <Text style={deckStyles.name}>{title}</Text>
+            <Text style={deckStyles.description}>{description}</Text>
+          </View>
         </View>
-      </View>
+      </Pressable>
     );
   };
 
