@@ -13,10 +13,10 @@ function NavBar() {
     <Tab.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: "#F5F3E5",
+          backgroundColor: "#F9F9F9",
         },
         headerTitleAlign: "center",
-        headerTintColor: "#4682B4",
+        headerTintColor: "#F99909",
       }}
     >
       <Tab.Screen
@@ -32,9 +32,9 @@ function NavBar() {
             }
             return <Ionicons name={homeIcon} size={size} color={color} />;
           },
-          tabBarActiveTintColor: "#9381FF",
+          tabBarActiveTintColor: "#F99909",
           tabBarStyle: {
-            backgroundColor: "#F5F3E5",
+            backgroundColor: "#F9F9F9",
           },
         })}
       />
@@ -53,9 +53,9 @@ function NavBar() {
 
             return <Ionicons name={analyticsIcon} size={size} color={color} />;
           },
-          tabBarActiveTintColor: "#9381FF",
+          tabBarActiveTintColor: "#F99909",
           tabBarStyle: {
-            backgroundColor: "#F5F3E5",
+            backgroundColor: "#F9F9F9",
           },
         })}
       />
@@ -75,9 +75,10 @@ function NavBar() {
               <Ionicons name={competitionIcon} size={size} color={color} />
             );
           },
-          tabBarActiveTintColor: "#9381FF",
+          tabBarActiveTintColor: "#F99909",
+          // "#9381FF",
           tabBarStyle: {
-            backgroundColor: "#F5F3E5",
+            backgroundColor: "#F9F9F9",
           },
         })}
       />
