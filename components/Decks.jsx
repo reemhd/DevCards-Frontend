@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { View, Text, ScrollView, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet, Pressable, FlatList } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Decks = ({ navigation }) => {
   const testDecks = [
@@ -12,32 +13,41 @@ const Decks = ({ navigation }) => {
 
   useEffect(() => {}, []);
 
-  // const renderItem = ({ item }) => {
-  //   return (
-  //     <View style={deckStyles.deckList}>
-  //       <Text style={deckStyles.name}>{item.name}</Text>
-  //       <Text style={deckStyles.description}>{item.description}</Text>
-  //     </View>
-  //   );
-  // };
+  const Deck = ({ name, description }) => {
+    return (
+      <View style={deckStyles.deckList}>
+        <View style={deckStyles.innerBorder}>
+          <Text style={deckStyles.name}>{name}</Text>
+          <Text style={deckStyles.description}>{description}</Text>
+        </View>
+      </View>
+    );
+  };
 
   return (
-    <ScrollView>
-      <View style={deckStyles.container}>
-        <Button
+    <View style={deckStyles.container}>
+      <View style={deckStyles.buttonBox}>
+        <Pressable
+          style={deckStyles.button}
           title="Create a New Deck"
           onPress={() => navigation.navigate("CreateDeck")}
-        />
-        {testDecks.map((testDeck) => (
-          <View style={deckStyles.deckList} key={testDeck.id}>
-            <View style={deckStyles.innerBorder}>
-              <Text style={deckStyles.name}>{testDeck.name}</Text>
-              <Text style={deckStyles.description}>{testDeck.description}</Text>
-            </View>
-          </View>
-        ))}
+        >
+          <Text style={deckStyles.buttonText}>Create Deck</Text>
+          <MaterialCommunityIcons
+            name="cards-outline"
+            size={24}
+            color="#F5F3E5"
+          />
+        </Pressable>
       </View>
-    </ScrollView>
+      <FlatList
+        data={testDecks}
+        renderItem={({ item }) => (
+          <Deck name={item.name} description={item.description} />
+        )}
+        keyExtractor={(item) => item.id}
+      />
+    </View>
   );
 };
 
@@ -45,7 +55,8 @@ const deckStyles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    backgroundColor: "#4682B4",
+    backgroundColor: "#27272D",
+    // "#4682B4"
     justifyContent: "center",
     alignItems: "stretch",
     alignContent: "stretch",
@@ -55,27 +66,55 @@ const deckStyles = StyleSheet.create({
     fontSize: 32,
     padding: 5,
     margin: 10,
-    color: "#9381FF",
+    color: "#F9F9F9",
+    // "#9381FF"
   },
   description: {
     fontSize: 24,
     padding: 5,
     margin: 10,
-    color: "#9381FF",
+    color: "#F9F9F9",
+    // color: "#9381FF",
   },
   deckList: {
-    backgroundColor: "#F5F3E5",
+    backgroundColor: "#818387",
+    // "#F5F3E5",
     elevation: 10,
     padding: 10,
     margin: 20,
     height: 170,
     borderRadius: 10,
+    borderColor: "#F9F9F9",
+    borderWidth: 1,
   },
   innerBorder: {
-    borderColor: "#9381FF",
+    borderColor: "#F99909",
+    // "#9381FF",
     borderWidth: 5,
     borderRadius: 10,
     padding: 0,
+  },
+  buttonBox: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  button: {
+    borderWidth: 3,
+    borderColor: "#F9F9F9",
+    // "#F5F3E5",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 10,
+    marginTop: 15,
+    elevation: 7,
+    backgroundColor: "#818387",
+    borderRadius: 8,
+  },
+  buttonText: {
+    color: "#F99909",
+    // "#F5F3E5",
+    fontSize: 22,
+    fontWeight: "bold",
   },
 });
 
