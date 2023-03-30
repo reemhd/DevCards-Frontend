@@ -36,7 +36,8 @@ export const getDecks = () => {
 };
 
 export const getDeckByID = (id) => {
-  return api.get(`/decks/${id}`).then(({ data }) => {
+  return api.get(`/decks/${id}/cards`).then(({ data }) => {
     console.log(data);
+    return data.deck;
   });
 };

@@ -3,55 +3,66 @@ import { View, Text, StyleSheet, FlatList, Pressable } from "react-native";
 import { getDeckByID } from "../utils/api";
 import { Fontisto } from "@expo/vector-icons";
 
-const SingleDeck = ({ deck_id }) => {
+const SingleDeck = ({ route }) => {
+  const { deck_id } = route.params;
   const [deck, setDeck] = useState({});
-  const [cardText, setCardText] = useState("");
 
-  // useEffect(() => {
-  //   getDeckByID(deck_id).then((deck) => {
-  //     setDeck(deck);
-  //   });
-  // }, [deck]);
+  useEffect(() => {
+    getDeckByID(deck_id).then((deck) => {
+      console.log(deck, "<<response in SingleDeck");
+      setDeck(deck);
+    });
+  }, [deck]);
 
-  const testData = [
-    {
-      _id: "1",
-      title: "Test Deck",
-      description: "Test Description",
-      cards: [
-        {
-          front: "Question",
-          back: "Answer",
-        },
-        {
-          front: "Question 2",
-          back: "Answer 2",
-        },
-        {
-          front: "Question 3",
-          back: "Answer 2",
-        },
-        {
-          front: "Question 4",
-          back: "Answer 2",
-        },
-        {
-          front: "Question 5",
-          back: "Answer 2",
-        },
-      ],
-    },
-  ];
+  //   const testData = [
+  //     {
+  //       _id: "1",
+  //       title: "Test Deck",
+  //       description: "Test Description",
+  //       cards: [
+  //         {
+  //           _id: "1",
+  //           front: "Question",
+  //           back: "Answer",
+  //         },
+  //         {
+  //           _id: "2",
+  //           front: "Question 2",
+  //           back: "Answer 2",
+  //         },
+  //         {
+  //           _id: "3",
+  //           front: "Question 3",
+  //           back: "Answer 2",
+  //         },
+  //         {
+  //           _id: "4",
+  //           front: "Question 4",
+  //           back: "Answer 2",
+  //         },
+  //         {
+  //           _id: "5",
+  //           front: "Question 5",
+  //           back: "Answer 2",
+  //         },
+  //       ],
+  //     },
+  //   ];
 
-  const handleFlipCard = (back, front, cardText) => {
-    if (cardText === front) return (cardText = back);
-    if (cardText === back) return (cardText = front);
+  const handleFlipCard = (front, back, _id, cardText) => {
+    setDeck((currentDeck) => {
+      currentDeck.map((card) => {
+        if (_id === card._id) {
+          return cardText === front ? (cardText = back) : (cardText = front);
+        }
+      });
+    });
   };
 
-  const Card = ({ front, back }) => {
+  const Card = ({ front, back, _id }) => {
     let cardText = front;
     return (
-      <Pressable onPress={() => handleFlipCard(back, front, cardText)}>
+      <Pressable onPress={() => handleFlipCard(front, back, _id, cardText)}>
         <View style={singleDeckStyle.cardList}>
           <Text style={singleDeckStyle.text}>{cardText}</Text>
           <View style={singleDeckStyle.spinner}>
@@ -64,9 +75,11 @@ const SingleDeck = ({ deck_id }) => {
   return (
     <View style={singleDeckStyle.container}>
       <FlatList
-        data={testData[0].cards}
-        renderItem={({ item }) => <Card front={item.front} back={item.back} />}
-        keyExtractor={(item) => item.front}
+        data={deck}
+        renderItem={({ item }) => (
+          <Card front={item.front} back={item.back} _id={item._id} />
+        )}
+        keyExtractor={(item) => item._id}
       />
     </View>
   );

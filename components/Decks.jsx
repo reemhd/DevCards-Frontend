@@ -47,7 +47,11 @@ const Decks = ({ navigation }) => {
       <FlatList
         data={currentDecks}
         renderItem={({ item }) => (
-          <Deck title={item.title} description={item.description} />
+          <Deck
+            title={item.title}
+            description={item.description}
+            _id={item._id}
+          />
         )}
         keyExtractor={(item) => item._id}
       />
