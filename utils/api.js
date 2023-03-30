@@ -2,9 +2,9 @@ import axios from "axios";
 
 const api = axios.create({ baseURL: "https://dev-cards.onrender.com/api" });
 
-export const postDeck = (name, description) => {
+export const postDeck = (title, description) => {
   return api
-    .post("/decks", { name, description })
+    .post("/decks", { title, description })
     .then((data) => {
       console.log(data);
     })
