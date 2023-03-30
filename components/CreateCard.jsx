@@ -1,29 +1,33 @@
 import React from "react";
 import { useState } from "react";
 import { Text, View, TextInput, StyleSheet } from "react-native";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const CreateCard = () => {
   const [cardFront, setCardFront] = useState("");
   const [cardBack, setCardBack] = useState("");
 
   return (
-    <View style={cardStyles.outer}>
-      <View style={cardStyles.container}>
-        <Text style={cardStyles.label}>Front: </Text>
-        <TextInput
-          style={cardStyles.inputBox}
-          placeholder="Enter your question here"
-          value={cardFront}
-          onChangeText={(text) => setCardFront(text)}
-        />
-        <Text style={cardStyles.label}>Back: </Text>
-        <TextInput
-          style={cardStyles.inputBox}
-          placeholder="Enter your answer here"
-          value={cardBack}
-          onChangeText={(text) => setCardBack(text)}
-        />
-      </View>
+    <View style={cardStyles.container}>
+      <MaterialCommunityIcons
+        name="card-text-outline"
+        size={50}
+        color="#F9F9F9"
+      />
+      <Text style={cardStyles.label}>Front</Text>
+      <TextInput
+        style={cardStyles.inputBox}
+        placeholder="Enter your question here"
+        value={cardFront}
+        onChangeText={(text) => setCardFront(text)}
+      />
+      <Text style={cardStyles.label}>Back</Text>
+      <TextInput
+        style={cardStyles.inputBox}
+        placeholder="Enter your answer here"
+        value={cardBack}
+        onChangeText={(text) => setCardBack(text)}
+      />
     </View>
   );
 };
@@ -36,7 +40,7 @@ const cardStyles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderStyle: "solid",
-    borderWidth: 1,
+    borderWidth: 5,
     borderColor: "#F9F9F9",
     margin: 50,
     padding: 20,
@@ -64,11 +68,6 @@ const cardStyles = StyleSheet.create({
     borderRadius: 10,
     borderColor: "#F9F9F9",
     borderWidth: 1,
-  },
-  outer: {
-    flex: 1,
-    backgroundColor: "#818387",
-    alignItems: "center",
   },
 });
 
