@@ -1,3 +1,4 @@
+import { NavigationContainer } from "@react-navigation/native";
 import { StyleSheet } from "react-native";
 import { ScrollView, View } from "react-native";
 // import CreateDeck from "./components/CreateDeck";
@@ -15,12 +16,14 @@ const styles = StyleSheet.create({
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <ScrollView style={styles.Scrollcontainer}>
-        <Decks />
-      </ScrollView>
+    <NavigationContainer>
+      {/* <View style={styles.container}> */}
+      {/* <ScrollView style={styles.Scrollcontainer}>
+          <Decks />
+        </ScrollView> */}
       <NavBar />
-    </View>
+      {/* </View> */}
+    </NavigationContainer>
   );
 }
 
