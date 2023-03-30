@@ -2,22 +2,22 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { View, Text, StyleSheet, Pressable, FlatList } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { getDecks } from "../utils/api";
 
 const Decks = ({ navigation }) => {
-  const testDecks = [
-    { name: "JS", description: "Testtesttest", id: 1 },
-    { name: "Python", description: "Testtesttest", id: 2 },
-    { name: "HTML", description: "Testtesttest", id: 3 },
-  ];
   const [currentDecks, setCurrentDecks] = useState([]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    getDecks().then((decks) => {
+      setCurrentDecks(decks);
+    });
+  }, []);
 
-  const Deck = ({ name, description }) => {
+  const Deck = ({ title, description }) => {
     return (
       <View style={deckStyles.deckList}>
         <View style={deckStyles.innerBorder}>
-          <Text style={deckStyles.name}>{name}</Text>
+          <Text style={deckStyles.name}>{title}</Text>
           <Text style={deckStyles.description}>{description}</Text>
         </View>
       </View>
@@ -41,11 +41,11 @@ const Decks = ({ navigation }) => {
         </Pressable>
       </View>
       <FlatList
-        data={testDecks}
+        data={currentDecks}
         renderItem={({ item }) => (
-          <Deck name={item.name} description={item.description} />
+          <Deck title={item.title} description={item.description} />
         )}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(item) => item._id}
       />
     </View>
   );

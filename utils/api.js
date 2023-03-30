@@ -1,10 +1,10 @@
 import axios from "axios";
 
-const api = axios.create({ baseURL: "" });
+const api = axios.create({ baseURL: "https://dev-cards.onrender.com/api" });
 
-export const postDeck = (name, description) => {
+export const postDeck = (title, description) => {
   return api
-    .post("/decks", { name, description })
+    .post("/decks", { title, description })
     .then((data) => {
       console.log(data);
     })
@@ -25,7 +25,12 @@ export const postCard = (front, back) => {
 };
 
 export const getDecks = () => {
-  return api.get("/decks").then((data) => {
-    return data.decks; //change this
-  });
+  return api
+    .get("/decks")
+    .then(({ data }) => {
+      return data.decks;
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 };
