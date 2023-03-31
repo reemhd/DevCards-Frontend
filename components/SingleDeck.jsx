@@ -3,16 +3,12 @@ import { View, Text, StyleSheet, FlatList, Pressable } from "react-native";
 import { getDeckByID } from "../utils/api";
 import { Fontisto } from "@expo/vector-icons";
 
-const SingleDeck = ({ route, deckID }) => {
+const SingleDeck = ({ route }) => {
   const { deck_id } = route.params;
   const [deck, setDeck] = useState({});
 
-  let deckToFetch;
-
-  deckID ? (deckToFetch = deckID) : (deckToFetch = deck_id);
-
   useEffect(() => {
-    getDeckByID(deckToFetch).then((deck) => {
+    getDeckByID(deck_id).then((deck) => {
       setDeck(deck);
     });
   }, []);

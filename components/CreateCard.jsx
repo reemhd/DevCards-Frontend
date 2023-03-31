@@ -19,7 +19,7 @@ const CreateCard = ({ navigation, newDeckID }) => {
     postCard(cardFront, cardBack, newDeckID).then(() => {
       console.log("card created");
     });
-    navigation.navigate("SingleDeck", { deckID: newDeckID });
+    navigation.navigate("Decks");
   };
 
   return (
