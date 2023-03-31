@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useState } from "react";
 import { View, Text, StyleSheet, Pressable, FlatList } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { getDecks } from "../utils/api";
+import { useFocusEffect } from "@react-navigation/native";
 
 const Decks = ({ navigation }) => {
   const [currentDecks, setCurrentDecks] = useState([]);
@@ -13,6 +14,14 @@ const Decks = ({ navigation }) => {
     });
   }, []);
 
+  useFocusEffect(
+    useCallback(() => {
+      getDecks().then((decks) => {
+        setCurrentDecks(decks);
+      });
+    }, [])
+  );
+
   const Deck = ({ title, description, _id }) => {
     return (
       <Pressable
@@ -21,7 +30,13 @@ const Decks = ({ navigation }) => {
         <View style={deckStyles.deckList}>
           <View style={deckStyles.innerBorder}>
             <Text style={deckStyles.name}>{title}</Text>
-            <Text style={deckStyles.description}>{description}</Text>
+            <Text
+              style={deckStyles.description}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
+              {description}
+            </Text>
           </View>
         </View>
       </Pressable>
@@ -76,18 +91,18 @@ const deckStyles = StyleSheet.create({
     fontSize: 32,
     padding: 5,
     margin: 10,
-    color: "#F9F9F9",
+    color: "black",
     // "#9381FF"
   },
   description: {
-    fontSize: 24,
+    fontSize: 20,
     padding: 5,
     margin: 10,
     color: "#F9F9F9",
     // color: "#9381FF",
   },
   deckList: {
-    backgroundColor: "#818387",
+    backgroundColor: "#BAB484",
     // "#F5F3E5",
     elevation: 10,
     padding: 10,
@@ -103,6 +118,7 @@ const deckStyles = StyleSheet.create({
     borderWidth: 5,
     borderRadius: 10,
     padding: 0,
+    height: 150,
   },
   buttonBox: {
     alignItems: "center",
@@ -116,6 +132,7 @@ const deckStyles = StyleSheet.create({
     justifyContent: "center",
     padding: 10,
     marginTop: 15,
+    marginBottom: 15,
     elevation: 7,
     backgroundColor: "#818387",
     borderRadius: 8,

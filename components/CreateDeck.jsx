@@ -55,13 +55,22 @@ const CreateDeck = ({ navigation }) => {
             <View style={createDeckStyles.innerBorder}>
               <Text style={createDeckStyles.boldText}>Description</Text>
               <TextInput
+                maxLength={30}
+                multiline={true}
+                numberOfLines={3}
                 placeholder="Enter Deck Description"
                 value={deckDescription}
                 onChangeText={(text) => setDeckDescription(text)}
               />
             </View>
           </View>
-          <View style={createDeckStyles.button}>
+          <View
+            style={
+              deckName && deckDescription
+                ? createDeckStyles.buttonActive
+                : createDeckStyles.buttonInactive
+            }
+          >
             <TouchableOpacity
               disabled={deckName && deckDescription ? false : true}
               onPress={handleCreateDeck}
@@ -86,33 +95,19 @@ const createDeckStyles = StyleSheet.create({
     backgroundColor: "#27272D",
     justifyContent: "center",
     alignItems: "center",
-    alignContent: "stretch",
   },
   label: {
     fontWeight: "bold",
     padding: 10,
     elevation: 5,
-    backgroundColor: "#818387",
-    color: "#F9F9F9",
+    backgroundColor: "#BAB484",
+    color: "black",
     alignItems: "center",
     margin: 10,
     width: "70%",
     borderRadius: 10,
     borderColor: "#F9F9F9",
     borderWidth: 1,
-  },
-  button: {
-    fontWeight: "bold",
-    padding: 10,
-    elevation: 10,
-    backgroundColor: "#F99909",
-    alignItems: "center",
-    margin: 10,
-    width: "50%",
-    borderRadius: 10,
-    shadowColor: "#F9F9F9",
-    shadowRadius: 10,
-    shadowOpacity: 0,
   },
   buttonText: {
     color: "#F5F3E5",
@@ -130,7 +125,33 @@ const createDeckStyles = StyleSheet.create({
   },
   boldText: {
     fontWeight: "bold",
-    color: "#F9F9F9",
+    color: "black",
+  },
+  buttonActive: {
+    backgroundColor: "#F99909",
+    fontWeight: "bold",
+    padding: 10,
+    elevation: 10,
+    alignItems: "center",
+    margin: 10,
+    width: "50%",
+    borderRadius: 10,
+    shadowColor: "#F9F9F9",
+    shadowRadius: 10,
+    shadowOpacity: 0,
+  },
+  buttonInactive: {
+    backgroundColor: "#E3BC98",
+    fontWeight: "bold",
+    padding: 10,
+    elevation: 10,
+    alignItems: "center",
+    margin: 10,
+    width: "50%",
+    borderRadius: 10,
+    shadowColor: "#F9F9F9",
+    shadowRadius: 10,
+    shadowOpacity: 0,
   },
 });
 
