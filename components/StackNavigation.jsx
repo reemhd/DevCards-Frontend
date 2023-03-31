@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import CreateDeck from "./CreateDeck";
 import Decks from "./Decks";
 import CreateCard from "./CreateCard";
+import SingleDeck from "./SingleDeck";
 
 const Stack = createStackNavigator();
 
@@ -12,6 +13,11 @@ const StackNavigation = () => {
       <Stack.Screen
         name="Decks"
         component={Decks}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="SingleDeck"
+        component={SingleDeck}
         options={{ headerShown: false }}
       />
       <Stack.Screen

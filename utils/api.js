@@ -5,18 +5,18 @@ const api = axios.create({ baseURL: "https://dev-cards.onrender.com/api" });
 export const postDeck = (title, description) => {
   return api
     .post("/decks", { title, description })
-    .then((data) => {
-      console.log(data);
+    .then(({ data }) => {
+      return data.createdDeck;
     })
     .catch((err) => {
       console.log(err);
     });
 };
 
-export const postCard = (front, back) => {
+export const postCard = (front, back, newDeckID) => {
   return api
-    .post("/decks/cards", { front, back })
-    .then((data) => {
+    .post(`/cards/${newDeckID}`, { front, back })
+    .then(({ data }) => {
       console.log(data);
     })
     .catch((err) => {
@@ -33,4 +33,10 @@ export const getDecks = () => {
     .catch((err) => {
       console.log(err);
     });
+};
+
+export const getDeckByID = (id) => {
+  return api.get(`/decks/${id}/cards`).then(({ data }) => {
+    return data.cards;
+  });
 };
