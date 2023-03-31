@@ -32,48 +32,62 @@ const SingleDeck = ({ route }) => {
     });
   }, []);
 
-  const handleFlipCard = (front, back, _id, cardText) => {
-    setDeck((currentDeck) => {
-      currentDeck.map((card) => {
-        if (_id === card._id) {
-          return cardText === front ? (cardText = back) : (cardText = front);
-        }
-      });
+  const handleFlipCard = () => {
+    Animated.timing(animate.current, {
+      duration: 300,
+      toValue: isFlipped ? 0 : 180,
+      useNativeDriver: true,
+    }).start(() => {
+      setIsFlipped(!isFlipped);
     });
   };
 
-  const Card = ({ front, back, _id }) => {
-    let cardText = front;
+  const Card = ({ front, back }) => {
     return (
-      <Pressable onPress={() => handleFlipCard(front, back, _id, cardText)}>
-        <View style={singleDeckStyle.cardList}>
-          <Text style={singleDeckStyle.text}>{cardText}</Text>
-          <View style={singleDeckStyle.spinner}>
-            <Fontisto name="spinner-rotate-forward" size={24} color="white" />
-          </View>
-        </View>
-      </Pressable>
+      <View>
+        <Pressable onPress={handleFlipCard}>
+          <Animated.View
+            style={[
+              { transform: [{ rotateY: interpolateFront }] },
+              singleDeckStyle.hidden,
+              singleDeckStyle.cardList,
+            ]}
+          >
+            <Text style={singleDeckStyle.text}>{front}</Text>
+            <View style={singleDeckStyle.spinner}>
+              <Fontisto name="spinner-rotate-forward" size={24} color="white" />
+            </View>
+          </Animated.View>
+        </Pressable>
+        <Pressable
+        // onPress={() =>
+        //  handleFlipCard(front, back, _id, cardText)}
+        >
+          <Animated.View
+            style={[
+              { transform: [{ rotateY: interpolateBack }] },
+              singleDeckStyle.hidden,
+              singleDeckStyle.cardListBack,
+            ]}
+          >
+            <Text style={singleDeckStyle.text}>{back}</Text>
+            <View style={singleDeckStyle.spinner}>
+              <Fontisto name="spinner-rotate-forward" size={24} color="white" />
+            </View>
+          </Animated.View>
+        </Pressable>
+      </View>
     );
   };
   return (
     <View style={singleDeckStyle.container}>
-      {!deck ? (
-        <>
-          <View>
-            <Text style={singleDeckStyle.error}>
-              Page working but no response from BE
-            </Text>
-          </View>
-        </>
-      ) : (
-        <FlatList
-          data={deck}
-          renderItem={({ item }) => (
-            <Card front={item.front} back={item.back} _id={item._id} />
-          )}
-          keyExtractor={(item) => item._id}
-        />
-      )}
+      <FlatList
+        data={deck}
+        renderItem={({ item }) => (
+          <Card front={item.front} back={item.back} _id={item._id} />
+        )}
+        keyExtractor={(item) => item._id}
+      />
     </View>
   );
 };
@@ -82,6 +96,7 @@ const singleDeckStyle = StyleSheet.create({
   text: {
     fontWeight: "bold",
     fontSize: 20,
+    padding: 50,
   },
   container: {
     flex: 1,
@@ -89,8 +104,7 @@ const singleDeckStyle = StyleSheet.create({
     backgroundColor: "#27272D",
     // "#4682B4"
     justifyContent: "center",
-    alignItems: "stretch",
-    alignContent: "stretch",
+    alignItems: "center",
   },
   cardList: {
     alignItems: "center",
@@ -101,11 +115,9 @@ const singleDeckStyle = StyleSheet.create({
     padding: 10,
     margin: 20,
     marginBottom: 0,
-    height: 170,
     borderRadius: 10,
     borderColor: "#F99909",
     borderWidth: 5,
-    elevation: 5,
     shadowColor: "#F9F9F9",
   },
   spinner: {
@@ -115,8 +127,24 @@ const singleDeckStyle = StyleSheet.create({
     paddingRight: 10,
     paddingBottom: 5,
   },
-  error: {
-    color: "white",
+  hidden: {
+    backfaceVisibility: "hidden",
+  },
+  cardListBack: {
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#818387",
+    // "#F5F3E5",
+    elevation: 10,
+    padding: 10,
+    margin: 20,
+    marginBottom: 0,
+    borderRadius: 10,
+    borderColor: "#F99909",
+    borderWidth: 5,
+    shadowColor: "#F9F9F9",
+    position: "absolute",
+    top: 0,
   },
 });
 export default SingleDeck;
