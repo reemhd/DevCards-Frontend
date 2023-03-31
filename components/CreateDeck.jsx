@@ -5,27 +5,33 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  KeyboardAvoidingView,
 } from "react-native";
 import { useState } from "react";
 import CreateCard from "./CreateCard";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { postDeck } from "../utils/api";
 
-const CreateDeck = () => {
+const CreateDeck = ({ navigation }) => {
   const [deckName, setDeckName] = useState("");
   const [deckDescription, setDeckDescription] = useState("");
   const [showCreateCard, setShowCreateCard] = useState(false);
-
-  //we need to reset the input boxes to blank AND make sure that showCreateCard is false
+  let newDeckID;
 
   const handleCreateDeck = () => {
-    //sends the name and description to backend
-    //use the api.js function
-    console.log("created");
+    postDeck(deckName, deckDescription).then((deck) => {
+      console.log(deck._id);
+      newDeckID = deck._id;
+    });
     setShowCreateCard(true);
   };
 
   return (
-    <View style={createDeckStyles.container}>
+    <KeyboardAvoidingView
+      style={createDeckStyles.container}
+      behavior={Platform.OS === "ios" ? "padding" : null}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -200}
+    >
       {!showCreateCard ? (
         <>
           <MaterialCommunityIcons
@@ -56,15 +62,18 @@ const CreateDeck = () => {
             </View>
           </View>
           <View style={createDeckStyles.button}>
-            <TouchableOpacity onPress={handleCreateDeck}>
+            <TouchableOpacity
+              disabled={deckName && deckDescription ? false : true}
+              onPress={handleCreateDeck}
+            >
               <Text style={createDeckStyles.buttonText}>Create Deck</Text>
             </TouchableOpacity>
           </View>
         </>
       ) : (
-        <CreateCard />
+        <CreateCard newDeckID={newDeckID} navigation={navigation} />
       )}
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
