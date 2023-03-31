@@ -8,27 +8,37 @@ const CreateCard = () => {
   const [cardBack, setCardBack] = useState("");
 
   return (
-    <View style={cardStyles.container}>
-      <MaterialCommunityIcons
-        name="card-text-outline"
-        size={50}
-        color="#F9F9F9"
-      />
-      <Text style={cardStyles.label}>Front</Text>
-      <TextInput
-        style={cardStyles.inputBox}
-        placeholder="Enter your question here"
-        value={cardFront}
-        onChangeText={(text) => setCardFront(text)}
-      />
-      <Text style={cardStyles.label}>Back</Text>
-      <TextInput
-        style={cardStyles.inputBox}
-        placeholder="Enter your answer here"
-        value={cardBack}
-        onChangeText={(text) => setCardBack(text)}
-      />
-    </View>
+    <KeyboardAvoidingView>
+      <View style={cardStyles.container}>
+        <MaterialCommunityIcons
+          name="card-text-outline"
+          size={50}
+          color="#F9F9F9"
+        />
+        <Text style={cardStyles.label}>Front</Text>
+        <TextInput
+          style={cardStyles.inputBox}
+          placeholder="Enter your question here"
+          value={cardFront}
+          onChangeText={(text) => setCardFront(text)}
+        />
+        <Text style={cardStyles.label}>Back</Text>
+        <TextInput
+          style={cardStyles.inputBox}
+          placeholder="Enter your answer here"
+          value={cardBack}
+          onChangeText={(text) => setCardBack(text)}
+        />
+      </View>
+      <View style={cardStyles.button}>
+        <TouchableOpacity
+          disabled={deckName && deckDescription ? false : true}
+          onPress={handleCreateDeck}
+        >
+          <Text style={cardStyles.buttonText}>Create Deck</Text>
+        </TouchableOpacity>
+      </View>
+    </KeyboardAvoidingView>
   );
 };
 
@@ -68,6 +78,24 @@ const cardStyles = StyleSheet.create({
     borderRadius: 10,
     borderColor: "#F9F9F9",
     borderWidth: 1,
+  },
+  button: {
+    fontWeight: "bold",
+    padding: 10,
+    elevation: 10,
+    backgroundColor: "#F99909",
+    alignItems: "center",
+    margin: 10,
+    width: "50%",
+    borderRadius: 10,
+    shadowColor: "#F9F9F9",
+    shadowRadius: 10,
+    shadowOpacity: 0,
+  },
+  buttonText: {
+    color: "#F5F3E5",
+    fontWeight: "bold",
+    fontSize: 24,
   },
 });
 

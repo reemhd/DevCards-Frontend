@@ -25,7 +25,7 @@ const CreateDeck = () => {
   };
 
   return (
-    <View style={createDeckStyles.container}>
+    <KeyboardAvoidingView style={createDeckStyles.container}>
       {!showCreateCard ? (
         <>
           <MaterialCommunityIcons
@@ -33,7 +33,7 @@ const CreateDeck = () => {
             size={50}
             color="#F9F9F9"
           />
-          <KeyboardAvoidingView style={createDeckStyles.label}>
+          <View style={createDeckStyles.label}>
             <View style={createDeckStyles.innerBorder}>
               <Text style={createDeckStyles.boldText}>Name</Text>
               <TextInput
@@ -44,8 +44,8 @@ const CreateDeck = () => {
                 }}
               />
             </View>
-          </KeyboardAvoidingView>
-          <KeyboardAvoidingView style={createDeckStyles.label}>
+          </View>
+          <View style={createDeckStyles.label}>
             <View style={createDeckStyles.innerBorder}>
               <Text style={createDeckStyles.boldText}>Description</Text>
               <TextInput
@@ -54,20 +54,20 @@ const CreateDeck = () => {
                 onChangeText={(text) => setDeckDescription(text)}
               />
             </View>
-          </KeyboardAvoidingView>
-          <KeyboardAvoidingView style={createDeckStyles.button}>
+          </View>
+          <View style={createDeckStyles.button}>
             <TouchableOpacity
               disabled={deckName && deckDescription ? false : true}
               onPress={handleCreateDeck}
             >
               <Text style={createDeckStyles.buttonText}>Create Deck</Text>
             </TouchableOpacity>
-          </KeyboardAvoidingView>
+          </View>
         </>
       ) : (
         <CreateCard />
       )}
-    </View>
+    </KeyboardAvoidingView>
   );
 };
 
