@@ -12,7 +12,7 @@ function NavBar() {
     <Tab.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: "#F9F9F9",
+          backgroundColor: "#27272D",
         },
         headerTitleAlign: "center",
         headerTintColor: "#F99909",
@@ -33,7 +33,7 @@ function NavBar() {
           },
           tabBarActiveTintColor: "#F99909",
           tabBarStyle: {
-            backgroundColor: "#F9F9F9",
+            backgroundColor: "#27272D",
           },
         })}
       />

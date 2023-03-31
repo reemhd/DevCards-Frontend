@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   StyleSheet,
   KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { useState } from "react";
 import CreateCard from "./CreateCard";
@@ -27,6 +29,7 @@ const CreateDeck = ({ navigation }) => {
   };
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <KeyboardAvoidingView
       style={createDeckStyles.container}
       behavior={Platform.OS === "ios" ? "padding" : null}
@@ -74,6 +77,7 @@ const CreateDeck = ({ navigation }) => {
         <CreateCard newDeckID={newDeckID} navigation={navigation} />
       )}
     </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -108,7 +112,7 @@ const createDeckStyles = StyleSheet.create({
     backgroundColor: "#F99909",
     alignItems: "center",
     margin: 10,
-    width: "50%",
+    width: "35%",
     borderRadius: 10,
     shadowColor: "#F9F9F9",
     shadowRadius: 10,
@@ -119,15 +123,15 @@ const createDeckStyles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 24,
   },
-  innerBorder: {
-    borderColor: "#F99909",
-    borderWidth: 5,
-    borderRadius: 10,
-    padding: 5,
-    paddingLeft: 25,
-    paddingRight: 25,
-    width: "90%",
-  },
+  // innerBorder: {
+  //   borderColor: "#F99909",
+  //   borderWidth: 5,
+  //   borderRadius: 10,
+  //   padding: 5,
+  //   paddingLeft: 25,
+  //   paddingRight: 25,
+  //   width: "90%",
+  // },
   boldText: {
     fontWeight: "bold",
     color: "#F9F9F9",
