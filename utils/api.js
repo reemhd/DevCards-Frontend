@@ -6,16 +6,16 @@ export const postDeck = (title, description) => {
   return api
     .post("/decks", { title, description })
     .then(({ data }) => {
-      console.log(data);
+      return data.createdDeck;
     })
     .catch((err) => {
       console.log(err);
     });
 };
 
-export const postCard = (front, back) => {
+export const postCard = (front, back, newDeckID) => {
   return api
-    .post("/decks/cards", { front, back })
+    .post(`/cards/${newDeckID}`, { front, back })
     .then(({ data }) => {
       console.log(data);
     })

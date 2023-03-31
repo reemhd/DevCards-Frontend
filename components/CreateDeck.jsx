@@ -12,20 +12,25 @@ import CreateCard from "./CreateCard";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { postDeck } from "../utils/api";
 
-const CreateDeck = () => {
+const CreateDeck = ({ navigation }) => {
   const [deckName, setDeckName] = useState("");
   const [deckDescription, setDeckDescription] = useState("");
   const [showCreateCard, setShowCreateCard] = useState(false);
+  const [newDeckID, setNewDeckID] = useState("");
 
   const handleCreateDeck = () => {
-    postDeck(deckName, deckDescription).then(() => {
-      console.log("created");
+    postDeck(deckName, deckDescription).then((deck) => {
+      console.log(deck._id);
+      setNewDeckID(deck._id);
     });
     setShowCreateCard(true);
   };
 
   return (
-    <KeyboardAvoidingView style={createDeckStyles.container}>
+    <KeyboardAvoidingView
+      style={createDeckStyles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
       {!showCreateCard ? (
         <>
           <MaterialCommunityIcons
@@ -65,7 +70,7 @@ const CreateDeck = () => {
           </View>
         </>
       ) : (
-        <CreateCard />
+        <CreateCard newDeckID={newDeckID} navigation={navigation} />
       )}
     </KeyboardAvoidingView>
   );

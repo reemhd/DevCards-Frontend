@@ -34,7 +34,9 @@ const Decks = ({ navigation }) => {
         <Pressable
           style={deckStyles.button}
           title="Create a New Deck"
-          onPress={() => navigation.navigate("CreateDeck")}
+          onPress={() =>
+            navigation.navigate("CreateDeck", { navigation: navigation })
+          }
         >
           <Text style={deckStyles.buttonText}>Create Deck</Text>
           <MaterialCommunityIcons
