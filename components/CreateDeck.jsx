@@ -10,13 +10,12 @@ import {
 import { useState } from "react";
 import CreateCard from "./CreateCard";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { postDeck } from "../utils/api";
 
 const CreateDeck = () => {
   const [deckName, setDeckName] = useState("");
   const [deckDescription, setDeckDescription] = useState("");
   const [showCreateCard, setShowCreateCard] = useState(false);
-
-  //we need to reset the input boxes to blank AND make sure that showCreateCard is false
 
   const handleCreateDeck = () => {
     postDeck(deckName, deckDescription).then(() => {
@@ -56,14 +55,14 @@ const CreateDeck = () => {
               />
             </View>
           </KeyboardAvoidingView>
-          <View style={createDeckStyles.button}>
+          <KeyboardAvoidingView style={createDeckStyles.button}>
             <TouchableOpacity
               disabled={deckName && deckDescription ? false : true}
               onPress={handleCreateDeck}
             >
               <Text style={createDeckStyles.buttonText}>Create Deck</Text>
             </TouchableOpacity>
-          </View>
+          </KeyboardAvoidingView>
         </>
       ) : (
         <CreateCard />

@@ -5,7 +5,7 @@ const api = axios.create({ baseURL: "https://dev-cards.onrender.com/api" });
 export const postDeck = (title, description) => {
   return api
     .post("/decks", { title, description })
-    .then((data) => {
+    .then(({ data }) => {
       console.log(data);
     })
     .catch((err) => {
@@ -16,7 +16,7 @@ export const postDeck = (title, description) => {
 export const postCard = (front, back) => {
   return api
     .post("/decks/cards", { front, back })
-    .then((data) => {
+    .then(({ data }) => {
       console.log(data);
     })
     .catch((err) => {
