@@ -32,18 +32,20 @@ const Decks = ({ navigation }) => {
   };
 
   return (
-    <View style={deckStyles.container}>
+    <>
       {loading ? (
-        <View style={deckStyles.loadingContainer}>
+        <View style={deckStyles.container}>
           <Spinner visible={loading} />
         </View>
       ) : (
-        <>
+        <View style={deckStyles.container}>
           <View style={deckStyles.buttonBox}>
             <Pressable
               style={deckStyles.button}
               title="Create a New Deck"
-              onPress={() => navigation.navigate("CreateDeck")}
+              onPress={() =>
+                navigation.navigate("CreateDeck", { navigation: navigation })
+              }
             >
               <Text style={deckStyles.buttonText}>Create Deck</Text>
               <MaterialCommunityIcons
@@ -56,13 +58,17 @@ const Decks = ({ navigation }) => {
           <FlatList
             data={currentDecks}
             renderItem={({ item }) => (
-              <Deck title={item.title} description={item.description} />
+              <Deck
+                title={item.title}
+                description={item.description}
+                _id={item._id}
+              />
             )}
             keyExtractor={(item) => item._id}
           />
-        </>
+        </View>
       )}
-    </View>
+    </>
   );
 };
 
