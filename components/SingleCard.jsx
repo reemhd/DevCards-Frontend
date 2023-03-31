@@ -107,7 +107,7 @@ const singleDeckStyle = StyleSheet.create({
   cardListBack: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#818387",
+    backgroundColor: "#BAB484",
     // "#F5F3E5",
     elevation: 10,
     padding: 2,
