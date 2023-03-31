@@ -24,7 +24,8 @@ const CreateCard = ({ navigation, newDeckID }) => {
 
   return (
     <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      behavior={Platform.OS === "ios" ? "padding" : null}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -200}
     >
       <View style={cardStyles.container}>
         <MaterialCommunityIcons

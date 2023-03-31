@@ -33,17 +33,17 @@ const SingleDeck = ({ route }) => {
   //         {
   //           _id: "3",
   //           front: "Question 3",
-  //           back: "Answer 2",
+  //           back: "Answer 3",
   //         },
   //         {
   //           _id: "4",
   //           front: "Question 4",
-  //           back: "Answer 2",
+  //           back: "Answer 4",
   //         },
   //         {
   //           _id: "5",
   //           front: "Question 5",
-  //           back: "Answer 2",
+  //           back: "Answer 5",
   //         },
   //       ],
   //     },
@@ -74,13 +74,23 @@ const SingleDeck = ({ route }) => {
   };
   return (
     <View style={singleDeckStyle.container}>
-      <FlatList
-        data={deck}
-        renderItem={({ item }) => (
-          <Card front={item.front} back={item.back} _id={item._id} />
-        )}
-        keyExtractor={(item) => item._id}
-      />
+      {!deck ? (
+        <>
+          <View>
+            <Text style={singleDeckStyle.error}>
+              Page working but no response from BE
+            </Text>
+          </View>
+        </>
+      ) : (
+        <FlatList
+          data={deck}
+          renderItem={({ item }) => (
+            <Card front={item.front} back={item.back} _id={item._id} />
+          )}
+          keyExtractor={(item) => item._id}
+        />
+      )}
     </View>
   );
 };
@@ -121,6 +131,9 @@ const singleDeckStyle = StyleSheet.create({
     alignSelf: "flex-end",
     paddingRight: 10,
     paddingBottom: 5,
+  },
+  error: {
+    color: "white",
   },
 });
 export default SingleDeck;

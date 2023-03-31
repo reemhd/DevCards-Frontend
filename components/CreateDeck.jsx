@@ -16,12 +16,12 @@ const CreateDeck = ({ navigation }) => {
   const [deckName, setDeckName] = useState("");
   const [deckDescription, setDeckDescription] = useState("");
   const [showCreateCard, setShowCreateCard] = useState(false);
-  const [newDeckID, setNewDeckID] = useState("");
+  let newDeckID;
 
   const handleCreateDeck = () => {
     postDeck(deckName, deckDescription).then((deck) => {
       console.log(deck._id);
-      setNewDeckID(deck._id);
+      newDeckID = deck._id;
     });
     setShowCreateCard(true);
   };
@@ -29,7 +29,8 @@ const CreateDeck = ({ navigation }) => {
   return (
     <KeyboardAvoidingView
       style={createDeckStyles.container}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      behavior={Platform.OS === "ios" ? "padding" : null}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -200}
     >
       {!showCreateCard ? (
         <>
