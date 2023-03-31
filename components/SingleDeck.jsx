@@ -1,11 +1,30 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, FlatList, Pressable } from "react-native";
+import React, { useEffect, useState, useRef } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  Pressable,
+  Animated,
+} from "react-native";
 import { getDeckByID } from "../utils/api";
 import { Fontisto } from "@expo/vector-icons";
 
 const SingleDeck = ({ route }) => {
   const { deck_id } = route.params;
   const [deck, setDeck] = useState({});
+  const [isFlipped, setIsFlipped] = useState(false);
+  const animate = useRef(new Animated.Value(0));
+
+  const interpolateFront = animate.current.interpolate({
+    inputRange: [0, 180],
+    outputRange: ["0deg", "180deg"],
+  });
+
+  const interpolateBack = animate.current.interpolate({
+    inputRange: [0, 180],
+    outputRange: ["180deg", "360deg"],
+  });
 
   useEffect(() => {
     getDeckByID(deck_id).then((deck) => {
