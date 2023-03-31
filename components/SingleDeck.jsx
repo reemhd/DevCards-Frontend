@@ -9,45 +9,9 @@ const SingleDeck = ({ route }) => {
 
   useEffect(() => {
     getDeckByID(deck_id).then((deck) => {
-      console.log(deck, "<<response in SingleDeck");
       setDeck(deck);
     });
-  }, [deck]);
-
-  //   const testData = [
-  //     {
-  //       _id: "1",
-  //       title: "Test Deck",
-  //       description: "Test Description",
-  //       cards: [
-  //         {
-  //           _id: "1",
-  //           front: "Question",
-  //           back: "Answer",
-  //         },
-  //         {
-  //           _id: "2",
-  //           front: "Question 2",
-  //           back: "Answer 2",
-  //         },
-  //         {
-  //           _id: "3",
-  //           front: "Question 3",
-  //           back: "Answer 3",
-  //         },
-  //         {
-  //           _id: "4",
-  //           front: "Question 4",
-  //           back: "Answer 4",
-  //         },
-  //         {
-  //           _id: "5",
-  //           front: "Question 5",
-  //           back: "Answer 5",
-  //         },
-  //       ],
-  //     },
-  //   ];
+  }, []);
 
   const handleFlipCard = (front, back, _id, cardText) => {
     setDeck((currentDeck) => {
