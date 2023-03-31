@@ -5,6 +5,7 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  KeyboardAvoidingView,
 } from "react-native";
 import { useState } from "react";
 import CreateCard from "./CreateCard";
@@ -18,9 +19,9 @@ const CreateDeck = () => {
   //we need to reset the input boxes to blank AND make sure that showCreateCard is false
 
   const handleCreateDeck = () => {
-    //sends the name and description to backend
-    //use the api.js function
-    console.log("created");
+    postDeck(deckName, deckDescription).then(() => {
+      console.log("created");
+    });
     setShowCreateCard(true);
   };
 
@@ -33,7 +34,7 @@ const CreateDeck = () => {
             size={50}
             color="#F9F9F9"
           />
-          <View style={createDeckStyles.label}>
+          <KeyboardAvoidingView style={createDeckStyles.label}>
             <View style={createDeckStyles.innerBorder}>
               <Text style={createDeckStyles.boldText}>Name</Text>
               <TextInput
@@ -44,8 +45,8 @@ const CreateDeck = () => {
                 }}
               />
             </View>
-          </View>
-          <View style={createDeckStyles.label}>
+          </KeyboardAvoidingView>
+          <KeyboardAvoidingView style={createDeckStyles.label}>
             <View style={createDeckStyles.innerBorder}>
               <Text style={createDeckStyles.boldText}>Description</Text>
               <TextInput
@@ -54,9 +55,12 @@ const CreateDeck = () => {
                 onChangeText={(text) => setDeckDescription(text)}
               />
             </View>
-          </View>
+          </KeyboardAvoidingView>
           <View style={createDeckStyles.button}>
-            <TouchableOpacity onPress={handleCreateDeck}>
+            <TouchableOpacity
+              disabled={deckName && deckDescription ? false : true}
+              onPress={handleCreateDeck}
+            >
               <Text style={createDeckStyles.buttonText}>Create Deck</Text>
             </TouchableOpacity>
           </View>
