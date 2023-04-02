@@ -13,6 +13,7 @@ function NavBar() {
       screenOptions={{
         headerStyle: {
           backgroundColor: "#27272D",
+          shadowOpacity: 0, //removes white lines below "header"
         },
         headerTitleAlign: "center",
         headerTintColor: "#F99909",
@@ -34,6 +35,7 @@ function NavBar() {
           tabBarActiveTintColor: "#F99909",
           tabBarStyle: {
             backgroundColor: "#27272D",
+            borderTopWidth: 0, //removes white lines above navbar
           },
         })}
       />
