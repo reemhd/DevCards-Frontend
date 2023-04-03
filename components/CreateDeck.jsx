@@ -19,59 +19,63 @@ const CreateDeck = ({ navigation }) => {
 
   const handleCreateDeck = () => {
     postDeck(deckName, deckDescription).then((deck) => {
-      console.log(deck._id);
-      navigation.navigate("CreateCard", { newDeckID: deck._id });
+      const newDeckID = deck._id;
+      navigation.navigate("CreateCard", { newDeckID });
     });
   };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-    <KeyboardAvoidingView
-      style={createDeckStyles.container}
-      behavior={Platform.OS === "ios" ? "padding" : null}
-      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -200}
-    >
-      <MaterialCommunityIcons name="cards-outline" size={50} color="#F9F9F9" />
-      <View style={createDeckStyles.label}>
-        <View style={createDeckStyles.innerBorder}>
-          <Text style={createDeckStyles.boldText}>Name</Text>
-          <TextInput
-            placeholder="Enter Deck Name"
-            value={deckName}
-            onChangeText={(text) => {
-              setDeckName(text);
-            }}
-          />
-        </View>
-      </View>
-      <View style={createDeckStyles.label}>
-        <View style={createDeckStyles.innerBorder}>
-          <Text style={createDeckStyles.boldText}>Description</Text>
-          <TextInput
-            maxLength={30}
-            multiline={true}
-            numberOfLines={3}
-            placeholder="Enter Deck Description"
-            value={deckDescription}
-            onChangeText={(text) => setDeckDescription(text)}
-          />
-        </View>
-      </View>
-      <View
-        style={
-          deckName && deckDescription
-            ? createDeckStyles.buttonActive
-            : createDeckStyles.buttonInactive
-        }
+      <KeyboardAvoidingView
+        style={createDeckStyles.container}
+        behavior={Platform.OS === "ios" ? "padding" : null}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -200}
       >
-        <TouchableOpacity
-          disabled={deckName && deckDescription ? false : true}
-          onPress={handleCreateDeck}
+        <MaterialCommunityIcons
+          name="cards-outline"
+          size={50}
+          color="#F9F9F9"
+        />
+        <View style={createDeckStyles.label}>
+          <View style={createDeckStyles.innerBorder}>
+            <Text style={createDeckStyles.boldText}>Name</Text>
+            <TextInput
+              placeholder="Enter Deck Name"
+              value={deckName}
+              onChangeText={(text) => {
+                setDeckName(text);
+              }}
+            />
+          </View>
+        </View>
+        <View style={createDeckStyles.label}>
+          <View style={createDeckStyles.innerBorder}>
+            <Text style={createDeckStyles.boldText}>Description</Text>
+            <TextInput
+              maxLength={30}
+              multiline={true}
+              numberOfLines={3}
+              placeholder="Enter Deck Description"
+              value={deckDescription}
+              onChangeText={(text) => setDeckDescription(text)}
+            />
+          </View>
+        </View>
+        <View
+          style={
+            deckName && deckDescription
+              ? createDeckStyles.buttonActive
+              : createDeckStyles.buttonInactive
+          }
         >
-          <Text style={createDeckStyles.buttonText}>Create Deck</Text>
-        </TouchableOpacity>
-      </View>
-    </KeyboardAvoidingView>
+          <TouchableOpacity
+            disabled={deckName && deckDescription ? false : true}
+            onPress={handleCreateDeck}
+          >
+            <Text style={createDeckStyles.buttonText}>Create Deck</Text>
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
     </TouchableWithoutFeedback>
   );
 };

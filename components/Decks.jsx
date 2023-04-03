@@ -41,10 +41,15 @@ const Decks = ({ navigation }) => {
           >
             <View style={deckStyles.innerBorder}>
               <Text style={deckStyles.name}>{title}</Text>
-              <Text style={deckStyles.description}>{description}</Text>
+              <Text
+                style={deckStyles.description}
+                numberOfLines={1}
+                ellipsizeMode="tail"
+              >
+                {description}
+              </Text>
             </View>
           </LinearGradient>
-
         </View>
       </Pressable>
     );
@@ -122,7 +127,6 @@ const deckStyles = StyleSheet.create({
     // color: "#9381FF",
   },
   deckList: {
-
     // backgroundColor: "#818387",
 
     // "#F5F3E5",
@@ -144,7 +148,6 @@ const deckStyles = StyleSheet.create({
     marginRight: 12,
     // borderColor: "#F9F9F9",
     // borderWidth: 1,
-
   },
   // buttonBox: {
   //   alignItems: "center",
@@ -156,7 +159,6 @@ const deckStyles = StyleSheet.create({
     justifyContent: "center",
 
     padding: 8,
-
 
     elevation: 7,
     backgroundColor: "#61DEB5",
