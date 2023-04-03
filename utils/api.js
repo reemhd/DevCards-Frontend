@@ -40,3 +40,9 @@ export const getDeckByID = (id) => {
     return data.cards;
   });
 };
+
+export const getUsers = () => {
+  return api.get(`/users`).then(({ data }) => {
+    return data.users;
+  });
+};

@@ -5,12 +5,13 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { getDecks } from "../utils/api";
 import { useFocusEffect } from "@react-navigation/native";
 import Spinner from "react-native-loading-spinner-overlay";
-import { LinearGradient } from "expo-linear-gradient";
 import { FontAwesome5 } from "@expo/vector-icons";
+import { useUser } from "../context/UserContext";
 
 const Decks = ({ navigation }) => {
   const [currentDecks, setCurrentDecks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { user } = useUser(); // user object with all decks, so now we need to render only decks from here
 
   useEffect(() => {
     getDecks().then((decks) => {
@@ -33,23 +34,16 @@ const Decks = ({ navigation }) => {
         onPress={() => navigation.navigate("SingleDeck", { deck_id: _id })}
       >
         <View style={deckStyles.deckList}>
-          <LinearGradient
-            colors={["#f19100", "#fff"]}
-            start={[0, 1]}
-            end={[3, 2]}
-            style={deckStyles.deckList}
-          >
-            <View style={deckStyles.innerBorder}>
-              <Text style={deckStyles.name}>{title}</Text>
-              <Text
-                style={deckStyles.description}
-                numberOfLines={1}
-                ellipsizeMode="tail"
-              >
-                {description}
-              </Text>
-            </View>
-          </LinearGradient>
+          <View style={deckStyles.innerBorder}>
+            <Text style={deckStyles.name}>{title}</Text>
+            <Text
+              style={deckStyles.description}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
+              {description}
+            </Text>
+          </View>
         </View>
       </Pressable>
     );
@@ -128,15 +122,13 @@ const deckStyles = StyleSheet.create({
   },
   deckList: {
     // backgroundColor: "#818387",
-
     // "#F5F3E5",
     elevation: 10,
     padding: 5,
     margin: 10,
-    marginBottom: 12,
     height: 140,
     borderRadius: 10,
-
+    backgroundColor: "#f19100",
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
