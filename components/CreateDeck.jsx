@@ -6,6 +6,8 @@ import {
   TouchableOpacity,
   StyleSheet,
   KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { useState } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -23,6 +25,7 @@ const CreateDeck = ({ navigation }) => {
   };
 
   return (
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
     <KeyboardAvoidingView
       style={createDeckStyles.container}
       behavior={Platform.OS === "ios" ? "padding" : null}
@@ -69,6 +72,7 @@ const CreateDeck = ({ navigation }) => {
         </TouchableOpacity>
       </View>
     </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -95,20 +99,35 @@ const createDeckStyles = StyleSheet.create({
     borderColor: "#F9F9F9",
     borderWidth: 1,
   },
+
+  button: {
+    fontWeight: "bold",
+    padding: 10,
+    elevation: 10,
+    backgroundColor: "#F99909",
+    alignItems: "center",
+    margin: 10,
+    width: "35%",
+    borderRadius: 10,
+    shadowColor: "#F9F9F9",
+    shadowRadius: 10,
+    shadowOpacity: 0,
+  },
+
   buttonText: {
     color: "#F5F3E5",
     fontWeight: "bold",
     fontSize: 24,
   },
-  innerBorder: {
-    borderColor: "#F99909",
-    borderWidth: 5,
-    borderRadius: 10,
-    padding: 5,
-    paddingLeft: 25,
-    paddingRight: 25,
-    width: "90%",
-  },
+  // innerBorder: {
+  //   borderColor: "#F99909",
+  //   borderWidth: 5,
+  //   borderRadius: 10,
+  //   padding: 5,
+  //   paddingLeft: 25,
+  //   paddingRight: 25,
+  //   width: "90%",
+  // },
   boldText: {
     fontWeight: "bold",
     color: "black",

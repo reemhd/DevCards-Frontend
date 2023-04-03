@@ -12,7 +12,8 @@ function NavBar() {
     <Tab.Navigator
       screenOptions={{
         headerStyle: {
-          backgroundColor: "#F9F9F9",
+          backgroundColor: "#171717",
+          shadowOpacity: 0, //removes white lines below "header"
         },
         headerTitleAlign: "center",
         headerTintColor: "#F99909",
@@ -33,7 +34,8 @@ function NavBar() {
           },
           tabBarActiveTintColor: "#F99909",
           tabBarStyle: {
-            backgroundColor: "#F9F9F9",
+            backgroundColor: "#171717",
+            borderTopWidth: 0, //removes white lines above navbar
           },
         })}
       />
