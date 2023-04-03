@@ -100,6 +100,7 @@ const singleDeckStyle = StyleSheet.create({
     borderWidth: 5,
     shadowColor: "#F9F9F9",
     height: 250,
+    width: 300,
   },
 });
 export default SingleDeck;
