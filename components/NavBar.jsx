@@ -4,10 +4,17 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Analytics from "./Analytics";
 import Competition from "./Competition";
 import StackNavigation from "./StackNavigation";
+import { useUser } from "../context/UserContext";
+import { SignIn } from "./SignIn";
 
 const Tab = createBottomTabNavigator();
 
 function NavBar() {
+  const { user } = useUser();
+
+  if (!user) {
+    return <SignIn />;
+  }
   return (
     <Tab.Navigator
       screenOptions={{
