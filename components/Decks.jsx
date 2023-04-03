@@ -11,10 +11,14 @@ const Decks = ({ navigation }) => {
   const [currentDecks, setCurrentDecks] = useState([]);
   const [loading, setLoading] = useState(true);
   const { user } = useUser(); // user object with all decks, so now we need to render only decks from here
+  console.log("USER >>>", user)
 
   useEffect(() => {
     getDecks().then((decks) => {
-      setCurrentDecks(decks);
+      const filteredDecks = decks.filter((deck) =>
+        user.user_decks.includes(deck._id)
+      );
+      setCurrentDecks(filteredDecks);
       setLoading(false);
     });
   }, []);
@@ -22,7 +26,12 @@ const Decks = ({ navigation }) => {
   useFocusEffect(
     useCallback(() => {
       getDecks().then((decks) => {
-        setCurrentDecks(decks);
+        // console.log("DECKS >>>>", decks);
+        const filteredDecks = decks.filter((deck) =>
+          user.user_decks.includes(deck._id)
+        );
+        setCurrentDecks(filteredDecks);
+        setLoading(false);
       });
     }, [])
   );
@@ -47,6 +56,7 @@ const Decks = ({ navigation }) => {
       </Pressable>
     );
   };
+
 
   return (
     <>
