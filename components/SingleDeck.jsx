@@ -33,13 +33,13 @@ const SingleDeck = ({ route, navigation }) => {
   };
 
   const handleDeletePress = (_id) => {
+    setDeck((currentDeck) => {
+      return currentDeck.filter((card) => {
+        return card._id !== _id;
+      });
+    });
     deleteCard(_id).then(() => {
       console.log("card deleted SingleDeck");
-      setDeck((currentDeck) => {
-        return currentDeck.filter((card) => {
-          return card._id !== _id;
-        });
-      });
     });
   };
 
