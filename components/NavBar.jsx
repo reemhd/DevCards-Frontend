@@ -54,10 +54,10 @@ function NavBar() {
 
             return <Ionicons name={analyticsIcon} size={size} color={color} />;
           },
-          tabBarActiveTintColor: "#171717",
+          tabBarActiveTintColor: "#F99909",
           tabBarStyle: {
-            backgroundColor: "#F9F9F9",
-            borderTopWidth: 0,
+            backgroundColor: "#171717",
+            borderTopWidth: 0, //removes white lines above navbar
           },
         })}
       />
@@ -77,10 +77,10 @@ function NavBar() {
               <Ionicons name={competitionIcon} size={size} color={color} />
             );
           },
-          tabBarActiveTintColor: "#171717",
+          tabBarActiveTintColor: "#F99909",
           tabBarStyle: {
-            backgroundColor: "#F9F9F9",
-            borderTopWidth: 0,
+            backgroundColor: "#171717",
+            borderTopWidth: 0, //removes white lines above navbar
           },
         })}
       />

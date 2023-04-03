@@ -34,7 +34,7 @@ const CreateDeck = ({ navigation }) => {
         <MaterialCommunityIcons
           name="cards-outline"
           size={50}
-          color="#F9F9F9"
+          color="#F99909"
         />
         <View style={createDeckStyles.label}>
           <View style={createDeckStyles.innerBorder}>
@@ -92,14 +92,14 @@ const createDeckStyles = StyleSheet.create({
     fontWeight: "bold",
     padding: 10,
     elevation: 5,
-    backgroundColor: "#BAB484",
+    backgroundColor: "#F9F9F9",
     color: "black",
-    alignItems: "center",
+    alignItems: "flex-start",
     margin: 10,
     width: "70%",
     borderRadius: 10,
-    borderColor: "#F9F9F9",
-    borderWidth: 1,
+    borderColor: "#F99909",
+    borderWidth: 3,
   },
 
   button: {
