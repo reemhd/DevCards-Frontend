@@ -1,11 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, FlatList, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  Pressable,
+  Modal,
+  TouchableOpacity,
+} from "react-native";
 import { getDeckByID } from "../utils/api";
-import { Fontisto } from "@expo/vector-icons";
+
+import SingleCard from "./SingleCard";
 
 const SingleDeck = ({ route }) => {
   const { deck_id } = route.params;
   const [deck, setDeck] = useState({});
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [cardID, setCardID] = useState("");
 
   useEffect(() => {
     getDeckByID(deck_id).then((deck) => {
@@ -13,48 +24,39 @@ const SingleDeck = ({ route }) => {
     });
   }, []);
 
-  const handleFlipCard = (front, back, _id, cardText) => {
-    setDeck((currentDeck) => {
-      currentDeck.map((card) => {
-        if (_id === card._id) {
-          return cardText === front ? (cardText = back) : (cardText = front);
-        }
-      });
-    });
+  const handleOnPress = (_id) => {
+    setIsModalVisible(true);
+    setCardID(_id);
   };
 
-  const Card = ({ front, back, _id }) => {
-    let cardText = front;
+  const Card = ({ front, _id }) => {
     return (
-      <Pressable onPress={() => handleFlipCard(front, back, _id, cardText)}>
-        <View style={singleDeckStyle.cardList}>
-          <Text style={singleDeckStyle.text}>{cardText}</Text>
-          <View style={singleDeckStyle.spinner}>
-            <Fontisto name="spinner-rotate-forward" size={24} color="white" />
-          </View>
-        </View>
-      </Pressable>
+      <View style={singleDeckStyle.cardList}>
+        <Pressable onPress={() => handleOnPress(_id)}>
+          <Text style={singleDeckStyle.text}>{front}</Text>
+        </Pressable>
+      </View>
     );
   };
   return (
     <View style={singleDeckStyle.container}>
-      {!deck ? (
-        <>
-          <View>
-            <Text style={singleDeckStyle.error}>
-              Page working but no response from BE
-            </Text>
+      <Modal visible={isModalVisible} transparent={false}>
+        <View style={singleDeckStyle.container}>
+          <SingleCard cardID={cardID} deck={deck} />
+          <View style={singleDeckStyle.closeModal}>
+            <TouchableOpacity onPress={() => setIsModalVisible(false)}>
+              <Text style={singleDeckStyle.closeModalText}>Back to Deck</Text>
+            </TouchableOpacity>
           </View>
-        </>
-      ) : (
-        <FlatList
-          data={deck}
-          renderItem={({ item }) => (
-            <Card front={item.front} back={item.back} _id={item._id} />
-          )}
-          keyExtractor={(item) => item._id}
-        />
-      )}
+        </View>
+      </Modal>
+      <FlatList
+        data={deck}
+        renderItem={({ item }) => (
+          <Card front={item.front} back={item.back} _id={item._id} />
+        )}
+        keyExtractor={(item) => item._id}
+      />
     </View>
   );
 };
@@ -63,41 +65,42 @@ const singleDeckStyle = StyleSheet.create({
   text: {
     fontWeight: "bold",
     fontSize: 20,
+    padding: 20,
+    color: "black",
+  },
+  closeModal: {
+    backgroundColor: "#F99909",
+    borderColor: "#BAB484",
+    position: "absolute",
+    bottom: 150,
+    borderWidth: 4,
+    padding: 5,
+    borderRadius: 10,
+  },
+  closeModalText: {
+    color: "white",
   },
   container: {
     flex: 1,
-    flexDirection: "column",
     backgroundColor: "#27272D",
     // "#4682B4"
     justifyContent: "center",
-    alignItems: "stretch",
-    alignContent: "stretch",
+    alignItems: "center",
   },
   cardList: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#818387",
-    // "#F5F3E5",
+    backgroundColor: "#BAB484",
     elevation: 10,
-    padding: 10,
+    padding: 2,
     margin: 20,
     marginBottom: 0,
-    height: 170,
     borderRadius: 10,
     borderColor: "#F99909",
     borderWidth: 5,
-    elevation: 5,
     shadowColor: "#F9F9F9",
-  },
-  spinner: {
-    position: "absolute",
-    bottom: 0,
-    alignSelf: "flex-end",
-    paddingRight: 10,
-    paddingBottom: 5,
-  },
-  error: {
-    color: "white",
+    height: 250,
+    width: 300,
   },
 });
 export default SingleDeck;

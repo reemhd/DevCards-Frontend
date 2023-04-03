@@ -25,7 +25,11 @@ const StackNavigation = () => {
         component={CreateDeck}
         options={{ headerShown: false }}
       />
-      <Stack.Screen name="CreateCard" component={CreateCard} />
+      <Stack.Screen
+        name="CreateCard"
+        component={CreateCard}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 };

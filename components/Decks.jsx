@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useState } from "react";
 import { View, Text, StyleSheet, Pressable, FlatList } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { getDecks } from "../utils/api";
+import { useFocusEffect } from "@react-navigation/native";
 import Spinner from "react-native-loading-spinner-overlay";
 import { LinearGradient } from "expo-linear-gradient";
 import { FontAwesome5 } from "@expo/vector-icons";
@@ -17,6 +18,14 @@ const Decks = ({ navigation }) => {
       setLoading(false);
     });
   }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      getDecks().then((decks) => {
+        setCurrentDecks(decks);
+      });
+    }, [])
+  );
 
   const Deck = ({ title, description, _id }) => {
     return (
@@ -35,6 +44,7 @@ const Decks = ({ navigation }) => {
               <Text style={deckStyles.description}>{description}</Text>
             </View>
           </LinearGradient>
+
         </View>
       </Pressable>
     );
@@ -98,19 +108,23 @@ const deckStyles = StyleSheet.create({
     padding: 5,
     paddingBottom: 0,
     margin: 10,
+
     marginBottom: 0,
     color: "#050514",
     // "#9381FF"
   },
   description: {
     fontSize: 18,
+
     padding: 5,
     margin: 10,
     color: "#050514",
     // color: "#9381FF",
   },
   deckList: {
+
     // backgroundColor: "#818387",
+
     // "#F5F3E5",
     elevation: 10,
     padding: 5,
@@ -118,6 +132,7 @@ const deckStyles = StyleSheet.create({
     marginBottom: 12,
     height: 140,
     borderRadius: 10,
+
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -129,6 +144,7 @@ const deckStyles = StyleSheet.create({
     marginRight: 12,
     // borderColor: "#F9F9F9",
     // borderWidth: 1,
+
   },
   // buttonBox: {
   //   alignItems: "center",
@@ -138,7 +154,10 @@ const deckStyles = StyleSheet.create({
     borderWidth: 0,
     alignItems: "center",
     justifyContent: "center",
+
     padding: 8,
+
+
     elevation: 7,
     backgroundColor: "#61DEB5",
     borderRadius: 50,

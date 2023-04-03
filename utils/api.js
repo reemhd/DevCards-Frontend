@@ -14,6 +14,7 @@ export const postDeck = (title, description) => {
 };
 
 export const postCard = (front, back, newDeckID) => {
+  console.log(front, back, newDeckID, "<<front, back, newDeckID");
   return api
     .post(`/cards/${newDeckID}`, { front, back })
     .then(({ data }) => {
@@ -37,6 +38,7 @@ export const getDecks = () => {
 
 export const getDeckByID = (id) => {
   return api.get(`/decks/${id}/cards`).then(({ data }) => {
+    console.log(data, "<<singleDeck in utils");
     return data.cards;
   });
 };
