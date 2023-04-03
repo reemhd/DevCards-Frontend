@@ -75,10 +75,11 @@ const singleDeckStyle = StyleSheet.create({
   cardContainer: {
     width: 350,
     height: 300,
+    alignItems: "center",
+    justifyContent: "center",
   },
   container: {
     flex: 1,
-
     backgroundColor: "#27272D",
     justifyContent: "center",
     alignItems: "center",
@@ -103,10 +104,9 @@ const singleDeckStyle = StyleSheet.create({
   },
   spinner: {
     position: "absolute",
-    bottom: 0,
+    bottom: 10,
+    right: 10,
     alignSelf: "flex-end",
-    paddingRight: 15,
-    paddingBottom: 10,
   },
   hidden: {
     backfaceVisibility: "hidden",

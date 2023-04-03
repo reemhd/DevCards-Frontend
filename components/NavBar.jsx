@@ -54,9 +54,10 @@ function NavBar() {
 
             return <Ionicons name={analyticsIcon} size={size} color={color} />;
           },
-          tabBarActiveTintColor: "#F99909",
+          tabBarActiveTintColor: "#171717",
           tabBarStyle: {
             backgroundColor: "#F9F9F9",
+            borderTopWidth: 0,
           },
         })}
       />
@@ -76,9 +77,10 @@ function NavBar() {
               <Ionicons name={competitionIcon} size={size} color={color} />
             );
           },
-          tabBarActiveTintColor: "#F99909",
+          tabBarActiveTintColor: "#171717",
           tabBarStyle: {
             backgroundColor: "#F9F9F9",
+            borderTopWidth: 0,
           },
         })}
       />
