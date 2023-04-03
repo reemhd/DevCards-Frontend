@@ -11,9 +11,11 @@ import {
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { postCard } from "../utils/api";
 
-const CreateCard = ({ navigation, newDeckID }) => {
+const CreateCard = ({ navigation, route }) => {
+  const { newDeckID } = route.params;
   const [cardFront, setCardFront] = useState("");
   const [cardBack, setCardBack] = useState("");
+  console.log(newDeckID, "<<newDeckID destructured in createCard");
 
   const handleCreateCard = () => {
     postCard(cardFront, cardBack, newDeckID).then(() => {
@@ -23,66 +25,59 @@ const CreateCard = ({ navigation, newDeckID }) => {
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : null}
-      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -200}
-    >
-      <View style={cardStyles.container}>
-        <MaterialCommunityIcons
-          name="card-text-outline"
-          size={50}
-          color="#F9F9F9"
+    <View style={cardStyles.container}>
+      <MaterialCommunityIcons
+        name="card-text-outline"
+        size={50}
+        color="#F9F9F9"
+      />
+      <View
+        style={
+          cardFront ? cardStyles.enterTextActive : cardStyles.enterTextInactive
+        }
+      >
+        <Text style={cardStyles.label}>Front</Text>
+        <TextInput
+          maxLength={70}
+          multiline={true}
+          numberOfLines={5}
+          style={cardStyles.inputBox}
+          placeholder="Enter your question here"
+          value={cardFront}
+          onChangeText={(text) => setCardFront(text)}
         />
-        <View
-          style={
-            cardFront
-              ? cardStyles.enterTextActive
-              : cardStyles.enterTextInactive
-          }
-        >
-          <Text style={cardStyles.label}>Front</Text>
-          <TextInput
-            maxLength={70}
-            multiline={true}
-            numberOfLines={5}
-            style={cardStyles.inputBox}
-            placeholder="Enter your question here"
-            value={cardFront}
-            onChangeText={(text) => setCardFront(text)}
-          />
-        </View>
-        <View
-          style={
-            cardBack ? cardStyles.enterTextActive : cardStyles.enterTextInactive
-          }
-        >
-          <Text style={cardStyles.label}>Back</Text>
-          <TextInput
-            maxLength={70}
-            multiline={true}
-            numberOfLines={5}
-            style={cardStyles.inputBox}
-            placeholder="Enter your answer here"
-            value={cardBack}
-            onChangeText={(text) => setCardBack(text)}
-          />
-        </View>
-        <View
-          style={
-            cardFront && cardBack
-              ? cardStyles.buttonActive
-              : cardStyles.buttonInactive
-          }
-        >
-          <TouchableOpacity
-            disabled={cardFront && cardBack ? false : true}
-            onPress={handleCreateCard}
-          >
-            <Text style={cardStyles.buttonText}>Create Card</Text>
-          </TouchableOpacity>
-        </View>
       </View>
-    </KeyboardAvoidingView>
+      <View
+        style={
+          cardBack ? cardStyles.enterTextActive : cardStyles.enterTextInactive
+        }
+      >
+        <Text style={cardStyles.label}>Back</Text>
+        <TextInput
+          maxLength={70}
+          multiline={true}
+          numberOfLines={5}
+          style={cardStyles.inputBox}
+          placeholder="Enter your answer here"
+          value={cardBack}
+          onChangeText={(text) => setCardBack(text)}
+        />
+      </View>
+      <View
+        style={
+          cardFront && cardBack
+            ? cardStyles.buttonActive
+            : cardStyles.buttonInactive
+        }
+      >
+        <TouchableOpacity
+          disabled={cardFront && cardBack ? false : true}
+          onPress={handleCreateCard}
+        >
+          <Text style={cardStyles.buttonText}>Create Card</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
   );
 };
 
