@@ -15,7 +15,6 @@ const CreateCard = ({ navigation, route }) => {
   const { newDeckID } = route.params;
   const [cardFront, setCardFront] = useState("");
   const [cardBack, setCardBack] = useState("");
-  console.log(newDeckID, "<<newDeckID destructured in createCard");
 
   const handleCreateCard = () => {
     postCard(cardFront, cardBack, newDeckID).then(() => {
@@ -25,12 +24,12 @@ const CreateCard = ({ navigation, route }) => {
   };
 
   return (
-    <KeyboardAvoidingView>
-      <View style={cardStyles.container}>
+    <KeyboardAvoidingView style={cardStyles.container}>
+      <View style={cardStyles.center}>
         <MaterialCommunityIcons
           name="card-text-outline"
           size={50}
-          color="#F9F9F9"
+          color="#f19100"
         />
         <View
           style={
@@ -94,10 +93,10 @@ const cardStyles = StyleSheet.create({
     alignItems: "center",
     borderStyle: "solid",
     borderWidth: 5,
-    borderColor: "#F9F9F9",
+    borderColor: "#f19100",
     margin: 50,
     padding: 20,
-    backgroundColor: "#BAB484",
+    backgroundColor: "#2c2c2c",
     borderRadius: 8,
   },
   inputBox: {
@@ -164,6 +163,10 @@ const cardStyles = StyleSheet.create({
     marginTop: 5,
     fontWeight: "bold",
     color: "#F9F9F9",
+  },
+  center: {
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 

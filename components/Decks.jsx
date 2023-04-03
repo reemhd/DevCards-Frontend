@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 import { useState } from "react";
 import { View, Text, StyleSheet, Pressable, FlatList } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { getDecks } from "../utils/api";
 import { useFocusEffect } from "@react-navigation/native";
 import Spinner from "react-native-loading-spinner-overlay";
@@ -74,23 +73,14 @@ const Decks = ({ navigation }) => {
             )}
             keyExtractor={(item) => item._id}
           />
-          {/* <View style={deckStyles.buttonBox}> */}
+
           <Pressable
             style={deckStyles.button}
             title="Create a New Deck"
-            onPress={() =>
-              navigation.navigate("CreateDeck", { navigation: navigation })
-            }
+            onPress={() => navigation.navigate("CreateDeck")}
           >
-            {/* <Text style={deckStyles.buttonText}></Text> */}
-            {/* <MaterialCommunityIcons
-                name="cards-outline"
-                size={24}
-                color="#F5F3E5"
-              /> */}
             <FontAwesome5 name="plus" size={34} color="black" />
           </Pressable>
-          {/* </View> */}
         </View>
       )}
     </>

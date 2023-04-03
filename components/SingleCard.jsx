@@ -43,7 +43,7 @@ const SingleCard = ({ cardID, deck }) => {
           >
             <Text style={singleDeckStyle.text}>{cardToRender[0].front}</Text>
             <View style={singleDeckStyle.spinner}>
-              <Fontisto name="spinner-rotate-forward" size={24} color="white" />
+              <Fontisto name="spinner-rotate-forward" size={34} color="black" />
             </View>
           </Animated.View>
 
@@ -56,7 +56,7 @@ const SingleCard = ({ cardID, deck }) => {
           >
             <Text style={singleDeckStyle.text}>{cardToRender[0].back}</Text>
             <View style={singleDeckStyle.spinner}>
-              <Fontisto name="spinner-rotate-forward" size={24} color="white" />
+              <Fontisto name="spinner-rotate-forward" size={34} color="black" />
             </View>
           </Animated.View>
         </View>
