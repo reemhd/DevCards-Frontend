@@ -18,6 +18,7 @@ export const postCard = (front, back, newDeckID) => {
     .post(`/cards/${newDeckID}`, { front, back })
     .then(({ data }) => {
       console.log(data);
+      return data.createdCard;
     })
     .catch((err) => {
       console.log(err);

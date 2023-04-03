@@ -12,15 +12,18 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { postCard } from "../utils/api";
 
 const CreateCard = ({ navigation, route }) => {
-  const { newDeckID } = route.params;
+  const { newDeckID, setDeck, title } = route.params;
+  console.log(title, "<<title in CreateCard");
   const [cardFront, setCardFront] = useState("");
   const [cardBack, setCardBack] = useState("");
 
   const handleCreateCard = () => {
-    postCard(cardFront, cardBack, newDeckID).then(() => {
-      console.log("card created");
+    postCard(cardFront, cardBack, newDeckID).then((card) => {
+      setDeck((current) => {
+        return [...current, card];
+      });
     });
-    navigation.navigate("Decks");
+    navigation.navigate("SingleDeck", { deck_id: newDeckID, title });
   };
 
   return (

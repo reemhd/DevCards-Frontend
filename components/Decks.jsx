@@ -29,7 +29,9 @@ const Decks = ({ navigation }) => {
   const Deck = ({ title, description, _id }) => {
     return (
       <Pressable
-        onPress={() => navigation.navigate("SingleDeck", { deck_id: _id })}
+        onPress={() =>
+          navigation.navigate("SingleDeck", { deck_id: _id, title })
+        }
       >
         <View style={deckStyles.deckList}>
           <LinearGradient
@@ -77,7 +79,11 @@ const Decks = ({ navigation }) => {
           <Pressable
             style={deckStyles.button}
             title="Create a New Deck"
-            onPress={() => navigation.navigate("CreateDeck")}
+            onPress={() =>
+              navigation.navigate("CreateDeck", {
+                setCurrentDecks,
+              })
+            }
           >
             <FontAwesome5 name="plus" size={34} color="black" />
           </Pressable>

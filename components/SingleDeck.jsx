@@ -16,7 +16,8 @@ import SingleCard from "./SingleCard";
 import { deleteCard } from "../utils/api";
 
 const SingleDeck = ({ route, navigation }) => {
-  const { deck_id } = route.params;
+  const { deck_id, title } = route.params;
+  console.log(title, "<<title in SingleDeck");
   const [deck, setDeck] = useState({});
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [cardID, setCardID] = useState("");
@@ -72,6 +73,9 @@ const SingleDeck = ({ route, navigation }) => {
           </View>
         </View>
       </Modal>
+      <View style={singleDeckStyle.title}>
+        <Text style={singleDeckStyle.titleText}>{title}</Text>
+      </View>
       <FlatList
         data={deck}
         renderItem={({ item }) => (
@@ -81,9 +85,13 @@ const SingleDeck = ({ route, navigation }) => {
       />
       <Pressable
         style={singleDeckStyle.button}
-        title="Create a New Deck"
+        title="Create a New Card"
         onPress={() =>
-          navigation.navigate("CreateCard", { newDeckID: deck_id })
+          navigation.navigate("CreateCard", {
+            newDeckID: deck_id,
+            setDeck,
+            title,
+          })
         }
       >
         <FontAwesome5 name="plus" size={34} color="black" />
@@ -166,6 +174,14 @@ const singleDeckStyle = StyleSheet.create({
     position: "absolute",
     bottom: 10,
     left: 30,
+  },
+  title: {
+    marginTop: 15,
+  },
+  titleText: {
+    fontSize: 24,
+    color: "#F99909",
+    fontWeight: "bold",
   },
 });
 export default SingleDeck;
