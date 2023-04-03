@@ -3,13 +3,16 @@ import { useState } from "react";
 import { View, Text, StyleSheet, Pressable, FlatList } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { getDecks } from "../utils/api";
+import Spinner from "react-native-loading-spinner-overlay";
 
 const Decks = ({ navigation }) => {
   const [currentDecks, setCurrentDecks] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getDecks().then((decks) => {
       setCurrentDecks(decks);
+      setLoading(false);
     });
   }, []);
 
@@ -29,35 +32,43 @@ const Decks = ({ navigation }) => {
   };
 
   return (
-    <View style={deckStyles.container}>
-      <View style={deckStyles.buttonBox}>
-        <Pressable
-          style={deckStyles.button}
-          title="Create a New Deck"
-          onPress={() =>
-            navigation.navigate("CreateDeck", { navigation: navigation })
-          }
-        >
-          <Text style={deckStyles.buttonText}>Create Deck</Text>
-          <MaterialCommunityIcons
-            name="cards-outline"
-            size={24}
-            color="#F5F3E5"
+    <>
+      {loading ? (
+        <View style={deckStyles.container}>
+          <Spinner visible={loading} />
+        </View>
+      ) : (
+        <View style={deckStyles.container}>
+          <View style={deckStyles.buttonBox}>
+            <Pressable
+              style={deckStyles.button}
+              title="Create a New Deck"
+              onPress={() =>
+                navigation.navigate("CreateDeck", { navigation: navigation })
+              }
+            >
+              <Text style={deckStyles.buttonText}>Create Deck</Text>
+              <MaterialCommunityIcons
+                name="cards-outline"
+                size={24}
+                color="#F5F3E5"
+              />
+            </Pressable>
+          </View>
+          <FlatList
+            data={currentDecks}
+            renderItem={({ item }) => (
+              <Deck
+                title={item.title}
+                description={item.description}
+                _id={item._id}
+              />
+            )}
+            keyExtractor={(item) => item._id}
           />
-        </Pressable>
-      </View>
-      <FlatList
-        data={currentDecks}
-        renderItem={({ item }) => (
-          <Deck
-            title={item.title}
-            description={item.description}
-            _id={item._id}
-          />
-        )}
-        keyExtractor={(item) => item._id}
-      />
-    </View>
+        </View>
+      )}
+    </>
   );
 };
 
@@ -125,6 +136,10 @@ const deckStyles = StyleSheet.create({
     // "#F5F3E5",
     fontSize: 22,
     fontWeight: "bold",
+  },
+  loadingContainer: {
+    alignItems: "center",
+    justifyContent: "center",
   },
 });
 
