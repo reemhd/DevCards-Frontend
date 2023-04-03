@@ -92,7 +92,6 @@ const deckStyles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     backgroundColor: "#2c2c2c",
-    // "#4682B4"
     justifyContent: "center",
     alignItems: "stretch",
     alignContent: "stretch",
@@ -106,7 +105,6 @@ const deckStyles = StyleSheet.create({
 
     marginBottom: 0,
     color: "#050514",
-    // "#9381FF"
   },
   description: {
     fontSize: 18,
@@ -114,19 +112,14 @@ const deckStyles = StyleSheet.create({
     padding: 5,
     margin: 10,
     color: "#050514",
-    // color: "#9381FF",
   },
   deckList: {
-    // backgroundColor: "#818387",
-
-    // "#F5F3E5",
     elevation: 10,
     padding: 5,
     margin: 10,
     marginBottom: 12,
     height: 140,
     borderRadius: 10,
-
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -136,20 +129,12 @@ const deckStyles = StyleSheet.create({
     shadowRadius: 4.65,
     marginBottom: 10,
     marginRight: 12,
-    // borderColor: "#F9F9F9",
-    // borderWidth: 1,
   },
-  // buttonBox: {
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  // },
   button: {
     borderWidth: 0,
     alignItems: "center",
     justifyContent: "center",
-
     padding: 8,
-
     elevation: 7,
     backgroundColor: "#61DEB5",
     borderRadius: 50,
@@ -171,7 +156,6 @@ const deckStyles = StyleSheet.create({
   },
   buttonText: {
     color: "#050514",
-    // "#F5F3E5",
     fontSize: 22,
     fontWeight: "bold",
   },

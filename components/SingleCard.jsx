@@ -80,7 +80,6 @@ const singleDeckStyle = StyleSheet.create({
     flex: 1,
 
     backgroundColor: "#27272D",
-    // "#4682B4"
     justifyContent: "center",
     alignItems: "center",
   },

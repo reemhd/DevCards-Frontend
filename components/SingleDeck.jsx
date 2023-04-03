@@ -38,9 +38,7 @@ const SingleDeck = ({ route, navigation }) => {
         return card._id !== _id;
       });
     });
-    deleteCard(_id).then(() => {
-      console.log("card deleted SingleDeck");
-    });
+    deleteCard(_id);
   };
 
   const Card = ({ front, _id }) => {
@@ -116,7 +114,6 @@ const singleDeckStyle = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#27272D",
-    // "#4682B4"
     justifyContent: "center",
     alignItems: "center",
   },
@@ -139,9 +136,7 @@ const singleDeckStyle = StyleSheet.create({
     borderWidth: 0,
     alignItems: "center",
     justifyContent: "center",
-
     padding: 8,
-
     elevation: 7,
     backgroundColor: "#61DEB5",
     borderRadius: 50,

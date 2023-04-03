@@ -77,7 +77,6 @@ function NavBar() {
             );
           },
           tabBarActiveTintColor: "#F99909",
-          // "#9381FF",
           tabBarStyle: {
             backgroundColor: "#F9F9F9",
           },
