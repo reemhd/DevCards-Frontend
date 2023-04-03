@@ -43,7 +43,7 @@ const SingleCard = ({ cardID, deck }) => {
           >
             <Text style={singleDeckStyle.text}>{cardToRender[0].front}</Text>
             <View style={singleDeckStyle.spinner}>
-              <Fontisto name="spinner-rotate-forward" size={24} color="white" />
+              <Fontisto name="spinner-rotate-forward" size={34} color="black" />
             </View>
           </Animated.View>
 
@@ -56,7 +56,7 @@ const SingleCard = ({ cardID, deck }) => {
           >
             <Text style={singleDeckStyle.text}>{cardToRender[0].back}</Text>
             <View style={singleDeckStyle.spinner}>
-              <Fontisto name="spinner-rotate-forward" size={24} color="white" />
+              <Fontisto name="spinner-rotate-forward" size={34} color="black" />
             </View>
           </Animated.View>
         </View>
@@ -75,12 +75,12 @@ const singleDeckStyle = StyleSheet.create({
   cardContainer: {
     width: 350,
     height: 300,
+    alignItems: "center",
+    justifyContent: "center",
   },
   container: {
     flex: 1,
-
     backgroundColor: "#27272D",
-    // "#4682B4"
     justifyContent: "center",
     alignItems: "center",
   },
@@ -104,10 +104,9 @@ const singleDeckStyle = StyleSheet.create({
   },
   spinner: {
     position: "absolute",
-    bottom: 0,
+    bottom: 10,
+    right: 10,
     alignSelf: "flex-end",
-    paddingRight: 15,
-    paddingBottom: 10,
   },
   hidden: {
     backfaceVisibility: "hidden",

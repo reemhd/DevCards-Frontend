@@ -34,7 +34,7 @@ const CreateDeck = ({ navigation }) => {
         <MaterialCommunityIcons
           name="cards-outline"
           size={50}
-          color="#F9F9F9"
+          color="#F99909"
         />
         <View style={createDeckStyles.label}>
           <View style={createDeckStyles.innerBorder}>
@@ -82,8 +82,6 @@ const CreateDeck = ({ navigation }) => {
 
 const createDeckStyles = StyleSheet.create({
   container: {
-    // height: "100%",
-    // width: "100%",
     flex: 1,
     flexDirection: "column",
     backgroundColor: "#27272D",
@@ -94,14 +92,14 @@ const createDeckStyles = StyleSheet.create({
     fontWeight: "bold",
     padding: 10,
     elevation: 5,
-    backgroundColor: "#BAB484",
+    backgroundColor: "#F9F9F9",
     color: "black",
-    alignItems: "center",
+    alignItems: "flex-start",
     margin: 10,
     width: "70%",
     borderRadius: 10,
-    borderColor: "#F9F9F9",
-    borderWidth: 1,
+    borderColor: "#F99909",
+    borderWidth: 3,
   },
 
   button: {
@@ -123,15 +121,6 @@ const createDeckStyles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 24,
   },
-  // innerBorder: {
-  //   borderColor: "#F99909",
-  //   borderWidth: 5,
-  //   borderRadius: 10,
-  //   padding: 5,
-  //   paddingLeft: 25,
-  //   paddingRight: 25,
-  //   width: "90%",
-  // },
   boldText: {
     fontWeight: "bold",
     color: "black",

@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect } from "react";
 import { useState } from "react";
 import { View, Text, StyleSheet, Pressable, FlatList } from "react-native";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { getDecks } from "../utils/api";
 import { useFocusEffect } from "@react-navigation/native";
 import Spinner from "react-native-loading-spinner-overlay";
@@ -68,23 +67,14 @@ const Decks = ({ navigation }) => {
             )}
             keyExtractor={(item) => item._id}
           />
-          {/* <View style={deckStyles.buttonBox}> */}
+
           <Pressable
             style={deckStyles.button}
             title="Create a New Deck"
-            onPress={() =>
-              navigation.navigate("CreateDeck", { navigation: navigation })
-            }
+            onPress={() => navigation.navigate("CreateDeck")}
           >
-            {/* <Text style={deckStyles.buttonText}></Text> */}
-            {/* <MaterialCommunityIcons
-                name="cards-outline"
-                size={24}
-                color="#F5F3E5"
-              /> */}
             <FontAwesome5 name="plus" size={34} color="black" />
           </Pressable>
-          {/* </View> */}
         </View>
       )}
     </>
@@ -96,7 +86,6 @@ const deckStyles = StyleSheet.create({
     flex: 1,
     flexDirection: "column",
     backgroundColor: "#2c2c2c",
-    // "#4682B4"
     justifyContent: "center",
     alignItems: "stretch",
     alignContent: "stretch",
@@ -110,7 +99,6 @@ const deckStyles = StyleSheet.create({
 
     marginBottom: 0,
     color: "#050514",
-    // "#9381FF"
   },
   description: {
     fontSize: 18,
@@ -118,7 +106,6 @@ const deckStyles = StyleSheet.create({
     padding: 5,
     margin: 10,
     color: "#050514",
-    // color: "#9381FF",
   },
   deckList: {
     // backgroundColor: "#818387",
@@ -138,20 +125,12 @@ const deckStyles = StyleSheet.create({
     shadowRadius: 4.65,
     marginBottom: 10,
     marginRight: 12,
-    // borderColor: "#F9F9F9",
-    // borderWidth: 1,
   },
-  // buttonBox: {
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  // },
   button: {
     borderWidth: 0,
     alignItems: "center",
     justifyContent: "center",
-
     padding: 8,
-
     elevation: 7,
     backgroundColor: "#61DEB5",
     borderRadius: 50,
@@ -173,7 +152,6 @@ const deckStyles = StyleSheet.create({
   },
   buttonText: {
     color: "#050514",
-    // "#F5F3E5",
     fontSize: 22,
     fontWeight: "bold",
   },

@@ -63,7 +63,8 @@ function NavBar() {
           },
           tabBarActiveTintColor: "#F99909",
           tabBarStyle: {
-            backgroundColor: "#F9F9F9",
+            backgroundColor: "#171717",
+            borderTopWidth: 0, //removes white lines above navbar
           },
         })}
       />
@@ -84,9 +85,9 @@ function NavBar() {
             );
           },
           tabBarActiveTintColor: "#F99909",
-          // "#9381FF",
           tabBarStyle: {
-            backgroundColor: "#F9F9F9",
+            backgroundColor: "#171717",
+            borderTopWidth: 0, //removes white lines above navbar
           },
         })}
       />
