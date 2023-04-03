@@ -6,74 +6,77 @@ import {
   TouchableOpacity,
   StyleSheet,
   KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { useState } from "react";
-import CreateCard from "./CreateCard";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { postDeck } from "../utils/api";
 
 const CreateDeck = ({ navigation }) => {
   const [deckName, setDeckName] = useState("");
   const [deckDescription, setDeckDescription] = useState("");
-  const [showCreateCard, setShowCreateCard] = useState(false);
-  let newDeckID;
 
   const handleCreateDeck = () => {
     postDeck(deckName, deckDescription).then((deck) => {
-      console.log(deck._id);
-      newDeckID = deck._id;
+      const newDeckID = deck._id;
+      navigation.navigate("CreateCard", { newDeckID });
     });
-    setShowCreateCard(true);
   };
 
   return (
-    <KeyboardAvoidingView
-      style={createDeckStyles.container}
-      behavior={Platform.OS === "ios" ? "padding" : null}
-      keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -200}
-    >
-      {!showCreateCard ? (
-        <>
-          <MaterialCommunityIcons
-            name="cards-outline"
-            size={50}
-            color="#F9F9F9"
-          />
-          <View style={createDeckStyles.label}>
-            <View style={createDeckStyles.innerBorder}>
-              <Text style={createDeckStyles.boldText}>Name</Text>
-              <TextInput
-                placeholder="Enter Deck Name"
-                value={deckName}
-                onChangeText={(text) => {
-                  setDeckName(text);
-                }}
-              />
-            </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+      <KeyboardAvoidingView
+        style={createDeckStyles.container}
+        behavior={Platform.OS === "ios" ? "padding" : null}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 0 : -200}
+      >
+        <MaterialCommunityIcons
+          name="cards-outline"
+          size={50}
+          color="#F9F9F9"
+        />
+        <View style={createDeckStyles.label}>
+          <View style={createDeckStyles.innerBorder}>
+            <Text style={createDeckStyles.boldText}>Name</Text>
+            <TextInput
+              placeholder="Enter Deck Name"
+              value={deckName}
+              onChangeText={(text) => {
+                setDeckName(text);
+              }}
+            />
           </View>
-          <View style={createDeckStyles.label}>
-            <View style={createDeckStyles.innerBorder}>
-              <Text style={createDeckStyles.boldText}>Description</Text>
-              <TextInput
-                placeholder="Enter Deck Description"
-                value={deckDescription}
-                onChangeText={(text) => setDeckDescription(text)}
-              />
-            </View>
+        </View>
+        <View style={createDeckStyles.label}>
+          <View style={createDeckStyles.innerBorder}>
+            <Text style={createDeckStyles.boldText}>Description</Text>
+            <TextInput
+              maxLength={30}
+              multiline={true}
+              numberOfLines={3}
+              placeholder="Enter Deck Description"
+              value={deckDescription}
+              onChangeText={(text) => setDeckDescription(text)}
+            />
           </View>
-          <View style={createDeckStyles.button}>
-            <TouchableOpacity
-              disabled={deckName && deckDescription ? false : true}
-              onPress={handleCreateDeck}
-            >
-              <Text style={createDeckStyles.buttonText}>Create Deck</Text>
-            </TouchableOpacity>
-          </View>
-        </>
-      ) : (
-        <CreateCard newDeckID={newDeckID} navigation={navigation} />
-      )}
-    </KeyboardAvoidingView>
+        </View>
+        <View
+          style={
+            deckName && deckDescription
+              ? createDeckStyles.buttonActive
+              : createDeckStyles.buttonInactive
+          }
+        >
+          <TouchableOpacity
+            disabled={deckName && deckDescription ? false : true}
+            onPress={handleCreateDeck}
+          >
+            <Text style={createDeckStyles.buttonText}>Create Deck</Text>
+          </TouchableOpacity>
+        </View>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 
@@ -86,14 +89,13 @@ const createDeckStyles = StyleSheet.create({
     backgroundColor: "#27272D",
     justifyContent: "center",
     alignItems: "center",
-    alignContent: "stretch",
   },
   label: {
     fontWeight: "bold",
     padding: 10,
     elevation: 5,
-    backgroundColor: "#818387",
-    color: "#F9F9F9",
+    backgroundColor: "#BAB484",
+    color: "black",
     alignItems: "center",
     margin: 10,
     width: "70%",
@@ -101,11 +103,44 @@ const createDeckStyles = StyleSheet.create({
     borderColor: "#F9F9F9",
     borderWidth: 1,
   },
+
   button: {
     fontWeight: "bold",
     padding: 10,
     elevation: 10,
     backgroundColor: "#F99909",
+    alignItems: "center",
+    margin: 10,
+    width: "35%",
+    borderRadius: 10,
+    shadowColor: "#F9F9F9",
+    shadowRadius: 10,
+    shadowOpacity: 0,
+  },
+
+  buttonText: {
+    color: "#F5F3E5",
+    fontWeight: "bold",
+    fontSize: 24,
+  },
+  // innerBorder: {
+  //   borderColor: "#F99909",
+  //   borderWidth: 5,
+  //   borderRadius: 10,
+  //   padding: 5,
+  //   paddingLeft: 25,
+  //   paddingRight: 25,
+  //   width: "90%",
+  // },
+  boldText: {
+    fontWeight: "bold",
+    color: "black",
+  },
+  buttonActive: {
+    backgroundColor: "#F99909",
+    fontWeight: "bold",
+    padding: 10,
+    elevation: 10,
     alignItems: "center",
     margin: 10,
     width: "50%",
@@ -114,23 +149,18 @@ const createDeckStyles = StyleSheet.create({
     shadowRadius: 10,
     shadowOpacity: 0,
   },
-  buttonText: {
-    color: "#F5F3E5",
+  buttonInactive: {
+    backgroundColor: "#E3BC98",
     fontWeight: "bold",
-    fontSize: 24,
-  },
-  innerBorder: {
-    borderColor: "#F99909",
-    borderWidth: 5,
+    padding: 10,
+    elevation: 10,
+    alignItems: "center",
+    margin: 10,
+    width: "50%",
     borderRadius: 10,
-    padding: 5,
-    paddingLeft: 25,
-    paddingRight: 25,
-    width: "90%",
-  },
-  boldText: {
-    fontWeight: "bold",
-    color: "#F9F9F9",
+    shadowColor: "#F9F9F9",
+    shadowRadius: 10,
+    shadowOpacity: 0,
   },
 });
 
