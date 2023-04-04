@@ -13,6 +13,13 @@ const Decks = ({ navigation }) => {
   const { user, updateUser } = useUser(); 
   // console.log("USER >>>", user)
 
+  const handleNewDeck = useCallback(
+    (newDeckId) => {
+      updateUser({ ...user, user_decks: [...user.user_decks, newDeckId] });
+    },
+    [user]
+  );
+
   useEffect(() => {
     getDecks().then((decks) => {
       const filteredDecks = decks.filter((deck) =>
@@ -21,7 +28,7 @@ const Decks = ({ navigation }) => {
       setCurrentDecks(filteredDecks);
       setLoading(false);
     });
-  }, [user]);
+  }, [user, handleNewDeck]);
 
   useFocusEffect(
     useCallback(() => {
@@ -32,12 +39,26 @@ const Decks = ({ navigation }) => {
         setCurrentDecks(filteredDecks);
         setLoading(false);
       });
-    }, [user])
+    }, [user, handleNewDeck])
   );
 
-  const handleNewDeck = (newDeckId) => {
-    updateUser({ ...user, user_decks: [...user.user_decks, newDeckId] });
-  };
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Pressable
+          style={deckStyles.button}
+          title="Create a New Deck"
+          onPress={() => navigation.navigate("CreateDeck", { handleNewDeck })}
+        >
+          <FontAwesome5 name="plus" size={34} color="black" />
+        </Pressable>
+      ),
+    });
+  }, [navigation, handleNewDeck]);
+
+  // const handleNewDeck = (newDeckId) => {
+  //   updateUser({ ...user, user_decks: [...user.user_decks, newDeckId] });
+  // };
 
   const Deck = ({ title, description, _id }) => {
     return (
@@ -85,7 +106,7 @@ const Decks = ({ navigation }) => {
           <Pressable
             style={deckStyles.button}
             title="Create a New Deck"
-            onPress={() => navigation.navigate("CreateDeck", { handleNewDeck })}
+            onPress={() => navigation.navigate("CreateDeck")}
           >
             <FontAwesome5 name="plus" size={34} color="black" />
           </Pressable>
