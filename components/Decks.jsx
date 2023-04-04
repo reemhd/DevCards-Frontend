@@ -10,6 +10,7 @@ import { useUser } from "../context/UserContext";
 const Decks = ({ navigation }) => {
   const [currentDecks, setCurrentDecks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [loadingError, setLoadingError] = useState(false);
   const { user } = useUser(); 
   // console.log("USER >>>", user)
 
@@ -20,6 +21,10 @@ const Decks = ({ navigation }) => {
       );
       setCurrentDecks(filteredDecks);
       setLoading(false);
+    })
+    .catch((err) => {
+      setLoading(false)
+      setLoadingError(true)
     });
   }, []);
 
@@ -60,11 +65,15 @@ const Decks = ({ navigation }) => {
 
   return (
     <>
-      {loading ? (
+      {loading ? ( loadingError ? <View style={deckStyles.center}>
+        <Text style={deckStyles.errorText}>Error Loading Decks</Text>
+        </View> :
         <View style={deckStyles.container}>
           <Spinner visible={loading} />
         </View>
-      ) : (
+      ) : ( loadingError ? <View style={deckStyles.center}>
+        <Text style={deckStyles.errorText}>Error Loading Decks</Text>
+        </View> :
         <View style={deckStyles.container}>
           <FlatList
             data={currentDecks}
@@ -169,6 +178,16 @@ const deckStyles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  errorText: {
+    fontWeight:"bold",
+    color: "#FF0000"
+  },
+  center: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#2c2c2c",
+}
 });
 
 export default Decks;

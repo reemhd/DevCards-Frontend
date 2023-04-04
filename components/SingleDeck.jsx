@@ -14,17 +14,24 @@ import { Ionicons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import SingleCard from "./SingleCard";
 import { deleteCard } from "../utils/api";
+import Spinner from "react-native-loading-spinner-overlay";
 
 const SingleDeck = ({ route, navigation }) => {
   const { deck_id } = route.params;
   const [deck, setDeck] = useState({});
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [cardID, setCardID] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [loadingError, setLoadingError] = useState(false);
 
   useEffect(() => {
     getDeckByID(deck_id).then((deck) => {
       setDeck(deck);
-    });
+      setLoading(false)
+    }).catch((err) => {
+      setLoading(false)
+      setLoadingError(true)
+    })
   }, []);
 
   const handleExpandPress = (_id) => {
@@ -61,7 +68,17 @@ const SingleDeck = ({ route, navigation }) => {
     );
   };
   return (
-    <View style={singleDeckStyle.container}>
+    <>
+    {loading ? ( loadingError ? <View style={singleDeckStyle.center}>
+        <Text style={singleDeckStyle.errorText}>Error Loading Decks</Text>
+        </View> :
+    <View style={singleDeckStyle.spinnerContainer}>
+      <Spinner visible={loading} />
+    </View>) :
+    ( loadingError ? <View style={singleDeckStyle.center}>
+      <Text style={singleDeckStyle.errorText}>Error Loading Decks</Text>
+      </View> : 
+      <View style={singleDeckStyle.container}>
       <Modal visible={isModalVisible} transparent={false}>
         <View style={singleDeckStyle.container}>
           <SingleCard cardID={cardID} deck={deck} />
@@ -88,9 +105,10 @@ const SingleDeck = ({ route, navigation }) => {
       >
         <FontAwesome5 name="plus" size={34} color="black" />
       </Pressable>
-    </View>
+    </View>)}
+  </>
   );
-};
+}; 
 
 const singleDeckStyle = StyleSheet.create({
   text: {
@@ -107,6 +125,14 @@ const singleDeckStyle = StyleSheet.create({
     borderWidth: 4,
     padding: 5,
     borderRadius: 10,
+  },
+  spinnerContainer: {
+    flex: 1,
+    flexDirection: "column",
+    backgroundColor: "#2c2c2c",
+    justifyContent: "center",
+    alignItems: "stretch",
+    alignContent: "stretch",
   },
   closeModalText: {
     color: "white",
@@ -167,5 +193,15 @@ const singleDeckStyle = StyleSheet.create({
     bottom: 10,
     left: 30,
   },
+  errorText: {
+    fontWeight:"bold",
+    color: "#FF0000"
+  },
+  center: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#2c2c2c",
+}
 });
 export default SingleDeck;
