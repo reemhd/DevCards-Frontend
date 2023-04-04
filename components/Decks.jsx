@@ -10,8 +10,7 @@ import { useUser } from "../context/UserContext";
 const Decks = ({ navigation }) => {
   const [currentDecks, setCurrentDecks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { user } = useUser(); 
-  // console.log("USER >>>", user)
+  const { user } = useUser();
 
   useEffect(() => {
     getDecks().then((decks) => {
@@ -26,7 +25,6 @@ const Decks = ({ navigation }) => {
   useFocusEffect(
     useCallback(() => {
       getDecks().then((decks) => {
-        // console.log("DECKS >>>>", decks);
         const filteredDecks = decks.filter((deck) =>
           user.user_decks.includes(deck._id)
         );
@@ -58,7 +56,6 @@ const Decks = ({ navigation }) => {
       </Pressable>
     );
   };
-
 
   return (
     <>
