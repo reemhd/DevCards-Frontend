@@ -1,3 +1,4 @@
+
 import React, { useState, useRef } from "react";
 import { View, Text, Pressable, StyleSheet, Animated } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -202,4 +203,3 @@ const reviseStyle = StyleSheet.create({
   },
 });
 
-export default Revise;

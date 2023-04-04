@@ -2,10 +2,11 @@ import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Analytics from "./Analytics";
-import Competition from "./Competition";
+import UserProfile from "./UserProfile";
 import StackNavigation from "./StackNavigation";
 import { useUser } from "../context/UserContext";
 import { SignIn } from "./SignIn";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 const Tab = createBottomTabNavigator();
 
@@ -69,19 +70,18 @@ function NavBar() {
         })}
       />
       <Tab.Screen
-        name="Competition"
-        component={Competition}
+        name="Profile"
+        component={UserProfile}
         options={({ route }) => ({
-          title: "Competition",
+          title: "Profile",
 
           tabBarIcon: ({ color, size, focused }) => {
-            let competitionIcon;
-
-            if (route.name === "Competition") {
-              competitionIcon = focused ? "trophy-sharp" : "trophy-outline";
-            }
             return (
-              <Ionicons name={competitionIcon} size={size} color={color} />
+              <MaterialCommunityIcons
+                name={focused ? "account-circle" : "account-circle-outline"}
+                size={size}
+                color={color}
+              />
             );
           },
           tabBarActiveTintColor: "#F99909",
