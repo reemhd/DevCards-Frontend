@@ -16,7 +16,7 @@ import SingleCard from "./SingleCard";
 import { deleteCard } from "../utils/api";
 
 const SingleDeck = ({ route, navigation }) => {
-  const { deck_id } = route.params;
+  const { deck_id, title } = route.params;
   const [deck, setDeck] = useState({});
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [cardID, setCardID] = useState("");
@@ -62,28 +62,51 @@ const SingleDeck = ({ route, navigation }) => {
   };
   return (
     <View style={singleDeckStyle.container}>
-      <Modal visible={isModalVisible} transparent={false}>
-        <View style={singleDeckStyle.container}>
-          <SingleCard cardID={cardID} deck={deck} />
-          <View style={singleDeckStyle.closeModal}>
-            <TouchableOpacity onPress={() => setIsModalVisible(false)}>
-              <Text style={singleDeckStyle.closeModalText}>Back to Deck</Text>
-            </TouchableOpacity>
+      <View style={singleDeckStyle.title}>
+        <Text style={singleDeckStyle.titleText}>{title}</Text>
+      </View>
+      <>
+        {deck.length === 0 ? (
+          <View style={singleDeckStyle.empty}>
+            <Text style={singleDeckStyle.emptyText}>
+              This deck is currently empty. Click below to add a card!
+            </Text>
           </View>
-        </View>
-      </Modal>
-      <FlatList
-        data={deck}
-        renderItem={({ item }) => (
-          <Card front={item.front} back={item.back} _id={item._id} />
+        ) : (
+          <>
+            <Modal visible={isModalVisible} transparent={false}>
+              <View style={singleDeckStyle.container}>
+                <SingleCard cardID={cardID} deck={deck} />
+                <View style={singleDeckStyle.closeModal}>
+                  <TouchableOpacity onPress={() => setIsModalVisible(false)}>
+                    <Text style={singleDeckStyle.closeModalText}>
+                      Back to Deck
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </Modal>
+
+            <FlatList
+              data={deck}
+              renderItem={({ item }) => (
+                <Card front={item.front} back={item.back} _id={item._id} />
+              )}
+              keyExtractor={(item) => item._id}
+            />
+          </>
         )}
-        keyExtractor={(item) => item._id}
-      />
+      </>
+
       <Pressable
         style={singleDeckStyle.button}
-        title="Create a New Deck"
+        title="Create a New Card"
         onPress={() =>
-          navigation.navigate("CreateCard", { newDeckID: deck_id })
+          navigation.navigate("CreateCard", {
+            newDeckID: deck_id,
+            setDeck,
+            title,
+          })
         }
       >
         <FontAwesome5 name="plus" size={34} color="black" />
@@ -98,6 +121,18 @@ const singleDeckStyle = StyleSheet.create({
     fontSize: 20,
     padding: 20,
     color: "black",
+  },
+  empty: {
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
+    backgroundColor: "#27272D",
+  },
+  emptyText: {
+    color: "white",
+    fontSize: 22,
+    fontWeight: "bold",
+    margin: 20,
   },
   closeModal: {
     backgroundColor: "#F99909",
@@ -166,6 +201,14 @@ const singleDeckStyle = StyleSheet.create({
     position: "absolute",
     bottom: 10,
     left: 30,
+  },
+  title: {
+    marginTop: 15,
+  },
+  titleText: {
+    fontSize: 24,
+    color: "#F99909",
+    fontWeight: "bold",
   },
 });
 export default SingleDeck;

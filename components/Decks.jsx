@@ -10,8 +10,7 @@ import { useUser } from "../context/UserContext";
 const Decks = ({ navigation }) => {
   const [currentDecks, setCurrentDecks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { user } = useUser(); 
-  // console.log("USER >>>", user)
+  const { user } = useUser();
 
   useEffect(() => {
     getDecks().then((decks) => {
@@ -26,7 +25,6 @@ const Decks = ({ navigation }) => {
   useFocusEffect(
     useCallback(() => {
       getDecks().then((decks) => {
-        // console.log("DECKS >>>>", decks);
         const filteredDecks = decks.filter((deck) =>
           user.user_decks.includes(deck._id)
         );
@@ -39,7 +37,9 @@ const Decks = ({ navigation }) => {
   const Deck = ({ title, description, _id }) => {
     return (
       <Pressable
-        onPress={() => navigation.navigate("SingleDeck", { deck_id: _id })}
+        onPress={() =>
+          navigation.navigate("SingleDeck", { deck_id: _id, title })
+        }
       >
         <View style={deckStyles.deckList}>
           <View style={deckStyles.innerBorder}>
@@ -56,7 +56,6 @@ const Decks = ({ navigation }) => {
       </Pressable>
     );
   };
-
 
   return (
     <>
@@ -81,7 +80,11 @@ const Decks = ({ navigation }) => {
           <Pressable
             style={deckStyles.button}
             title="Create a New Deck"
-            onPress={() => navigation.navigate("CreateDeck")}
+            onPress={() =>
+              navigation.navigate("CreateDeck", {
+                setCurrentDecks,
+              })
+            }
           >
             <FontAwesome5 name="plus" size={34} color="black" />
           </Pressable>
