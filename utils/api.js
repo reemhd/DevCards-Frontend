@@ -18,6 +18,7 @@ export const postCard = (front, back, newDeckID) => {
     .post(`/cards/${newDeckID}`, { front, back })
     .then(({ data }) => {
       console.log(data);
+      return data.createdCard;
     })
     .catch((err) => {
       console.log(err);
@@ -36,9 +37,12 @@ export const getDecks = () => {
 };
 
 export const getDeckByID = (id) => {
-  return api.get(`/decks/${id}/cards`).then(({ data }) => {
-    return data.cards;
-  }).catch((err) => {
+  return api.get(`/decks/${id}/cards`)
+  .then(({ data }) => {
+    // return data.cards;
+    throw {err : 'error of cards'}
+  })
+  .catch((err) => {
     throw { err }
   })
 };
@@ -50,7 +54,5 @@ export const getUsers = () => {
 };
 
 export const deleteCard = (id) => {
-  return api.delete(`/cards/${id}`).then(() => {
-    console.log("card deleted in utils");
-  });
+  return api.delete(`/cards/${id}`).then(() => {});
 };

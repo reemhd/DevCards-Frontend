@@ -5,6 +5,11 @@ import Decks from "./Decks";
 import CreateCard from "./CreateCard";
 import SingleDeck from "./SingleDeck";
 
+
+import {SignIn} from './SignIn'
+
+import Revise from "./Revise";
+
 const Stack = createStackNavigator();
 
 const StackNavigation = () => {
@@ -28,6 +33,14 @@ const StackNavigation = () => {
       <Stack.Screen
         name="CreateCard"
         component={CreateCard}
+        options={{ headerShown: false }}
+      />
+
+      <Stack.Screen name="SignIn" component={SignIn} />
+
+      <Stack.Screen
+        name="Revise"
+        component={Revise}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>
