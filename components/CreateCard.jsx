@@ -7,6 +7,8 @@ import {
   StyleSheet,
   KeyboardAvoidingView,
   TouchableOpacity,
+  TouchableWithoutFeedback,
+  Keyboard,
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { postCard } from "../utils/api";
@@ -27,63 +29,67 @@ const CreateCard = ({ navigation, route }) => {
   };
 
   return (
-    <KeyboardAvoidingView style={cardStyles.container}>
-      <View style={cardStyles.center}>
-        <MaterialCommunityIcons
-          name="card-text-outline"
-          size={50}
-          color="#f19100"
-        />
-        <View
-          style={
-            cardFront
-              ? cardStyles.enterTextActive
-              : cardStyles.enterTextInactive
-          }
-        >
-          <Text style={cardStyles.label}>Front</Text>
-          <TextInput
-            maxLength={70}
-            multiline={true}
-            numberOfLines={5}
-            style={cardStyles.inputBox}
-            placeholder="Enter your question here"
-            value={cardFront}
-            onChangeText={(text) => setCardFront(text)}
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <KeyboardAvoidingView style={cardStyles.container}>
+        <View style={cardStyles.center}>
+          <MaterialCommunityIcons
+            name="card-text-outline"
+            size={50}
+            color="#f19100"
           />
-        </View>
-        <View
-          style={
-            cardBack ? cardStyles.enterTextActive : cardStyles.enterTextInactive
-          }
-        >
-          <Text style={cardStyles.label}>Back</Text>
-          <TextInput
-            maxLength={70}
-            multiline={true}
-            numberOfLines={5}
-            style={cardStyles.inputBox}
-            placeholder="Enter your answer here"
-            value={cardBack}
-            onChangeText={(text) => setCardBack(text)}
-          />
-        </View>
-        <View
-          style={
-            cardFront && cardBack
-              ? cardStyles.buttonActive
-              : cardStyles.buttonInactive
-          }
-        >
-          <TouchableOpacity
-            disabled={cardFront && cardBack ? false : true}
-            onPress={handleCreateCard}
+          <View
+            style={
+              cardFront
+                ? cardStyles.enterTextActive
+                : cardStyles.enterTextInactive
+            }
           >
-            <Text style={cardStyles.buttonText}>Create Card</Text>
-          </TouchableOpacity>
+            <Text style={cardStyles.label}>Front</Text>
+            <TextInput
+              maxLength={70}
+              multiline={true}
+              numberOfLines={5}
+              style={cardStyles.inputBox}
+              placeholder="Enter your question here"
+              value={cardFront}
+              onChangeText={(text) => setCardFront(text)}
+            />
+          </View>
+          <View
+            style={
+              cardBack
+                ? cardStyles.enterTextActive
+                : cardStyles.enterTextInactive
+            }
+          >
+            <Text style={cardStyles.label}>Back</Text>
+            <TextInput
+              maxLength={70}
+              multiline={true}
+              numberOfLines={5}
+              style={cardStyles.inputBox}
+              placeholder="Enter your answer here"
+              value={cardBack}
+              onChangeText={(text) => setCardBack(text)}
+            />
+          </View>
+          <View
+            style={
+              cardFront && cardBack
+                ? cardStyles.buttonActive
+                : cardStyles.buttonInactive
+            }
+          >
+            <TouchableOpacity
+              disabled={cardFront && cardBack ? false : true}
+              onPress={handleCreateCard}
+            >
+              <Text style={cardStyles.buttonText}>Create Card</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 
