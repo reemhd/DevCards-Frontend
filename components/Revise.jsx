@@ -8,6 +8,7 @@ const Revise = ({ route }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [endOfQuestions, setEndOfQuestions] = useState(false);
   const [isFlipped, setIsFlipped] = useState(false);
+  const [score, setScore] = useState(0);
   const animate = useRef(new Animated.Value(0));
 
   const interpolateFront = animate.current.interpolate({
@@ -36,6 +37,7 @@ const Revise = ({ route }) => {
       setEndOfQuestions(true);
     }
     setCurrentIndex(currentIndex + 1);
+    setScore(score + 1);
     handleFlipCard();
   };
 
@@ -52,7 +54,10 @@ const Revise = ({ route }) => {
     <>
       {endOfQuestions ? (
         <View style={reviseStyle.end}>
-          <Text style={reviseStyle.endText}>You scored ___%! Well done!</Text>
+          <Text style={reviseStyle.endText}>
+            You scored {Math.floor((score / deck.length) * 100)}% Well done!
+          </Text>
+          {/* //send the score to the backend */}
         </View>
       ) : (
         <View style={reviseStyle.container}>
@@ -75,7 +80,11 @@ const Revise = ({ route }) => {
                   reviseStyle.cardListBack,
                 ]}
               >
-                <Text style={reviseStyle.text}>{deck[currentIndex].back}</Text>
+                <View style={reviseStyle.textBox}>
+                  <Text style={reviseStyle.text}>
+                    {deck[currentIndex].back}
+                  </Text>
+                </View>
                 <View style={reviseStyle.buttons}>
                   <Pressable style={reviseStyle.tick} onPress={handleTickPress}>
                     <Ionicons name="checkmark-sharp" size={34} color="white" />
@@ -105,17 +114,23 @@ const reviseStyle = StyleSheet.create({
     color: "black",
   },
   cardContainer: {
-    width: 350,
-    height: 300,
+    width: 300,
+    height: 450,
     alignItems: "center",
     justifyContent: "center",
-    marginLeft: 15,
+    marginRight: 30,
   },
   container: {
     flex: 1,
     backgroundColor: "#27272D",
     justifyContent: "center",
     alignItems: "center",
+  },
+  textBox: {
+    alignItems: "center",
+    justifyContent: "center",
+    position: "absolute",
+    top: 0,
   },
   cardList: {
     backgroundColor: "#F99909",
@@ -125,7 +140,7 @@ const reviseStyle = StyleSheet.create({
     borderRadius: 20,
     borderColor: "white",
     borderWidth: 3,
-    height: 250,
+    height: 350,
     width: 300,
     position: "absolute",
     top: 0,
@@ -143,7 +158,7 @@ const reviseStyle = StyleSheet.create({
     borderRadius: 20,
     borderColor: "white",
     borderWidth: 3,
-    height: 250,
+    height: 350,
     width: 300,
     position: "absolute",
     top: 0,
@@ -170,6 +185,8 @@ const reviseStyle = StyleSheet.create({
   },
   buttons: {
     flexDirection: "row",
+    position: "absolute",
+    bottom: 0,
   },
   end: {
     flex: 1,
@@ -181,6 +198,7 @@ const reviseStyle = StyleSheet.create({
     color: "white",
     fontSize: 28,
     fontWeight: "bold",
+    margin: 20,
   },
 });
 
