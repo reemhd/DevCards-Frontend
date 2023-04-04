@@ -250,5 +250,15 @@ const singleDeckStyle = StyleSheet.create({
     bottom: 10,
     left: 30,
   },
+  errorText: {
+    fontWeight:"bold",
+    color: "#FF0000"
+  },
+  center: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#2c2c2c",
+}
 });
 export default SingleDeck;

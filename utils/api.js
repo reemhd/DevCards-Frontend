@@ -39,8 +39,7 @@ export const getDecks = () => {
 export const getDeckByID = (id) => {
   return api.get(`/decks/${id}/cards`)
   .then(({ data }) => {
-    // return data.cards;
-    throw {err : 'error of cards'}
+    return data.cards;
   })
   .catch((err) => {
     throw { err }
