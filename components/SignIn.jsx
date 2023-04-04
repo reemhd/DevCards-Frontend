@@ -8,6 +8,7 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
+  Image
 } from "react-native";
 import { getUsers } from "../utils/api";
 import { useUser } from "../context/UserContext";
@@ -26,7 +27,7 @@ export const SignIn = () => {
     getUsers().then((users) => {
       const filteredUser = users.filter((user) => user.username === username);
       if (filteredUser.length === 0) {
-        setError('User does not exist')
+        setError("User does not exist");
         return;
       }
       // set context with username
@@ -41,11 +42,15 @@ export const SignIn = () => {
           style={styles.keyboardAvoidingContainer}
           behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
-          <Text style={styles.title}>Sign In</Text>
+          <Image
+            source={require("../assets/DevCards.png")}
+            style={styles.logo}
+          />
           {error ? <Text style={styles.error}>{error}</Text> : null}
           <TextInput
             style={styles.input}
             placeholder="Username"
+            placeholderTextColor="white"
             value={username}
             onChangeText={(text) => setUsername(text)}
             autoCapitalize="none"
@@ -54,10 +59,14 @@ export const SignIn = () => {
           <TextInput
             style={styles.input}
             placeholder="Password"
+            placeholderTextColor="white"
             secureTextEntry={true}
             autoCapitalize="none"
             autoCorrect={false}
           />
+          <Text style={styles.signUp}>
+            Don't have an account? <Text style={styles.bold}>Sign Up</Text>
+          </Text>
           <TouchableOpacity style={styles.button} onPress={handleSignIn}>
             <Text style={styles.buttonText}>Sign In</Text>
           </TouchableOpacity>
@@ -69,10 +78,8 @@ export const SignIn = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#F5FCFF",
+    flex: 2,
+    backgroundColor: "#2c2c2c",
   },
   keyboardAvoidingContainer: {
     flex: 1,
@@ -81,18 +88,16 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingHorizontal: 20,
   },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 20,
-  },
   input: {
     width: "80%",
+    gap: 11,
     height: 50,
     padding: 10,
     borderWidth: 1,
     borderColor: "#ccc",
-    marginBottom: 20,
+    marginBottom: 10,
+    color: "#fff",
+    borderRadius: 5,
   },
   button: {
     backgroundColor: "#f19100",
@@ -103,11 +108,24 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   buttonText: {
-    color: "#fff",
-    fontSize: 18,
+    fontWeight: "bold",
+    color: "#2c2c2c",
+    fontSize: 20,
   },
   error: {
     color: "red",
     marginBottom: 10,
   },
+  logo: {
+    width: 460,
+    height: 200,
+  },
+  signUp: {
+    color: "#fff",
+    paddingBottom: 10,
+  },
+  bold: {
+    fontWeight: "bold",
+  },
 });
+
