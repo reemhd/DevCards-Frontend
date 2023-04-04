@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, FlatList } from "react-native";
 import { useUser } from "../context/UserContext";
 import Spinner from "react-native-loading-spinner-overlay";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { getDecks } from "../utils/api";
 
 const Analytics = () => {
   const { user, updateUser } = useUser();
@@ -42,7 +43,7 @@ const Analytics = () => {
   return (
     <>
       {loading ? (
-        <View style={deckStyles.container}>
+        <View style={analyticsStyle.loadingContainer}>
           <Spinner visible={loading} />
         </View>
       ) : (
@@ -61,6 +62,14 @@ const Analytics = () => {
 };
 
 const analyticsStyle = StyleSheet.create({
+  loadingContainer: {
+    flex: 1,
+    flexDirection: "column",
+    backgroundColor: "#2c2c2c",
+    justifyContent: "center",
+    alignItems: "stretch",
+    alignContent: "stretch",
+  },
   text: {
     fontWeight: "bold",
     color: "white",
@@ -73,8 +82,9 @@ const analyticsStyle = StyleSheet.create({
   },
   deck: {
     flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: "stretch",
+    justifyContent: "flex-start",
+    padding: 10,
   },
   title: {
     color: "white",
