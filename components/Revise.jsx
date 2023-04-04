@@ -3,9 +3,10 @@ import { View, Text, Pressable, StyleSheet, Animated } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
+import { patchUserPercent } from "../utils/api";
 
 const Revise = ({ route, navigation }) => {
-  const { deck } = route.params;
+  const { deck, deck_id } = route.params;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [endOfQuestions, setEndOfQuestions] = useState(false);
   const [isFlipped, setIsFlipped] = useState(false);
@@ -50,6 +51,14 @@ const Revise = ({ route, navigation }) => {
     setCurrentIndex(currentIndex + 1);
     handleFlipCard();
   };
+  const handleFinish = ()=>{
+    const percent = Math.floor((score / deck.length) * 100)
+    patchUserPercent(percent, deck_id)
+    .then((data)=>{
+      console.log(data)
+    })
+    navigation.navigate("Decks")
+  }
 
   return (
     <>
@@ -59,7 +68,9 @@ const Revise = ({ route, navigation }) => {
             You scored {Math.floor((score / deck.length) * 100)}%
           </Text>
           <Text style={reviseStyle.endText}>Well done!</Text>
-          {/* //send the score to the backend */}
+          <Pressable  style= {reviseStyle.finish} onPress={handleFinish} >
+            <Text style= {reviseStyle.finishText}>Back to Decks</Text>
+          </Pressable>
           <View style={reviseStyle.lower}>
             <Text style={reviseStyle.lowerText}>
               Click below to view your full analytics
@@ -222,6 +233,21 @@ const reviseStyle = StyleSheet.create({
     fontWeight: "bold",
     margin: 25,
   },
+  finish:{
+    backgroundColor: "#F99909",
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 10,
+
+  },
+finishText:{
+  color: "white",
+  fontSize: 22,
+  fontWeight: "bold",
+  
+
+}
 });
 
 export default Revise;

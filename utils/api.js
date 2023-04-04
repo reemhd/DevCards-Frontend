@@ -51,3 +51,14 @@ export const getUsers = () => {
 export const deleteCard = (id) => {
   return api.delete(`/cards/${id}`).then(() => {});
 };
+
+export const patchUserPercent = (percent, id)=>{
+  console.log(percent, id, "meow")
+  return api.patch(`/decks/${id}/user-percent`, {user_percent: percent})
+  .then(({data})=>{
+    return data
+  })
+  .catch((err)=>{
+    console.log(err)
+  })
+}
