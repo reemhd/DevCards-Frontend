@@ -99,6 +99,13 @@ const SingleDeck = ({ route, navigation }) => {
       </>
 
       <Pressable
+        style={singleDeckStyle.revise}
+        title="Revise"
+        onPress={() => navigation.navigate("Revise", { deck })}
+      >
+        <Text style={singleDeckStyle.reviseText}>Revise</Text>
+      </Pressable>
+      <Pressable
         style={singleDeckStyle.button}
         title="Create a New Card"
         onPress={() =>
@@ -122,6 +129,21 @@ const singleDeckStyle = StyleSheet.create({
     padding: 20,
     color: "black",
   },
+
+  revise: {
+    backgroundColor: "#F99909",
+    position: "absolute",
+    bottom: 30,
+    left: 20,
+    borderRadius: 30,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  reviseText: {
+    fontWeight: "bold",
+    fontSize: 32,
+    padding: 15,
+
   empty: {
     alignItems: "center",
     justifyContent: "center",
@@ -133,6 +155,7 @@ const singleDeckStyle = StyleSheet.create({
     fontSize: 22,
     fontWeight: "bold",
     margin: 20,
+
   },
   closeModal: {
     backgroundColor: "#F99909",
