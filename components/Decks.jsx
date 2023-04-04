@@ -6,12 +6,13 @@ import { useFocusEffect } from "@react-navigation/native";
 import Spinner from "react-native-loading-spinner-overlay";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useUser } from "../context/UserContext";
+import { SearchBar } from "./SearchBar";
 
 const Decks = ({ navigation }) => {
   const [currentDecks, setCurrentDecks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { user, updateUser } = useUser(); 
-  // console.log("USER >>>", user)
+  const { user, updateUser } = useUser();
+  const [searchQuery, setSearchQuery] = useState("");
 
   const handleNewDeck = useCallback(
     (newDeckId) => {
@@ -21,14 +22,21 @@ const Decks = ({ navigation }) => {
   );
 
   useEffect(() => {
-    getDecks().then((decks) => {
-      const filteredDecks = decks.filter((deck) =>
-        user.user_decks.includes(deck._id)
+  getDecks().then((decks) => {
+    let filteredDecks = decks.filter((deck) =>
+      user.user_decks.includes(deck._id)
+    );
+    if (searchQuery.length > 0) {
+      filteredDecks = filteredDecks.filter((deck) =>
+        deck.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
-      setCurrentDecks(filteredDecks);
-      setLoading(false);
-    });
-  }, [user, handleNewDeck]);
+    }
+    setCurrentDecks(filteredDecks);
+    setLoading(false);
+  });
+}, [user, handleNewDeck, searchQuery]);
+
+
 
   useFocusEffect(
     useCallback(() => {
@@ -56,9 +64,9 @@ const Decks = ({ navigation }) => {
     });
   }, [navigation, handleNewDeck]);
 
-  // const handleNewDeck = (newDeckId) => {
-  //   updateUser({ ...user, user_decks: [...user.user_decks, newDeckId] });
-  // };
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+  };
 
   const Deck = ({ title, description, _id }) => {
     return (
@@ -91,6 +99,7 @@ const Decks = ({ navigation }) => {
         </View>
       ) : (
         <View style={deckStyles.container}>
+          <SearchBar onSearch={handleSearch} />
           <FlatList
             data={currentDecks}
             renderItem={({ item }) => (
