@@ -14,23 +14,18 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { postDeck } from "../utils/api";
 import { useUser } from "../context/UserContext";
 
-
-
-const CreateDeck = ({ navigation }) => {
+const CreateDeck = ({ navigation, route }) => {
   const { user } = useUser();
 
   const [deckName, setDeckName] = useState("");
   const [deckDescription, setDeckDescription] = useState("");
-  const { setCurrentDecks } = route.params;
+  // const { setCurrentDecks } = route.params;
 
   const handleCreateDeck = () => {
     postDeck(deckName, deckDescription, user._id).then((deck) => {
       const newDeckID = deck._id;
-
-      setCurrentDecks((current) => {
-        return [...current, deck];
-      });
-      navigation.navigate("Decks", { newDeckID, title: deck.title });
+      navigation.navigate("CreateCard", { newDeckID });
+      route.params?.handleNewDeck(newDeckID);
     });
   };
 
