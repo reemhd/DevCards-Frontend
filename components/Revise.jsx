@@ -11,6 +11,7 @@ const Revise = ({ route, navigation }) => {
   const [endOfQuestions, setEndOfQuestions] = useState(false);
   const [isFlipped, setIsFlipped] = useState(false);
   const [score, setScore] = useState(0);
+  const [message, setMessage] = useState("Well done!");
   const animate = useRef(new Animated.Value(0));
 
   const interpolateFront = animate.current.interpolate({
@@ -36,6 +37,9 @@ const Revise = ({ route, navigation }) => {
   const handleTickPress = () => {
     if (currentIndex === deck.length - 1) {
       setEndOfQuestions(true);
+      if (score === 0) {
+        setMessage("Bad luck!");
+      }
     }
     setCurrentIndex(currentIndex + 1);
     setScore(score + 1);
@@ -45,6 +49,9 @@ const Revise = ({ route, navigation }) => {
   const handleCrossPress = () => {
     if (currentIndex === deck.length - 1) {
       setEndOfQuestions(true);
+      if (score === 0) {
+        setMessage("Bad luck!");
+      }
     }
     setCurrentIndex(currentIndex + 1);
     handleFlipCard();
@@ -64,7 +71,7 @@ const Revise = ({ route, navigation }) => {
           <Text style={reviseStyle.endText}>
             You scored {Math.floor((score / deck.length) * 100)}%
           </Text>
-          <Text style={reviseStyle.endText}>Well done!</Text>
+          <Text style={reviseStyle.endText}>{message}</Text>
           <Pressable style={reviseStyle.finish} onPress={handleFinish}>
             <Text style={reviseStyle.finishText}>Back to Decks</Text>
           </Pressable>
