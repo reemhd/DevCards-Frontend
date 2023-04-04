@@ -42,13 +42,15 @@ export const SignIn = () => {
           style={styles.keyboardAvoidingContainer}
           behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
-          <Image
-            source={require("../assets/DevCards.png")}
-            style={styles.logo}
-          />
+          <View>
+            <Image
+              source={require("../assets/DevCards.png")}
+              style={styles.logo}
+            />
+          </View>
           {error ? <Text style={styles.error}>{error}</Text> : null}
           <TextInput
-            style={styles.input}
+            style={styles.input1}
             placeholder="Username"
             placeholderTextColor="white"
             value={username}
@@ -57,7 +59,7 @@ export const SignIn = () => {
             autoCorrect={false}
           />
           <TextInput
-            style={styles.input}
+            style={styles.input2}
             placeholder="Password"
             placeholderTextColor="white"
             secureTextEntry={true}
@@ -88,8 +90,21 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingHorizontal: 20,
   },
-  input: {
+  input1: {
     width: "80%",
+    gap: 11,
+    height: 50,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    marginBottom: 10,
+    color: "#fff",
+    borderRadius: 5,
+    margin: 20,
+  },
+  input2: {
+    width: "80%",
+    margin: 20,
     gap: 11,
     height: 50,
     padding: 10,
@@ -106,6 +121,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 5,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 4,
   },
   buttonText: {
     fontWeight: "bold",
@@ -119,10 +138,14 @@ const styles = StyleSheet.create({
   logo: {
     width: 460,
     height: 200,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 4,
   },
   signUp: {
     color: "#fff",
-    paddingBottom: 10,
+    padding: 10,
   },
   bold: {
     fontWeight: "bold",
