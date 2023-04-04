@@ -16,8 +16,10 @@ import { useUser } from "../context/UserContext";
 
 const CreateDeck = ({ navigation, route }) => {
   const { user } = useUser();
+
   const [deckName, setDeckName] = useState("");
   const [deckDescription, setDeckDescription] = useState("");
+  // const { setCurrentDecks } = route.params;
 
   const handleCreateDeck = () => {
     postDeck(deckName, deckDescription, user._id).then((deck) => {

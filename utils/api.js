@@ -18,6 +18,7 @@ export const postCard = (front, back, newDeckID) => {
     .post(`/cards/${newDeckID}`, { front, back })
     .then(({ data }) => {
       console.log(data);
+      return data.createdCard;
     })
     .catch((err) => {
       console.log(err);
@@ -48,7 +49,5 @@ export const getUsers = () => {
 };
 
 export const deleteCard = (id) => {
-  return api.delete(`/cards/${id}`).then(() => {
-    console.log("card deleted in utils");
-  });
+  return api.delete(`/cards/${id}`).then(() => {});
 };

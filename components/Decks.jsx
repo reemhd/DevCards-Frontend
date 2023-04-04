@@ -26,7 +26,6 @@ const Decks = ({ navigation }) => {
   useFocusEffect(
     useCallback(() => {
       getDecks().then((decks) => {
-        // console.log("DECKS >>>>", decks);
         const filteredDecks = decks.filter((deck) =>
           user.user_decks.includes(deck._id)
         );
@@ -43,7 +42,9 @@ const Decks = ({ navigation }) => {
   const Deck = ({ title, description, _id }) => {
     return (
       <Pressable
-        onPress={() => navigation.navigate("SingleDeck", { deck_id: _id })}
+        onPress={() =>
+          navigation.navigate("SingleDeck", { deck_id: _id, title })
+        }
       >
         <View style={deckStyles.deckList}>
           <View style={deckStyles.innerBorder}>
@@ -60,7 +61,6 @@ const Decks = ({ navigation }) => {
       </Pressable>
     );
   };
-
 
   return (
     <>
