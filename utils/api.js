@@ -32,14 +32,18 @@ export const getDecks = () => {
       return data.decks;
     })
     .catch((err) => {
-      console.log(err);
+      throw { err }
     });
 };
 
 export const getDeckByID = (id) => {
-  return api.get(`/decks/${id}/cards`).then(({ data }) => {
+  return api.get(`/decks/${id}/cards`)
+  .then(({ data }) => {
     return data.cards;
-  });
+  })
+  .catch((err) => {
+    throw { err }
+  })
 };
 
 export const getUsers = () => {
