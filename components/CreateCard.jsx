@@ -103,7 +103,6 @@ const cardStyles = StyleSheet.create({
     borderStyle: "solid",
     borderWidth: 5,
     borderColor: "#f19100",
-    margin: 50,
     padding: 20,
     backgroundColor: "#2c2c2c",
     borderRadius: 8,
@@ -116,11 +115,12 @@ const cardStyles = StyleSheet.create({
     margin: 10,
     borderRadius: 8,
     backgroundColor: "#F9F9F9",
+    width: 180,
   },
   enterTextInactive: {
     alignItems: "center",
     justifyContent: "center",
-    width: "90%",
+    width: 200,
     height: 150,
     backgroundColor: "#E3BC98",
     borderColor: "#F9F9F9",
@@ -130,7 +130,7 @@ const cardStyles = StyleSheet.create({
   enterTextActive: {
     alignItems: "center",
     justifyContent: "center",
-    width: "90%",
+    width: 200,
     height: 150,
     backgroundColor: "#F99909",
     borderColor: "#F9F9F9",
@@ -154,6 +154,7 @@ const cardStyles = StyleSheet.create({
     shadowColor: "#F9F9F9",
     shadowRadius: 10,
     shadowOpacity: 0,
+    marginTop: 30,
   },
   buttonInactive: {
     fontWeight: "bold",
@@ -167,11 +168,12 @@ const cardStyles = StyleSheet.create({
     shadowColor: "#F9F9F9",
     shadowRadius: 10,
     shadowOpacity: 0,
+    marginTop: 30,
   },
   label: {
     marginTop: 5,
     fontWeight: "bold",
-    color: "#F9F9F9",
+    color: "#2c2c2c",
   },
   center: {
     alignItems: "center",
