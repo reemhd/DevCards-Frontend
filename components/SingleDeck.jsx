@@ -118,7 +118,7 @@ const SingleDeck = ({ route, navigation }) => {
       <Pressable
         style={singleDeckStyle.revise}
         title="Revise"
-        onPress={() => navigation.navigate("Revise", { deck })}
+        onPress={() => navigation.navigate("Revise", { deck, deck_id })}
       >
         <Text style={singleDeckStyle.reviseText}>Revise</Text>
       </Pressable>
