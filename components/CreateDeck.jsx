@@ -12,14 +12,19 @@ import {
 import { useState } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { postDeck } from "../utils/api";
+import { useUser } from "../context/UserContext";
 
-const CreateDeck = ({ navigation, route }) => {
+
+
+const CreateDeck = ({ navigation }) => {
+  const { user } = useUser();
+
   const [deckName, setDeckName] = useState("");
   const [deckDescription, setDeckDescription] = useState("");
   const { setCurrentDecks } = route.params;
 
   const handleCreateDeck = () => {
-    postDeck(deckName, deckDescription).then((deck) => {
+    postDeck(deckName, deckDescription, user._id).then((deck) => {
       const newDeckID = deck._id;
 
       setCurrentDecks((current) => {
