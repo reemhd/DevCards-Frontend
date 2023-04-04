@@ -10,8 +10,8 @@ import { useUser } from "../context/UserContext";
 const Decks = ({ navigation }) => {
   const [currentDecks, setCurrentDecks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { user } = useUser(); // user object with all decks, so now we need to render only decks from here
-  console.log("USER >>>", user)
+  const { user } = useUser(); 
+  // console.log("USER >>>", user)
 
   useEffect(() => {
     getDecks().then((decks) => {
