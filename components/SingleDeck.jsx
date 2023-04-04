@@ -80,6 +80,13 @@ const SingleDeck = ({ route, navigation }) => {
         keyExtractor={(item) => item._id}
       />
       <Pressable
+        style={singleDeckStyle.revise}
+        title="Revise"
+        onPress={() => navigation.navigate("Revise", { deck })}
+      >
+        <Text style={singleDeckStyle.reviseText}>Revise</Text>
+      </Pressable>
+      <Pressable
         style={singleDeckStyle.button}
         title="Create a New Deck"
         onPress={() =>
@@ -98,6 +105,20 @@ const singleDeckStyle = StyleSheet.create({
     fontSize: 20,
     padding: 20,
     color: "black",
+  },
+  revise: {
+    backgroundColor: "#F99909",
+    position: "absolute",
+    bottom: 30,
+    left: 20,
+    borderRadius: 30,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  reviseText: {
+    fontWeight: "bold",
+    fontSize: 32,
+    padding: 15,
   },
   closeModal: {
     backgroundColor: "#F99909",
