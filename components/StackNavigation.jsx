@@ -4,6 +4,7 @@ import CreateDeck from "./CreateDeck";
 import Decks from "./Decks";
 import CreateCard from "./CreateCard";
 import SingleDeck from "./SingleDeck";
+import {SignIn} from './SignIn'
 
 const Stack = createStackNavigator();
 
@@ -30,6 +31,7 @@ const StackNavigation = () => {
         component={CreateCard}
         options={{ headerShown: false }}
       />
+      <Stack.Screen name="SignIn" component={SignIn} />
     </Stack.Navigator>
   );
 };
