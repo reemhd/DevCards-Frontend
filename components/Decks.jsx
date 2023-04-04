@@ -10,7 +10,7 @@ import { useUser } from "../context/UserContext";
 const Decks = ({ navigation }) => {
   const [currentDecks, setCurrentDecks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { user } = useUser(); 
+  const { user, updateUser } = useUser(); 
   // console.log("USER >>>", user)
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const Decks = ({ navigation }) => {
       setCurrentDecks(filteredDecks);
       setLoading(false);
     });
-  }, []);
+  }, [user]);
 
   useFocusEffect(
     useCallback(() => {
@@ -33,8 +33,12 @@ const Decks = ({ navigation }) => {
         setCurrentDecks(filteredDecks);
         setLoading(false);
       });
-    }, [])
+    }, [user])
   );
+
+  const handleNewDeck = (newDeckId) => {
+    updateUser({ ...user, user_decks: [...user.user_decks, newDeckId] });
+  };
 
   const Deck = ({ title, description, _id }) => {
     return (
@@ -81,7 +85,7 @@ const Decks = ({ navigation }) => {
           <Pressable
             style={deckStyles.button}
             title="Create a New Deck"
-            onPress={() => navigation.navigate("CreateDeck")}
+            onPress={() => navigation.navigate("CreateDeck", { handleNewDeck })}
           >
             <FontAwesome5 name="plus" size={34} color="black" />
           </Pressable>
