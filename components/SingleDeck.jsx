@@ -17,7 +17,6 @@ import { deleteCard } from "../utils/api";
 
 const SingleDeck = ({ route, navigation }) => {
   const { deck_id, title } = route.params;
-  console.log(title, "<<title in SingleDeck");
   const [deck, setDeck] = useState({});
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [cardID, setCardID] = useState("");

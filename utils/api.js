@@ -43,7 +43,5 @@ export const getDeckByID = (id) => {
 };
 
 export const deleteCard = (id) => {
-  return api.delete(`/cards/${id}`).then(() => {
-    console.log("card deleted in utils");
-  });
+  return api.delete(`/cards/${id}`).then(() => {});
 };

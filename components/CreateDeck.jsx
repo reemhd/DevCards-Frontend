@@ -21,7 +21,7 @@ const CreateDeck = ({ navigation, route }) => {
   const handleCreateDeck = () => {
     postDeck(deckName, deckDescription).then((deck) => {
       const newDeckID = deck._id;
-      console.log(deck.title, "<<deck.title in Create Deck");
+
       setCurrentDecks((current) => {
         return [...current, deck];
       });

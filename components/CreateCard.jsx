@@ -13,7 +13,7 @@ import { postCard } from "../utils/api";
 
 const CreateCard = ({ navigation, route }) => {
   const { newDeckID, setDeck, title } = route.params;
-  console.log(title, "<<title in CreateCard");
+
   const [cardFront, setCardFront] = useState("");
   const [cardBack, setCardBack] = useState("");
 
