@@ -35,7 +35,6 @@ const Revise = ({ route, navigation }) => {
 
   const handleTickPress = () => {
     if (currentIndex === deck.length - 1) {
-      //some backend stuff for adding a correct vote
       setEndOfQuestions(true);
     }
     setCurrentIndex(currentIndex + 1);
@@ -45,20 +44,18 @@ const Revise = ({ route, navigation }) => {
 
   const handleCrossPress = () => {
     if (currentIndex === deck.length - 1) {
-      //some backend stuff for adding an incorrect vote
       setEndOfQuestions(true);
     }
     setCurrentIndex(currentIndex + 1);
     handleFlipCard();
   };
-  const handleFinish = ()=>{
-    const percent = Math.floor((score / deck.length) * 100)
-    patchUserPercent(percent, deck_id)
-    .then((data)=>{
-      console.log(data)
-    })
-    navigation.navigate("Decks")
-  }
+  const handleFinish = () => {
+    const percent = Math.floor((score / deck.length) * 100);
+    patchUserPercent(percent, deck_id).then((data) => {
+      console.log(data);
+    });
+    navigation.navigate("Decks");
+  };
 
   return (
     <>
@@ -68,8 +65,8 @@ const Revise = ({ route, navigation }) => {
             You scored {Math.floor((score / deck.length) * 100)}%
           </Text>
           <Text style={reviseStyle.endText}>Well done!</Text>
-          <Pressable  style= {reviseStyle.finish} onPress={handleFinish} >
-            <Text style= {reviseStyle.finishText}>Back to Decks</Text>
+          <Pressable style={reviseStyle.finish} onPress={handleFinish}>
+            <Text style={reviseStyle.finishText}>Back to Decks</Text>
           </Pressable>
           <View style={reviseStyle.lower}>
             <Text style={reviseStyle.lowerText}>
@@ -233,21 +230,18 @@ const reviseStyle = StyleSheet.create({
     fontWeight: "bold",
     margin: 25,
   },
-  finish:{
+  finish: {
     backgroundColor: "#F99909",
     borderRadius: 20,
     alignItems: "center",
     justifyContent: "center",
     padding: 10,
-
   },
-finishText:{
-  color: "white",
-  fontSize: 22,
-  fontWeight: "bold",
-  
-
-}
+  finishText: {
+    color: "white",
+    fontSize: 22,
+    fontWeight: "bold",
+  },
 });
 
 export default Revise;
