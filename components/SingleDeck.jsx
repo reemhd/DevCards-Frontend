@@ -143,7 +143,7 @@ const singleDeckStyle = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 32,
     padding: 15,
-
+  },
   empty: {
     alignItems: "center",
     justifyContent: "center",
@@ -155,7 +155,6 @@ const singleDeckStyle = StyleSheet.create({
     fontSize: 22,
     fontWeight: "bold",
     margin: 20,
-
   },
   closeModal: {
     backgroundColor: "#F99909",

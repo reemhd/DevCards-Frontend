@@ -1,10 +1,10 @@
-
 import React, { useState, useRef } from "react";
 import { View, Text, Pressable, StyleSheet, Animated } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
 
-const Revise = ({ route }) => {
+const Revise = ({ route, navigation }) => {
   const { deck } = route.params;
   const [currentIndex, setCurrentIndex] = useState(0);
   const [endOfQuestions, setEndOfQuestions] = useState(false);
@@ -56,9 +56,18 @@ const Revise = ({ route }) => {
       {endOfQuestions ? (
         <View style={reviseStyle.end}>
           <Text style={reviseStyle.endText}>
-            You scored {Math.floor((score / deck.length) * 100)}% Well done!
+            You scored {Math.floor((score / deck.length) * 100)}%
           </Text>
+          <Text style={reviseStyle.endText}>Well done!</Text>
           {/* //send the score to the backend */}
+          <View style={reviseStyle.lower}>
+            <Text style={reviseStyle.lowerText}>
+              Click below to view your full analytics
+            </Text>
+          </View>
+          <View style={reviseStyle.arrow}>
+            <Entypo name="arrow-long-down" size={54} color="#F99909" />
+          </View>
         </View>
       ) : (
         <View style={reviseStyle.container}>
@@ -113,6 +122,18 @@ const reviseStyle = StyleSheet.create({
     fontSize: 20,
     padding: 20,
     color: "black",
+  },
+  arrow: {
+    position: "absolute",
+    bottom: 20,
+  },
+  lower: {
+    position: "absolute",
+    bottom: 90,
+  },
+  lowerText: {
+    color: "white",
+    fontSize: 18,
   },
   cardContainer: {
     width: 300,
@@ -199,7 +220,8 @@ const reviseStyle = StyleSheet.create({
     color: "white",
     fontSize: 28,
     fontWeight: "bold",
-    margin: 20,
+    margin: 25,
   },
 });
 
+export default Revise;
