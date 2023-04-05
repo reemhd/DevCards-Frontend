@@ -48,6 +48,7 @@ const CreateCard = ({ navigation, route }) => {
               numberOfLines={5}
               style={cardStyles.inputBox}
               placeholder="Enter your question here"
+              placeholderTextColor="white"
               value={cardFront}
               onChangeText={(text) => setCardFront(text)}
             />
@@ -66,6 +67,7 @@ const CreateCard = ({ navigation, route }) => {
               numberOfLines={5}
               style={cardStyles.inputBox}
               placeholder="Enter your answer here"
+              placeholderTextColor="white"
               value={cardBack}
               onChangeText={(text) => setCardBack(text)}
             />
@@ -97,45 +99,37 @@ const cardStyles = StyleSheet.create({
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    borderStyle: "solid",
-    borderWidth: 5,
-    borderColor: "#f19100",
     padding: 20,
     backgroundColor: "#2c2c2c",
-    borderRadius: 8,
   },
   inputBox: {
-    borderWidth: 1,
-    borderStyle: "solid",
-    borderColor: "#F9F9F9",
     padding: 10,
     margin: 10,
     borderRadius: 8,
-    backgroundColor: "#F9F9F9",
-    width: 180,
+    backgroundColor: "#2c2c2c",
+    width: 280,
+    color: "#fff",
   },
   enterTextInactive: {
     alignItems: "center",
     justifyContent: "center",
-    width: 200,
+    width: 320,
     height: 150,
-    backgroundColor: "#E3BC98",
-    borderColor: "#F9F9F9",
-    borderWidth: 2,
+    backgroundColor: "#42403d",
     marginTop: 10,
+    borderRadius: 5,
   },
   enterTextActive: {
     alignItems: "center",
     justifyContent: "center",
-    width: 200,
+    width: 320,
     height: 150,
-    backgroundColor: "#F99909",
-    borderColor: "#F9F9F9",
-    borderWidth: 2,
+    backgroundColor: "#f19100",
     marginTop: 10,
+    borderRadius: 5,
   },
   buttonText: {
-    color: "#F5F3E5",
+    color: "#2c2c2c",
     fontWeight: "bold",
     fontSize: 24,
   },
@@ -143,7 +137,7 @@ const cardStyles = StyleSheet.create({
     fontWeight: "bold",
     padding: 10,
     elevation: 10,
-    backgroundColor: "#F99909",
+    backgroundColor: "#61DEB5",
     alignItems: "center",
     margin: 10,
     width: "90%",
@@ -157,7 +151,7 @@ const cardStyles = StyleSheet.create({
     fontWeight: "bold",
     padding: 10,
     elevation: 10,
-    backgroundColor: "#E3BC98",
+    backgroundColor: "#42403d",
     alignItems: "center",
     margin: 10,
     width: "90%",
@@ -171,6 +165,8 @@ const cardStyles = StyleSheet.create({
     marginTop: 5,
     fontWeight: "bold",
     color: "#2c2c2c",
+    fontWeight: "bold",
+    fontSize: 30,
   },
   center: {
     alignItems: "center",
