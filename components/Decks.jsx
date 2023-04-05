@@ -64,9 +64,9 @@ const Decks = ({ navigation }) => {
     });
   }, [navigation, handleNewDeck]);
 
-  const handleSearch = (query) => {
+  const handleSearch = useCallback((query) => {
     setSearchQuery(query);
-  };
+  }, []);
 
   const Deck = ({ title, description, _id }) => {
     return (
@@ -99,7 +99,7 @@ const Decks = ({ navigation }) => {
         </View>
       ) : (
         <View style={deckStyles.container}>
-          <SearchBar onSearch={handleSearch} />
+          <SearchBar handleSearch={handleSearch} />
           <FlatList
             data={currentDecks}
             renderItem={({ item }) => (

@@ -3,7 +3,6 @@ import {
   TextInput,
   StyleSheet,
   View,
-  TouchableOpacity,
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
@@ -12,8 +11,10 @@ import { FontAwesome } from "@expo/vector-icons";
 export const SearchBar = ({ handleSearch }) => {
   const [query, setQuery] = useState("");
 
-  const handleSubmit = () => {
-    // handleSearch(query);
+  const handleQueryChange = (event) => {
+    const newQuery = event.nativeEvent.text;
+    setQuery(newQuery);
+    handleSearch(newQuery);
   };
 
   return (
@@ -25,14 +26,9 @@ export const SearchBar = ({ handleSearch }) => {
           placeholder="Search by title"
           placeholderTextColor="#A9A9A9"
           value={query}
-          onChangeText={setQuery}
+          onChange={handleQueryChange}
           returnKeyType="search"
         />
-        {query.length > 0 && (
-          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-            <FontAwesome name="times" size={20} color="#A9A9A9" />
-          </TouchableOpacity>
-        )}
       </View>
     </TouchableWithoutFeedback>
   );
