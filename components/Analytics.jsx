@@ -1,14 +1,14 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import { useUser } from "../context/UserContext";
 import Spinner from "react-native-loading-spinner-overlay";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { getDecks } from "../utils/api";
 import { useFocusEffect } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
+import { ProgressChart } from "react-native-chart-kit";
 
 const Analytics = () => {
-  const { user, updateUser } = useUser();
+  const { user } = useUser();
   const [loading, setLoading] = useState(true);
   const [currentDecks, setCurrentDecks] = useState([]);
 
@@ -34,35 +34,31 @@ const Analytics = () => {
     }, [user])
   );
 
-  //   const Deck = ({ title, user_percent }) => {
-  //     const findAveragePercent = (array) => {
-  //       const average = array.reduce((a, b) => a + b, 0);
-  //       return Math.floor(average / (array.length - 1));
-  //     };
-  //     return (
-  //       <View style={analyticsStyle.deck}>
-  //         <View>
-  //           <MaterialCommunityIcons
-  //             name="google-analytics"
-  //             size={24}
-  //             color="white"
-  //           />
-  //         </View>
-  //         <View>
-  //           <Text style={analyticsStyle.title}>{title}</Text>
-  //         </View>
-  //         <View>
-  //           <Text style={analyticsStyle.percent}>
-  //             {findAveragePercent(user_percent)}%
-  //           </Text>
-  //         </View>
-  //       </View>
-  //     );
-  //   };
+  const dataList = [];
 
-  const findAveragePercent = (array) => {
+  const labelList = [];
+
+  const findAveragePercent = (array, title) => {
     const average = array.reduce((a, b) => a + b, 0);
+    dataList.push(Math.floor(average / (array.length - 1)) / 100);
+    labelList.push(title);
     return Math.floor(average / (array.length - 1));
+  };
+
+  const chartConfig = {
+    backgroundColor: "#2C2C2C",
+    backgroundGradientFrom: "#2C2C2C",
+    backgroundGradientTo: "#2C2C2C",
+    color: (opacity = 1) => `rgba(249, 153, 9, ${opacity})`,
+    labelColor: (opacity = 1) => `rgba(249, 153, 9, ${opacity})`,
+    style: {
+      borderRadius: 20,
+    },
+  };
+
+  const data = {
+    labels: labelList,
+    data: dataList,
   };
 
   return (
@@ -91,10 +87,21 @@ const Analytics = () => {
               <Text style={analyticsStyle.columnHeader}>Average Score</Text>
               {currentDecks.map((deck) => (
                 <Text key={deck._id} style={analyticsStyle.text}>
-                  {findAveragePercent(deck.user_percent)}%
+                  {findAveragePercent(deck.user_percent, deck.title)}%
                 </Text>
               ))}
             </View>
+          </View>
+          <View style={analyticsStyle.chart}>
+            <ProgressChart
+              data={data}
+              width={Dimensions.get("window").width}
+              height={150}
+              strokeWidth={16}
+              radius={32}
+              chartConfig={chartConfig}
+              hideLegend={false}
+            />
           </View>
         </View>
       )}
@@ -120,6 +127,10 @@ const analyticsStyle = StyleSheet.create({
   },
   header: {
     alignItems: "center",
+  },
+  chart: {
+    alignItems: "center",
+    marginTop: 30,
   },
   title: {
     fontSize: 20,
