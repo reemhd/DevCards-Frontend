@@ -9,7 +9,7 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import { useState } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { postDeck } from "../utils/api";
 import { useUser } from "../context/UserContext";
@@ -21,13 +21,28 @@ const CreateDeck = ({ navigation, route }) => {
   const [deckDescription, setDeckDescription] = useState("");
   // const { setCurrentDecks } = route.params;
 
-  const handleCreateDeck = () => {
+  const handleCreateDeck = useCallback(() => {
     postDeck(deckName, deckDescription, user._id).then((deck) => {
       const newDeckID = deck._id;
       navigation.navigate("CreateCard", { newDeckID });
-      route.params?.handleNewDeck(newDeckID);
+      const handleNewDeck = route.params?.handleNewDeck;
+      handleNewDeck && handleNewDeck(newDeckID);
     });
-  };
+  }, [deckName, deckDescription, navigation, route.params, user._id]);
+
+  useEffect(() => {
+    navigation.setOptions({
+      headerTitle: "Create Deck",
+      headerRight: () => (
+        <TouchableOpacity
+          disabled={!deckName || !deckDescription}
+          onPress={handleCreateDeck}
+        >
+          <Text style={createDeckStyles.buttonText}>Create Deck</Text>
+        </TouchableOpacity>
+      ),
+    });
+  }, [deckName, deckDescription, handleCreateDeck, navigation]);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>

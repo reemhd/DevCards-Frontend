@@ -6,27 +6,42 @@ import { useFocusEffect } from "@react-navigation/native";
 import Spinner from "react-native-loading-spinner-overlay";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useUser } from "../context/UserContext";
+import { SearchBar } from "./SearchBar";
 
 const Decks = ({ navigation }) => {
   const [currentDecks, setCurrentDecks] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { user, updateUser } = useUser();
+  const [searchQuery, setSearchQuery] = useState("");
   const [loadingError, setLoadingError] = useState(false);
-  const { user, updateUser } = useUser(); 
-  // console.log("USER >>>", user)
+
+  const handleNewDeck = useCallback(
+    (newDeckId) => {
+      updateUser({ ...user, user_decks: [...user.user_decks, newDeckId] });
+    },
+    [user]
+  );
 
   useEffect(() => {
-    getDecks().then((decks) => {
-      const filteredDecks = decks.filter((deck) =>
-        user.user_decks.includes(deck._id)
+  getDecks().then((decks) => {
+    let filteredDecks = decks.filter((deck) =>
+      user.user_decks.includes(deck._id)
+    );
+    if (searchQuery.length > 0) {
+      filteredDecks = filteredDecks.filter((deck) =>
+        deck.title.toLowerCase().includes(searchQuery.toLowerCase())
       );
-      setCurrentDecks(filteredDecks);
-      setLoading(false);
-    })
-    .catch((err) => {
+    }
+    setCurrentDecks(filteredDecks);
+    setLoading(false);
+  })
+  .catch((err) => {
       setLoading(false)
       setLoadingError(true)
     });
-  }, [user]);
+}, [user, handleNewDeck, searchQuery]);
+
+
 
   useFocusEffect(
     useCallback(() => {
@@ -37,12 +52,26 @@ const Decks = ({ navigation }) => {
         setCurrentDecks(filteredDecks);
         setLoading(false);
       });
-    }, [user])
+    }, [user, handleNewDeck])
   );
 
-  const handleNewDeck = (newDeckId) => {
-    updateUser({ ...user, user_decks: [...user.user_decks, newDeckId] });
-  };
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <Pressable
+          style={deckStyles.button}
+          title="Create a New Deck"
+          onPress={() => navigation.navigate("CreateDeck", { handleNewDeck })}
+        >
+          <FontAwesome5 name="plus" size={34} color="black" />
+        </Pressable>
+      ),
+    });
+  }, [navigation, handleNewDeck]);
+
+  const handleSearch = useCallback((query) => {
+    setSearchQuery(query);
+  }, []);
 
   const Deck = ({ title, description, _id }) => {
     return (
@@ -79,6 +108,7 @@ const Decks = ({ navigation }) => {
         <Text style={deckStyles.errorText}>Error Loading Decks</Text>
         </View> :
         <View style={deckStyles.container}>
+          <SearchBar handleSearch={handleSearch} />
           <FlatList
             data={currentDecks}
             renderItem={({ item }) => (
@@ -94,7 +124,7 @@ const Decks = ({ navigation }) => {
           <Pressable
             style={deckStyles.button}
             title="Create a New Deck"
-            onPress={() => navigation.navigate("CreateDeck", { handleNewDeck })}
+            onPress={() => navigation.navigate("CreateDeck")}
           >
             <FontAwesome5 name="plus" size={34} color="black" />
           </Pressable>
