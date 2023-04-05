@@ -8,6 +8,7 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
+  Image
 } from "react-native";
 import { getUsers } from "../utils/api";
 import { useUser } from "../context/UserContext";
@@ -26,7 +27,7 @@ export const SignIn = () => {
     getUsers().then((users) => {
       const filteredUser = users.filter((user) => user.username === username);
       if (filteredUser.length === 0) {
-        setError('User does not exist')
+        setError("User does not exist");
         return;
       }
       // set context with username
@@ -41,23 +42,33 @@ export const SignIn = () => {
           style={styles.keyboardAvoidingContainer}
           behavior={Platform.OS === "ios" ? "padding" : "height"}
         >
-          <Text style={styles.title}>Sign In</Text>
+          <View>
+            <Image
+              source={require("../assets/DevCards.png")}
+              style={styles.logo}
+            />
+          </View>
           {error ? <Text style={styles.error}>{error}</Text> : null}
           <TextInput
-            style={styles.input}
+            style={styles.input1}
             placeholder="Username"
+            placeholderTextColor="white"
             value={username}
             onChangeText={(text) => setUsername(text)}
             autoCapitalize="none"
             autoCorrect={false}
           />
           <TextInput
-            style={styles.input}
+            style={styles.input2}
             placeholder="Password"
+            placeholderTextColor="white"
             secureTextEntry={true}
             autoCapitalize="none"
             autoCorrect={false}
           />
+          <Text style={styles.signUp}>
+            Don't have an account? <Text style={styles.bold}>Sign Up</Text>
+          </Text>
           <TouchableOpacity style={styles.button} onPress={handleSignIn}>
             <Text style={styles.buttonText}>Sign In</Text>
           </TouchableOpacity>
@@ -69,10 +80,8 @@ export const SignIn = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "#F5FCFF",
+    flex: 2,
+    backgroundColor: "#2c2c2c",
   },
   keyboardAvoidingContainer: {
     flex: 1,
@@ -81,18 +90,29 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingHorizontal: 20,
   },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 20,
-  },
-  input: {
+  input1: {
     width: "80%",
+    gap: 11,
     height: 50,
     padding: 10,
     borderWidth: 1,
     borderColor: "#ccc",
-    marginBottom: 20,
+    marginBottom: 0,
+    color: "#fff",
+    borderRadius: 5,
+    margin: 20,
+  },
+  input2: {
+    width: "80%",
+    margin: 20,
+    gap: 11,
+    height: 50,
+    padding: 10,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    marginBottom: 30,
+    color: "#fff",
+    borderRadius: 5,
   },
   button: {
     backgroundColor: "#f19100",
@@ -101,13 +121,34 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 5,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 4,
   },
   buttonText: {
-    color: "#fff",
-    fontSize: 18,
+    fontWeight: "bold",
+    color: "#2c2c2c",
+    fontSize: 20,
   },
   error: {
     color: "red",
     marginBottom: 10,
   },
+  logo: {
+    width: 460,
+    height: 200,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.8,
+    shadowRadius: 4,
+  },
+  signUp: {
+    color: "#fff",
+    padding: 10,
+  },
+  bold: {
+    fontWeight: "bold",
+  },
 });
+
