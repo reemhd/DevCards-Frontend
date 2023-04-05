@@ -11,21 +11,21 @@ const Decks = ({ navigation }) => {
   const [currentDecks, setCurrentDecks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadingError, setLoadingError] = useState(false);
-  const { user, updateUser } = useUser(); 
-  // console.log("USER >>>", user)
+  const { user, updateUser } = useUser();
 
   useEffect(() => {
-    getDecks().then((decks) => {
-      const filteredDecks = decks.filter((deck) =>
-        user.user_decks.includes(deck._id)
-      );
-      setCurrentDecks(filteredDecks);
-      setLoading(false);
-    })
-    .catch((err) => {
-      setLoading(false)
-      setLoadingError(true)
-    });
+    getDecks()
+      .then((decks) => {
+        const filteredDecks = decks.filter((deck) =>
+          user.user_decks.includes(deck._id)
+        );
+        setCurrentDecks(filteredDecks);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setLoading(false);
+        setLoadingError(true);
+      });
   }, [user]);
 
   useFocusEffect(
@@ -69,15 +69,21 @@ const Decks = ({ navigation }) => {
 
   return (
     <>
-      {loading ? ( loadingError ? <View style={deckStyles.center}>
-        <Text style={deckStyles.errorText}>Error Loading Decks</Text>
-        </View> :
-        <View style={deckStyles.container}>
-          <Spinner visible={loading} />
+      {loading ? (
+        loadingError ? (
+          <View style={deckStyles.center}>
+            <Text style={deckStyles.errorText}>Error Loading Decks</Text>
+          </View>
+        ) : (
+          <View style={deckStyles.container}>
+            <Spinner visible={loading} />
+          </View>
+        )
+      ) : loadingError ? (
+        <View style={deckStyles.center}>
+          <Text style={deckStyles.errorText}>Error Loading Decks</Text>
         </View>
-      ) : ( loadingError ? <View style={deckStyles.center}>
-        <Text style={deckStyles.errorText}>Error Loading Decks</Text>
-        </View> :
+      ) : (
         <View style={deckStyles.container}>
           <FlatList
             data={currentDecks}
@@ -131,8 +137,6 @@ const deckStyles = StyleSheet.create({
     color: "#050514",
   },
   deckList: {
-    // backgroundColor: "#818387",
-    // "#F5F3E5",
     elevation: 10,
     padding: 5,
     margin: 10,
@@ -183,15 +187,15 @@ const deckStyles = StyleSheet.create({
     justifyContent: "center",
   },
   errorText: {
-    fontWeight:"bold",
-    color: "#FF0000"
+    fontWeight: "bold",
+    color: "#FF0000",
   },
   center: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#2c2c2c",
-}
+  },
 });
 
 export default Decks;

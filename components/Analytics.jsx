@@ -2,13 +2,12 @@ import React, { useEffect, useState, useCallback } from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
 import { useUser } from "../context/UserContext";
 import Spinner from "react-native-loading-spinner-overlay";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { getDecks } from "../utils/api";
 import { useFocusEffect } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 
 const Analytics = () => {
-  const { user, updateUser } = useUser();
+  const { user } = useUser();
   const [loading, setLoading] = useState(true);
   const [currentDecks, setCurrentDecks] = useState([]);
 
@@ -33,32 +32,6 @@ const Analytics = () => {
       });
     }, [user])
   );
-
-  //   const Deck = ({ title, user_percent }) => {
-  //     const findAveragePercent = (array) => {
-  //       const average = array.reduce((a, b) => a + b, 0);
-  //       return Math.floor(average / (array.length - 1));
-  //     };
-  //     return (
-  //       <View style={analyticsStyle.deck}>
-  //         <View>
-  //           <MaterialCommunityIcons
-  //             name="google-analytics"
-  //             size={24}
-  //             color="white"
-  //           />
-  //         </View>
-  //         <View>
-  //           <Text style={analyticsStyle.title}>{title}</Text>
-  //         </View>
-  //         <View>
-  //           <Text style={analyticsStyle.percent}>
-  //             {findAveragePercent(user_percent)}%
-  //           </Text>
-  //         </View>
-  //       </View>
-  //     );
-  //   };
 
   const findAveragePercent = (array) => {
     const average = array.reduce((a, b) => a + b, 0);

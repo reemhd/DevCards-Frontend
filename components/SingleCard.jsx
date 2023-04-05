@@ -115,7 +115,6 @@ const singleDeckStyle = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#BAB484",
-    // "#F5F3E5",
     elevation: 10,
     padding: 2,
     margin: 10,

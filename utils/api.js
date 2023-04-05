@@ -32,18 +32,19 @@ export const getDecks = () => {
       return data.decks;
     })
     .catch((err) => {
-      throw { err }
+      throw { err };
     });
 };
 
 export const getDeckByID = (id) => {
-  return api.get(`/decks/${id}/cards`)
-  .then(({ data }) => {
-    return data.cards;
-  })
-  .catch((err) => {
-    throw { err }
-  })
+  return api
+    .get(`/decks/${id}/cards`)
+    .then(({ data }) => {
+      return data.cards;
+    })
+    .catch((err) => {
+      throw { err };
+    });
 };
 
 export const getUsers = () => {
@@ -57,7 +58,6 @@ export const deleteCard = (id) => {
 };
 
 export const patchUserPercent = (percent, id) => {
-  console.log(percent, id, "meow");
   return api
     .patch(`/decks/${id}/user-percent`, { user_percent: percent })
     .then(({ data }) => {
