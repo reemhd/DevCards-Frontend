@@ -121,7 +121,7 @@ const analyticsStyle = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    backgroundColor: "#F99909",
+    backgroundColor: "#2C2C2C",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -129,20 +129,19 @@ const analyticsStyle = StyleSheet.create({
     alignItems: "center",
   },
   chart: {
-    alignItems: "center",
     marginTop: 30,
+    marginRight: 50,
   },
   title: {
     fontSize: 20,
     fontWeight: "bold",
-    color: "#27272D",
+    color: "#F99909",
     marginTop: 20,
   },
   content: {
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: 20,
-    paddingHorizontal: 100,
   },
   column: {
     flex: 1,
@@ -151,7 +150,7 @@ const analyticsStyle = StyleSheet.create({
   },
   columnHeader: {
     fontWeight: "bold",
-    color: "#27272D",
+    color: "#F99909",
     marginBottom: 10,
   },
   text: {
