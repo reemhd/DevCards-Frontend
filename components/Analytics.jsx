@@ -113,7 +113,7 @@ const analyticsStyle = StyleSheet.create({
   loadingContainer: {
     flex: 1,
     flexDirection: "column",
-    backgroundColor: "#F99909",
+    backgroundColor: "#2C2C2C",
     justifyContent: "center",
     alignItems: "stretch",
     alignContent: "stretch",
