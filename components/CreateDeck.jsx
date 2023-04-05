@@ -57,9 +57,11 @@ const CreateDeck = ({ navigation, route }) => {
         />
         <View style={createDeckStyles.label}>
           <View style={createDeckStyles.innerBorder}>
-            <Text style={createDeckStyles.boldText}>Name</Text>
+            {/* <Text style={createDeckStyles.boldText}>Name</Text> */}
             <TextInput
+              style={createDeckStyles.inputBox}
               placeholder="Enter Deck Name"
+              placeholderTextColor="white"
               value={deckName}
               onChangeText={(text) => {
                 setDeckName(text);
@@ -69,12 +71,14 @@ const CreateDeck = ({ navigation, route }) => {
         </View>
         <View style={createDeckStyles.label}>
           <View style={createDeckStyles.innerBorder}>
-            <Text style={createDeckStyles.boldText}>Description</Text>
+            {/* <Text style={createDeckStyles.boldText}>Description</Text> */}
             <TextInput
+              style={createDeckStyles.inputBox}
               maxLength={30}
               multiline={true}
-              numberOfLines={3}
+              numberOfLines={5}
               placeholder="Enter Deck Description"
+              placeholderTextColor="white"
               value={deckDescription}
               onChangeText={(text) => setDeckDescription(text)}
             />
@@ -103,7 +107,7 @@ const createDeckStyles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    backgroundColor: "#27272D",
+    backgroundColor: "#2c2c2c",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -111,7 +115,7 @@ const createDeckStyles = StyleSheet.create({
     fontWeight: "bold",
     padding: 10,
     elevation: 5,
-    backgroundColor: "#F9F9F9",
+    backgroundColor: "#2c2c2c",
     color: "black",
     alignItems: "flex-start",
     margin: 10,
@@ -136,7 +140,7 @@ const createDeckStyles = StyleSheet.create({
   },
 
   buttonText: {
-    color: "#F5F3E5",
+    color: "#2c2c2c",
     fontWeight: "bold",
     fontSize: 24,
   },
@@ -153,7 +157,6 @@ const createDeckStyles = StyleSheet.create({
     margin: 10,
     width: "50%",
     borderRadius: 10,
-    shadowColor: "#F9F9F9",
     shadowRadius: 10,
     shadowOpacity: 0,
   },
@@ -166,9 +169,14 @@ const createDeckStyles = StyleSheet.create({
     margin: 10,
     width: "50%",
     borderRadius: 10,
-    shadowColor: "#F9F9F9",
     shadowRadius: 10,
     shadowOpacity: 0,
+  },
+  inputBox: {
+    height: 20,
+    width: "100%",
+    backgroundColor: "#2c2c2c",
+    color: "white"
   },
 });
 

@@ -56,12 +56,12 @@ const SingleDeck = ({ route, navigation }) => {
         </View>
         <Pressable onPress={() => handleExpandPress(_id)}>
           <View style={singleDeckStyle.expand}>
-            <Ionicons name="expand-sharp" size={44} color="black" />
+            <Ionicons name="expand-sharp" size={24} color="black" />
           </View>
         </Pressable>
         <Pressable onPress={() => handleDeletePress(_id)}>
           <View style={singleDeckStyle.delete}>
-            <Feather name="trash-2" size={44} color="white" />
+            <Feather name="trash-2" size={24} color="white" />
           </View>
         </Pressable>
       </View>
@@ -80,7 +80,7 @@ const SingleDeck = ({ route, navigation }) => {
       </View> : 
       <View style={singleDeckStyle.container}>
       <View style={singleDeckStyle.title}>
-        <Text style={singleDeckStyle.titleText}>{title}</Text>
+        <Text style={singleDeckStyle.titleText}>{title} Deck</Text>
       </View>
       <>
         {deck.length === 0 ? (
@@ -141,19 +141,35 @@ const SingleDeck = ({ route, navigation }) => {
 }; 
 
 const singleDeckStyle = StyleSheet.create({
+  titleText: {
+    fontWeight: "bold",
+    fontSize: 30,
+    paddingTop: 10,
+    color: "#61DEB5",
+  },
   text: {
     fontWeight: "bold",
     fontSize: 20,
     padding: 20,
     color: "black",
   },
-
   revise: {
-    backgroundColor: "#F99909",
+    width: 150,
+    height: 80,
+    backgroundColor: "#61DEB5",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 9,
+    },
+    shadowOpacity: 0.57,
+    shadowRadius: 4.65,
+    marginBottom: 10,
+    marginRight: 12,
     position: "absolute",
-    bottom: 30,
+    bottom: 20,
     left: 20,
-    borderRadius: 30,
+    borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -166,7 +182,7 @@ const singleDeckStyle = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flex: 1,
-    backgroundColor: "#27272D",
+    backgroundColor: "#2c2c2c",
   },
   emptyText: {
     color: "white",
@@ -175,13 +191,21 @@ const singleDeckStyle = StyleSheet.create({
     margin: 20,
   },
   closeModal: {
-    backgroundColor: "#F99909",
-    borderColor: "#BAB484",
+    backgroundColor: "#61DEB5",
+    borderColor: "#61DEB5",
     position: "absolute",
     bottom: 150,
     borderWidth: 4,
     padding: 5,
     borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.65,
+    shadowRadius: 3.84,
+    elevation: 5,
   },
   spinnerContainer: {
     flex: 1,
@@ -192,28 +216,38 @@ const singleDeckStyle = StyleSheet.create({
     alignContent: "stretch",
   },
   closeModalText: {
-    color: "white",
+    color: "#2c2c2c",
+    fontWeight: "bold",
+    fontSize: 22,
   },
   container: {
     flex: 1,
-    backgroundColor: "#27272D",
+    backgroundColor: "#2c2c2c",
     justifyContent: "center",
     alignItems: "center",
   },
   cardList: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#BAB484",
+    backgroundColor: "#f19100",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 9,
+    },
+    shadowOpacity: 0.87,
+    shadowRadius: 4.65,
+    marginBottom: 10,
+    marginRight: 12,
     elevation: 10,
     padding: 2,
     margin: 20,
     marginBottom: 0,
     borderRadius: 10,
-    borderColor: "#F99909",
+    borderColor: "#f19100",
     borderWidth: 5,
-    shadowColor: "#F9F9F9",
-    height: 250,
-    width: 300,
+    height: 150,
+    width: 350,
   },
   button: {
     borderWidth: 0,
@@ -251,14 +285,14 @@ const singleDeckStyle = StyleSheet.create({
     left: 30,
   },
   errorText: {
-    fontWeight:"bold",
-    color: "#FF0000"
+    fontWeight: "bold",
+    color: "#FF0000",
   },
   center: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#2c2c2c",
-}
+  },
 });
 export default SingleDeck;
