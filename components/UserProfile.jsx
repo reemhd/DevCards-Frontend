@@ -32,9 +32,9 @@ const UserProfile = ({ navigation }) => {
         />
         <Text style={userProfileStyle.title}>{user.username}'s Profile</Text>
       </View>
-        <Text style={userProfileStyle.totalText}>
-          Total Decks: {decks.length}
-        </Text>
+      <Text style={userProfileStyle.totalText}>
+        Total Decks: {decks.length}
+      </Text>
       <View style={userProfileStyle.content}>
         <View style={userProfileStyle.column}>
           <Text style={userProfileStyle.columnHeader}>Decks:</Text>
@@ -53,12 +53,9 @@ const UserProfile = ({ navigation }) => {
           ))}
         </View>
       </View>
-        <TouchableOpacity
-          style={userProfileStyle.button}
-          onPress={handleLogout}
-        >
-          <Text style={userProfileStyle.buttonText}>Logout</Text>
-        </TouchableOpacity>
+      <TouchableOpacity style={userProfileStyle.button} onPress={handleLogout}>
+        <Text style={userProfileStyle.buttonText}>Logout</Text>
+      </TouchableOpacity>
     </View>
   );
 };
