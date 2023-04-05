@@ -46,9 +46,9 @@ const Analytics = () => {
   };
 
   const chartConfig = {
-    backgroundColor: "#000000",
-    backgroundGradientFrom: "#000000",
-    backgroundGradientTo: "#000000",
+    backgroundColor: "#2C2C2C",
+    backgroundGradientFrom: "#2C2C2C",
+    backgroundGradientTo: "#2C2C2C",
     color: (opacity = 1) => `rgba(249, 153, 9, ${opacity})`,
     labelColor: (opacity = 1) => `rgba(249, 153, 9, ${opacity})`,
     style: {
