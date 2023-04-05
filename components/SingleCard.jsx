@@ -43,7 +43,11 @@ const SingleCard = ({ cardID, deck }) => {
           >
             <Text style={singleDeckStyle.text}>{cardToRender[0].front}</Text>
             <View style={singleDeckStyle.spinner}>
-              <Fontisto name="spinner-rotate-forward" size={34} color="black" />
+              <Fontisto
+                name="spinner-rotate-forward"
+                size={24}
+                color="#2c2c2c"
+              />
             </View>
           </Animated.View>
 
@@ -56,7 +60,11 @@ const SingleCard = ({ cardID, deck }) => {
           >
             <Text style={singleDeckStyle.text}>{cardToRender[0].back}</Text>
             <View style={singleDeckStyle.spinner}>
-              <Fontisto name="spinner-rotate-forward" size={34} color="black" />
+              <Fontisto
+                name="spinner-rotate-forward"
+                size={24}
+                color="#2c2c2c"
+              />
             </View>
           </Animated.View>
         </View>
@@ -80,22 +88,30 @@ const singleDeckStyle = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: "#27272D",
+    backgroundColor: "#2c2c2c",
     justifyContent: "center",
     alignItems: "center",
   },
   cardList: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#BAB484",
+    backgroundColor: "#f19100",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 9,
+    },
+    shadowOpacity: 0.87,
+    shadowRadius: 4.65,
+    marginBottom: 5,
+    marginRight: 12,
     elevation: 10,
     padding: 2,
     margin: 20,
     marginBottom: 0,
     borderRadius: 10,
-    borderColor: "#F99909",
+    borderColor: "#f19100",
     borderWidth: 5,
-    shadowColor: "#F9F9F9",
     height: 250,
     width: 300,
     position: "absolute",
@@ -114,16 +130,21 @@ const singleDeckStyle = StyleSheet.create({
   cardListBack: {
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#BAB484",
-    // "#F5F3E5",
+    backgroundColor: "#f19100",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 9,
+    },
+    shadowOpacity: 0.87,
+    shadowRadius: 4.65,
     elevation: 10,
     padding: 2,
     margin: 10,
     marginBottom: 0,
     borderRadius: 10,
-    borderColor: "#F99909",
+    borderColor: "#f19100",
     borderWidth: 5,
-    shadowColor: "#F9F9F9",
     height: 250,
     width: 300,
     position: "absolute",

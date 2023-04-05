@@ -148,16 +148,16 @@ const deckStyles = StyleSheet.create({
     fontSize: 32,
     padding: 5,
     paddingBottom: 0,
-    margin: 10,
-
+    margin: 8,
+    marginTop: 15,
     marginBottom: 0,
     color: "#050514",
   },
   description: {
     fontSize: 18,
-
     padding: 5,
     margin: 10,
+    marginTop: 0,
     color: "#050514",
   },
   deckList: {
@@ -166,7 +166,7 @@ const deckStyles = StyleSheet.create({
     elevation: 10,
     padding: 5,
     margin: 10,
-    height: 140,
+    height: 110,
     borderRadius: 10,
     backgroundColor: "#f19100",
     shadowColor: "#000",
