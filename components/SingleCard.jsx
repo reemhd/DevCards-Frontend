@@ -138,6 +138,7 @@ const singleDeckStyle = StyleSheet.create({
     },
     shadowOpacity: 0.87,
     shadowRadius: 4.65,
+    // backgroundColor: "#BAB484",
     elevation: 10,
     padding: 2,
     margin: 10,

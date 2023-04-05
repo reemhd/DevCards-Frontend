@@ -3,10 +3,12 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useUser } from "../context/UserContext";
 import { getDecks } from "../utils/api";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import Spinner from "react-native-loading-spinner-overlay";
 
 const UserProfile = ({ navigation }) => {
   const { user, updateUser } = useUser();
   const [decks, setDecks] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getDecks().then((decks) => {
@@ -14,6 +16,7 @@ const UserProfile = ({ navigation }) => {
         user.user_decks.includes(deck._id)
       );
       setDecks(filteredDecks);
+      setLoading(false);
     });
   }, [user]);
 
@@ -22,41 +25,68 @@ const UserProfile = ({ navigation }) => {
     navigation.navigate("SignIn");
   };
 
+  const findAveragePercent = (array) => {
+    const average = array.reduce((a, b) => a + b, 0);
+    return Math.floor(average / (array.length - 1));
+  };
+
+  const avg = decks.map((deck) => {
+    return findAveragePercent(deck.user_percent);
+  });
+
   return (
-    <View style={userProfileStyle.container}>
-      <View style={userProfileStyle.header}>
-        <MaterialCommunityIcons
-          name="account-circle-outline"
-          size={100}
-          color="#F99909"
-        />
-        <Text style={userProfileStyle.title}>{user.username}'s Profile</Text>
-      </View>
-      <Text style={userProfileStyle.totalText}>
-        Total Decks: {decks.length}
-      </Text>
-      <View style={userProfileStyle.content}>
-        <View style={userProfileStyle.column}>
-          <Text style={userProfileStyle.columnHeader}>Decks:</Text>
-          {decks.map((deck) => (
-            <Text key={deck._id} style={userProfileStyle.text}>
-              {deck.title}
-            </Text>
-          ))}
+    <>
+      {loading ? (
+        <View style={userProfileStyle.loadingContainer}>
+          <Spinner visible={loading} />
         </View>
-        <View style={userProfileStyle.column}>
-          <Text style={userProfileStyle.columnHeader}>Cards:</Text>
-          {decks.map((deck) => (
-            <Text key={deck._id} style={userProfileStyle.text}>
-              {deck.cards.length}
+      ) : (
+        <View style={userProfileStyle.container}>
+          <View style={userProfileStyle.header}>
+            <MaterialCommunityIcons
+              name="account-circle-outline"
+              size={100}
+              color="#F99909"
+            />
+            <Text style={userProfileStyle.title}>
+              {user.username}'s Profile
             </Text>
-          ))}
+          </View>
+
+          <Text style={userProfileStyle.totalText}>
+            Total Decks: {decks.length}
+          </Text>
+          <View style={userProfileStyle.content}>
+            <View style={userProfileStyle.column}>
+              <Text style={userProfileStyle.columnHeader}>Decks:</Text>
+              {decks.map((deck) => (
+                <Text key={deck._id} style={userProfileStyle.text}>
+                  {deck.title}
+                </Text>
+              ))}
+            </View>
+            <View style={userProfileStyle.column}>
+              <Text style={userProfileStyle.columnHeader}>Cards:</Text>
+              {decks.map((deck) => (
+                <Text key={deck._id} style={userProfileStyle.text}>
+                  {deck.cards.length}
+                </Text>
+              ))}
+            </View>
+          </View>
+          <Text style={userProfileStyle.totalText}>
+            Average score on all decks:{" "}
+            {isNaN(findAveragePercent(avg)) ? 0 : findAveragePercent(avg)}%
+          </Text>
+          <TouchableOpacity
+            style={userProfileStyle.button}
+            onPress={handleLogout}
+          >
+            <Text style={userProfileStyle.buttonText}>Logout</Text>
+          </TouchableOpacity>
         </View>
-      </View>
-      <TouchableOpacity style={userProfileStyle.button} onPress={handleLogout}>
-        <Text style={userProfileStyle.buttonText}>Logout</Text>
-      </TouchableOpacity>
-    </View>
+      )}
+    </>
   );
 };
 
@@ -64,7 +94,7 @@ const userProfileStyle = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    backgroundColor: "#27272D",
+    backgroundColor: "#2C2C2C",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -119,6 +149,14 @@ const userProfileStyle = StyleSheet.create({
   buttonText: {
     color: "#fff",
     fontSize: 18,
+  },
+  loadingContainer: {
+    flex: 1,
+    flexDirection: "column",
+    backgroundColor: "#2C2C2C",
+    justifyContent: "center",
+    alignItems: "stretch",
+    alignContent: "stretch",
   },
 });
 

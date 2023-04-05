@@ -19,7 +19,6 @@ const CreateDeck = ({ navigation, route }) => {
 
   const [deckName, setDeckName] = useState("");
   const [deckDescription, setDeckDescription] = useState("");
-  // const { setCurrentDecks } = route.params;
 
   const handleCreateDeck = useCallback(() => {
     postDeck(deckName, deckDescription, user._id).then((deck) => {

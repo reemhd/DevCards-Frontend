@@ -58,9 +58,7 @@ const Revise = ({ route, navigation }) => {
   };
   const handleFinish = () => {
     const percent = Math.floor((score / deck.length) * 100);
-    patchUserPercent(percent, deck_id).then((data) => {
-      console.log(data);
-    });
+    patchUserPercent(percent, deck_id);
     navigation.navigate("Decks");
   };
 
