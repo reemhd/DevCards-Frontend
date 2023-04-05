@@ -130,7 +130,8 @@ const analyticsStyle = StyleSheet.create({
   },
   chart: {
     marginTop: 30,
-    marginRight: 50,
+    marginRight: 70,
+    alignItems: "center",
   },
   title: {
     fontSize: 20,
