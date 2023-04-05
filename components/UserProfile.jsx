@@ -10,14 +10,13 @@ const UserProfile = ({ navigation }) => {
   const [decks, setDecks] = useState([]);
   const [loading, setLoading] = useState(true);
 
-
   useEffect(() => {
     getDecks().then((decks) => {
       const filteredDecks = decks.filter((deck) =>
         user.user_decks.includes(deck._id)
       );
       setDecks(filteredDecks);
-      setLoading(false)
+      setLoading(false);
     });
   }, [user]);
 
@@ -31,55 +30,62 @@ const UserProfile = ({ navigation }) => {
     return Math.floor(average / (array.length - 1));
   };
 
-  const avg = decks.map(deck => {
-    return findAveragePercent(deck.user_percent)
+  const avg = decks.map((deck) => {
+    return findAveragePercent(deck.user_percent);
   });
 
   return (
     <>
-    {loading ? (
-      <View style={userProfileStyle.loadingContainer}>
-        <Spinner visible={loading} />
-      </View>
-        ) : 
-    (<View style={userProfileStyle.container}>
-      <View style={userProfileStyle.header}>
-        <MaterialCommunityIcons
-          name="account-circle-outline"
-          size={100}
-          color="#F99909"
-        />
-        <Text style={userProfileStyle.title}>{user.username}'s Profile</Text>
-      </View>
+      {loading ? (
+        <View style={userProfileStyle.loadingContainer}>
+          <Spinner visible={loading} />
+        </View>
+      ) : (
+        <View style={userProfileStyle.container}>
+          <View style={userProfileStyle.header}>
+            <MaterialCommunityIcons
+              name="account-circle-outline"
+              size={100}
+              color="#F99909"
+            />
+            <Text style={userProfileStyle.title}>
+              {user.username}'s Profile
+            </Text>
+          </View>
 
-      <Text style={userProfileStyle.totalText}>
-        Total Decks: {decks.length}
-      </Text>
-      <View style={userProfileStyle.content}>
-        <View style={userProfileStyle.column}>
-          <Text style={userProfileStyle.columnHeader}>Decks:</Text>
-          {decks.map((deck) => (
-            <Text key={deck._id} style={userProfileStyle.text}>
-              {deck.title}
-            </Text>
-          ))}
+          <Text style={userProfileStyle.totalText}>
+            Total Decks: {decks.length}
+          </Text>
+          <View style={userProfileStyle.content}>
+            <View style={userProfileStyle.column}>
+              <Text style={userProfileStyle.columnHeader}>Decks:</Text>
+              {decks.map((deck) => (
+                <Text key={deck._id} style={userProfileStyle.text}>
+                  {deck.title}
+                </Text>
+              ))}
+            </View>
+            <View style={userProfileStyle.column}>
+              <Text style={userProfileStyle.columnHeader}>Cards:</Text>
+              {decks.map((deck) => (
+                <Text key={deck._id} style={userProfileStyle.text}>
+                  {deck.cards.length}
+                </Text>
+              ))}
+            </View>
+          </View>
+          <Text style={userProfileStyle.totalText}>
+            Average score on all decks:{" "}
+            {isNaN(findAveragePercent(avg)) ? 0 : findAveragePercent(avg)}%
+          </Text>
+          <TouchableOpacity
+            style={userProfileStyle.button}
+            onPress={handleLogout}
+          >
+            <Text style={userProfileStyle.buttonText}>Logout</Text>
+          </TouchableOpacity>
         </View>
-        <View style={userProfileStyle.column}>
-          <Text style={userProfileStyle.columnHeader}>Cards:</Text>
-          {decks.map((deck) => (
-            <Text key={deck._id} style={userProfileStyle.text}>
-              {deck.cards.length}
-            </Text>
-          ))}
-        </View>
-      </View>
-      <Text style={userProfileStyle.totalText}>
-        Average score on all decks: {isNaN(findAveragePercent(avg)) ? 0 : findAveragePercent(avg)}%
-      </Text>
-      <TouchableOpacity style={userProfileStyle.button} onPress={handleLogout}>
-        <Text style={userProfileStyle.buttonText}>Logout</Text>
-      </TouchableOpacity>
-    </View> )}
+      )}
     </>
   );
 };
@@ -88,7 +94,7 @@ const userProfileStyle = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: "column",
-    backgroundColor: "#27272D",
+    backgroundColor: "#2C2C2C",
     justifyContent: "center",
     alignItems: "center",
   },
@@ -147,7 +153,7 @@ const userProfileStyle = StyleSheet.create({
   loadingContainer: {
     flex: 1,
     flexDirection: "column",
-    backgroundColor: "#F99909",
+    backgroundColor: "#2C2C2C",
     justifyContent: "center",
     alignItems: "stretch",
     alignContent: "stretch",
