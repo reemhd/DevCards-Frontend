@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect } from "react";
-import { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { View, Text, StyleSheet, Pressable, FlatList } from "react-native";
 import { getDecks } from "../utils/api";
 import { useFocusEffect } from "@react-navigation/native";
@@ -11,16 +10,12 @@ import { SearchBar } from "./SearchBar";
 const Decks = ({ navigation }) => {
   const [currentDecks, setCurrentDecks] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { user, updateUser } = useUser();
+  const { user } = useUser();
   const [searchQuery, setSearchQuery] = useState("");
   const [loadingError, setLoadingError] = useState(false);
+  const [deckAdded, setDeckAdded] = useState(false);
 
-  const handleNewDeck = useCallback(
-    (newDeckId) => {
-      updateUser({ ...user, user_decks: [...user.user_decks, newDeckId] });
-    },
-    [user]
-  );
+  console.log(user)
 
   useEffect(() => {
     getDecks()
@@ -40,7 +35,8 @@ const Decks = ({ navigation }) => {
         setLoading(false);
         setLoadingError(true);
       });
-  }, [user, handleNewDeck, searchQuery]);
+  }, [user, searchQuery, deckAdded]);
+
 
   useFocusEffect(
     useCallback(() => {
@@ -51,22 +47,8 @@ const Decks = ({ navigation }) => {
         setCurrentDecks(filteredDecks);
         setLoading(false);
       });
-    }, [user, handleNewDeck])
+    }, [user])
   );
-
-  useEffect(() => {
-    navigation.setOptions({
-      headerRight: () => (
-        <Pressable
-          style={deckStyles.button}
-          title="Create a New Deck"
-          onPress={() => navigation.navigate("CreateDeck", { handleNewDeck })}
-        >
-          <FontAwesome5 name="plus" size={34} color="black" />
-        </Pressable>
-      ),
-    });
-  }, [navigation, handleNewDeck]);
 
   const handleSearch = useCallback((query) => {
     setSearchQuery(query);
@@ -129,7 +111,9 @@ const Decks = ({ navigation }) => {
           <Pressable
             style={deckStyles.button}
             title="Create a New Deck"
-            onPress={() => navigation.navigate("CreateDeck")}
+            onPress={() =>
+              navigation.navigate("CreateDeck", { setDeckAdded })
+            }
           >
             <FontAwesome5 name="plus" size={34} color="black" />
           </Pressable>
@@ -166,6 +150,8 @@ const deckStyles = StyleSheet.create({
     color: "#050514",
   },
   deckList: {
+    // backgroundColor: "#818387",
+    // "#F5F3E5",
     elevation: 10,
     padding: 5,
     margin: 10,
@@ -216,15 +202,15 @@ const deckStyles = StyleSheet.create({
     justifyContent: "center",
   },
   errorText: {
-    fontWeight: "bold",
-    color: "#FF0000",
+    fontWeight:"bold",
+    color: "#FF0000"
   },
   center: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#2c2c2c",
-  },
+}
 });
 
 export default Decks;

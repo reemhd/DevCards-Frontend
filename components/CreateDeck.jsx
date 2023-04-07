@@ -15,33 +15,21 @@ import { postDeck } from "../utils/api";
 import { useUser } from "../context/UserContext";
 
 const CreateDeck = ({ navigation, route }) => {
-  const { user } = useUser();
+  const { user, updateUser } = useUser();
 
   const [deckName, setDeckName] = useState("");
   const [deckDescription, setDeckDescription] = useState("");
 
-  const handleCreateDeck = useCallback(() => {
+  const { setDeckAdded } = route.params;
+
+  const handleCreateDeck = () => {
     postDeck(deckName, deckDescription, user._id).then((deck) => {
       const newDeckID = deck._id;
+      updateUser({ ...user, user_decks: [...user.user_decks, newDeckID] });
       navigation.navigate("CreateCard", { newDeckID });
-      const handleNewDeck = route.params?.handleNewDeck;
-      handleNewDeck && handleNewDeck(newDeckID);
+      setDeckAdded(true);
     });
-  }, [deckName, deckDescription, navigation, route.params, user._id]);
-
-  useEffect(() => {
-    navigation.setOptions({
-      headerTitle: "Create Deck",
-      headerRight: () => (
-        <TouchableOpacity
-          disabled={!deckName || !deckDescription}
-          onPress={handleCreateDeck}
-        >
-          <Text style={createDeckStyles.buttonText}>Create Deck</Text>
-        </TouchableOpacity>
-      ),
-    });
-  }, [deckName, deckDescription, handleCreateDeck, navigation]);
+  };
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
