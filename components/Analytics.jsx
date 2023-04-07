@@ -97,7 +97,7 @@ const Analytics = () => {
               data={data}
               width={Dimensions.get("window").width}
               height={150}
-              strokeWidth={16}
+              strokeWidth={10}
               radius={32}
               chartConfig={chartConfig}
               hideLegend={false}
