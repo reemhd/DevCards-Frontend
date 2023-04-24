@@ -2,7 +2,7 @@
 
 ## About This Project
 
-- ![DevCards](https://user-images.githubusercontent.com/113103959/234092599-8ac3c8f7-21bd-4262-9bb3-7bb83d23f03c.png)
+ ![DevCards](https://user-images.githubusercontent.com/113103959/234092599-8ac3c8f7-21bd-4262-9bb3-7bb83d23f03c.png)
 
 DevCards is a full-stack application designed to help developers of all skill levels review, practice, and master programming concepts at their own pace.
 
