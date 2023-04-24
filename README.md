@@ -6,7 +6,7 @@
 
 DevCards is a full-stack application designed to help developers of all skill levels review, practice, and master programming concepts at their own pace.
 
-This project was developed as part of the final group project of the NorthCoders Software Engineering bootcamp.
+This project was developed as part of my final group project at the NorthCoders Software Engineering bootcamp.
 
 [Backend repo](https://github.com/reemhd/DevCards-Backend)
 
@@ -60,9 +60,3 @@ npm start
 - [Matt Bishop](https://github.com/Nanobot1514)
 - [Danny Bowman](https://github.com/danzo3000)
 - [Georgios Tsesmelis](https://github.com/GeorgeTsez)
-
-
-
-
-
-
