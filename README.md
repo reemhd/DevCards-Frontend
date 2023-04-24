@@ -39,27 +39,27 @@ To run this project locally, download the Expo Go app from the app store or goog
 1. Clone this repository: 
 ```
 git clone https://github.com/reemhd/DevCards-Frontend.git
-
+```
 2. Change into the project directory:
 ```
 cd DevCards-Frontend
-
+```
 3. Install the dependencies:
 ```
 npm install
-
+```
 4. Start the development server:
 ```
 npm start
-
+```
 5. Scan the QR code using the Expo Go app (Android) or the Camera (iOS). You could also use the [Android Studio Emulator](https://docs.expo.dev/workflow/android-studio-emulator/) or the [iOS Simulator](https://docs.expo.dev/workflow/ios-simulator/)
 
 ## Team members
 
-[Rogerio Soares](https://github.com/RogerioSoares96)
-[Matt Bishop](https://github.com/Nanobot1514)
-[Danny Bowman](https://github.com/danzo3000)
-[Georgios Tsesmelis](https://github.com/GeorgeTsez)
+- [Rogerio Soares](https://github.com/RogerioSoares96)
+- [Matt Bishop](https://github.com/Nanobot1514)
+- [Danny Bowman](https://github.com/danzo3000)
+- [Georgios Tsesmelis](https://github.com/GeorgeTsez)
 
 
 
