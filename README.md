@@ -8,9 +8,10 @@ DevCards is a full-stack application designed to help developers of all skill le
 
 This project was developed as part of my final group project at the NorthCoders Software Engineering bootcamp.
 
+[Video demo](https://www.youtube.com/watch?v=bIy8yAFeY64)
+
 [Backend repo](https://github.com/reemhd/DevCards-Backend)
 
-[Video demo](https://www.youtube.com/watch?v=bIy8yAFeY64)
 
 ## Tech Stack
 
